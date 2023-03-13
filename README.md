@@ -1,2 +1,2 @@
-# portfolio
-Repository for my personal portfolio website
+# Personal website
+Repository to host code for my personal portfolio website
