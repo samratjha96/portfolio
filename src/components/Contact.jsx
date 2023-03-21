@@ -17,10 +17,45 @@ const Contact = () => {
   })
   const formRef = useRef();
   const [loading, setLoading] = useState(false)
+  const [sentEmail, setSentEmail] = useState(false)
 
 
-  const handleChange = (e) => {}
-  const handleSubmit = (e) => {}
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm({...form, [name]: value })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setSentEmail(false)
+    emailjs.send(
+      "service_z8ymp4p",
+      "template_o58e5yh",
+      {
+        from_name: form.name,
+        to_name: "Samrat",
+        from_email: form.email,
+        to_email: "zasamrat@gmail.com",
+        message: form.message,
+      },
+      "O6hX4RD46fMq3-86-"
+    ).then(() => {
+      setLoading(false);
+      setSentEmail(true)
+
+      setForm({
+        name: "",
+        email: "",
+        message: ""
+      })
+
+    }, (error) => {
+      setLoading(false)
+      setSentEmail(false)
+      console.log("Error!")
+      alert("Something went wrong when sending the email. Please try again in a bit")
+    })
+  }
 
   return (
     <div className='xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden'>
@@ -50,6 +85,7 @@ const Contact = () => {
           <button type="submit" className='bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl'>
             {loading ? "Sending..." : "Send"}
           </button>
+          {sentEmail && <span className="text-[green] font-medium mb-4">Successfully sent!</span>}
         </form>
       </motion.div>
 
