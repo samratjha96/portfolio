@@ -183,7 +183,7 @@ import {
       name: "Yue Wu",
       designation: "Founder",
       company: "YWCorp",
-      image: "https://randomuser.me/api/portraits/men/5.jpg",
+      image: "https://p.kindpng.com/picc/s/176-1761123_naruto-shippuden-madara-uchiha-clan-picsart-madara-uchiha.png",
     },
     {
       testimonial:
