@@ -179,10 +179,10 @@ import {
     },
     {
       testimonial:
-        "I've never met a web developer who truly cares about their clients' success like Samrat does.",
-      name: "Chris Brown",
-      designation: "COO",
-      company: "DEF Corp",
+        "Samrat is truly 牛逼",
+      name: "Yue Wu",
+      designation: "Founder",
+      company: "YWCorp",
       image: "https://randomuser.me/api/portraits/men/5.jpg",
     },
     {
