@@ -18,7 +18,9 @@ import reactjs from "./tech/reactjs.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
-import kotlin from "./tech/kotlin.png"
+import kotlin from "./tech/kotlin.png";
+import golang from "./tech/golang.png";
+import python from "./tech/python.png";
 
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
@@ -42,6 +44,8 @@ export {
   cloud,
   kotlin,
   java,
+  golang,
+  python,
   git,
   javascript,
   nodejs,

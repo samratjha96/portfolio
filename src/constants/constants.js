@@ -14,14 +14,12 @@ import {
     docker,
     java,
     kotlin,
-
+    golang,
+    python,
 
     appian,
     aws,
     boeing,
-    carrent,
-    jobit,
-    tripguide,
     threejs,
   } from "../assets";
   
@@ -83,6 +81,14 @@ import {
     {
       name: "Java",
       icon: java,
+    },
+    {
+      name: "Golang",
+      icon: golang,
+    },
+    {
+      name: "Python",
+      icon: python,
     },
     {
       name: "JavaScript",
@@ -192,7 +198,7 @@ import {
     {
       name: "Mock Interview Prep",
       description:
-        "Mock Software Engineering interview for the interview prep site [InterviewPen](https://interviewpen.com/). Watch to see how to navigate and succeed in a FAANG interview",
+        "Mock Software Engineering interview for the interview prep site InterviewPen (https://interviewpen.com/). Watch to see how to navigate and succeed in a FAANG interview",
       tags: [
         {
           name: "react",
