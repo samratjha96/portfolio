@@ -128,10 +128,10 @@ import {
       iconBg: "#383E56",
       date: "March 2021 - Jan 2022",
       points: [
-        "Developing and maintaining web applications using React.js and other related technologies.",
-        "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-        "Implementing responsive design and ensuring cross-browser compatibility.",
-        "Participating in code reviews and providing constructive feedback to other developers.",
+        "Led the integration with newly acquired company from Spain by being the first engineer to work directly in the Spain team",
+        "Collaborated across Spain and USA teams to develop sustainable engineering practices to ensure long term success",
+        "Implemented core features to make Robotic Process Automation (RPA) a native capability of the Appian platform",
+        "Won company wide award for excellent technical innovation in delivering the first successful integration with an acquired company for Appian",
       ],
     },
     {
@@ -141,10 +141,10 @@ import {
       iconBg: "#383E56",
       date: "Aug 2018 - March 2021",
       points: [
-        "Developing and maintaining web applications using React.js and other related technologies.",
-        "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-        "Implementing responsive design and ensuring cross-browser compatibility.",
-        "Participating in code reviews and providing constructive feedback to other developers.",
+        "Developed and delivered a full stack integration with Twilio in Appian's Intelligent Contact Center platform allowing cloud native telephony capabilities",
+        "Designed, implemented and presented a templatized end to end delivery pipeline of Appian applications to customers. Used to this day to ship thousands of applications on Appian",
+        "Empowered a 100+ engineer organization to be self-sufficient with AWS by solely managing a fleet of AWS accounts for the orgnanization",
+        "Developed and shipped an open source project, Terraform provider for Twilio, to be used by Appian and external companies",
       ],
     },
     {
@@ -154,10 +154,9 @@ import {
       iconBg: "#E6DEDD",
       date: "Jan 2023 - Present",
       points: [
-        "Developing and maintaining web applications using React.js and other related technologies.",
-        "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-        "Implementing responsive design and ensuring cross-browser compatibility.",
-        "Participating in code reviews and providing constructive feedback to other developers.",
+        "Part of the first cohort of software engineers for Boeing's Avionics department",
+        "Developed high performance flight simulation engine based on real time flight data",
+        "Won best hackathon project for building the first ever big data visualization platform for Boeing's internal test flights",
       ],
     },
   ];

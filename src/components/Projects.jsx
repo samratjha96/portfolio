@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { styles } from "../styles";
 import { SectionWrapper } from '../hoc';
-import { videos } from '../constants';
+import { videos } from '../constants/constants';
 import { fadeIn, textVariant } from "../utils/motion"
 import YoutubeEmbed from './YoutubeEmbed';
 
