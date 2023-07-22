@@ -21,7 +21,7 @@ const Hero = () => {
           <div className={`${styles.heroSubText} mt-2 text-white-100`}>
             <Typewriter
               options={{
-                strings: ["Backend Engineer", "AWS Expert", "Software Architect", "Web Developer"],
+                strings: ["AWS Expert", "Software Architect", "Backend Engineer", "Web Developer"],
                 autoStart: true,
                 loop: true,
                 pauseFor: 200
