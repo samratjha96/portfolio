@@ -152,7 +152,7 @@ import {
       company_name: "Boeing",
       icon: boeing,
       iconBg: "#E6DEDD",
-      date: "Jan 2023 - Present",
+      date: "June 2018 - August 2018",
       points: [
         "Part of the first cohort of software engineers for Boeing's Avionics department",
         "Developed high performance flight simulation engine based on real time flight data",
