@@ -48,4 +48,4 @@ const OnlinePresence = () => {
   )
 }
 
-export default SectionWrapper(OnlinePresence, "")
+export default SectionWrapper(OnlinePresence, "media")
