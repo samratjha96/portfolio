@@ -3,18 +3,19 @@ import {
     backend,
     creator,
     web,
+
     javascript,
     typescript,
-    html,
-    css,
     reactjs,
-    redux,
     tailwind,
     nodejs,
-    mongodb,
+    cloud,
     git,
-    figma,
     docker,
+    java,
+    kotlin,
+
+
     appian,
     aws,
     boeing,
@@ -60,12 +61,24 @@ import {
   
   const technologies = [
     {
-      name: "HTML 5",
-      icon: html,
+      name: "Git",
+      icon: git,
     },
     {
-      name: "CSS 3",
-      icon: css,
+      name: "AWS",
+      icon: cloud,
+    },
+    {
+      name: "Docker",
+      icon: docker,
+    },
+    {
+      name: "Kotlin",
+      icon: kotlin,
+    },
+    {
+      name: "Java",
+      icon: java,
     },
     {
       name: "JavaScript",
@@ -80,10 +93,6 @@ import {
       icon: reactjs,
     },
     {
-      name: "Redux Toolkit",
-      icon: redux,
-    },
-    {
       name: "Tailwind CSS",
       icon: tailwind,
     },
@@ -92,25 +101,9 @@ import {
       icon: nodejs,
     },
     {
-      name: "MongoDB",
-      icon: mongodb,
-    },
-    {
       name: "Three JS",
       icon: threejs,
-    },
-    {
-      name: "git",
-      icon: git,
-    },
-    {
-      name: "figma",
-      icon: figma,
-    },
-    {
-      name: "docker",
-      icon: docker,
-    },
+    }
   ];
   
   const experiences = [
@@ -121,10 +114,7 @@ import {
       iconBg: "#383E56",
       date: "March 2022 - Current",
       points: [
-        "Developing and maintaining web applications using React.js and other related technologies.",
-        "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-        "Implementing responsive design and ensuring cross-browser compatibility.",
-        "Participating in code reviews and providing constructive feedback to other developers.",
+        "Building the next generation of edge computing infrastructure to deliver the ultimate hybrid cloud experience"
       ],
     },
     {
