@@ -6,6 +6,7 @@ import mobile from "./mobile.png";
 import web from "./web.png";
 import github from "./github.png";
 import menu from "./menu.svg";
+import rocket from "./rocket.svg";
 import close from "./close.svg";
 
 import docker from "./tech/docker.png";
@@ -39,6 +40,7 @@ export {
   web,
   github,
   menu,
+  rocket,
   close,
   docker,
   cloud,

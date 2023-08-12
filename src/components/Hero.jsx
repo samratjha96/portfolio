@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion"
+import { rocket } from "../assets"
 import { styles } from "../styles"
 import Lottie from "lottie-react";
 import animationData from "../../public/astronaut-with-space-shuttle.json";
@@ -22,38 +23,52 @@ const Hero = () => {
           <div className={`${styles.heroSubText} mt-2 text-white-100`}>
             <Typewriter
               options={{
-                strings: ["AWS Expert", "Software Architect", "Backend Engineer", "Web Developer"],
+                strings: [
+                  "AWS Expert",
+                  "Software Architect",
+                  "Backend Engineer",
+                  "Web Developer",
+                ],
                 autoStart: true,
                 loop: true,
-                pauseFor: 200
+                pauseFor: 200,
               }}
             />
           </div>
         </div>
       </div>
       {/* <ComputersCanvas /> */}
-      <div className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto`}>
-        <div className='flex justify-center items-center'>
+      <div
+        className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto`}
+      >
+        <div className="flex justify-center items-center">
           <Lottie
             animationData={animationData}
             className="flex justify-center items-center"
             loop={true}
           />
         </div>
-       </div>
+      </div>
 
       <div className="absolute xs:bottom-8 top-3/4 w-full flex justify-center items-center">
         <a href="#about">
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
             <motion.div
-              animate={{ y: [0, 24, 0] }}
+              animate={{ y: [1, 20, 1] }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
                 repeatType: "loop",
               }}
-              className="w-3 h-3 rounded-full bg-secondary mb-1"
-            />
+            >
+              <div className="w-[30px]">
+                <img
+                  src={rocket}
+                  alt="Get Started"
+                  className="cursor-pointer"
+                />
+              </div>
+            </motion.div>
           </div>
         </a>
       </div>
