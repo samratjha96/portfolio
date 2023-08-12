@@ -1,26 +1,30 @@
 import React from 'react'
-import Tilt from 'react-parallax-tilt';
 import { motion } from 'framer-motion';
 
 import { styles } from "../styles";
 import { SectionWrapper } from '../hoc';
 import { videos } from '../constants/constants';
 import { fadeIn, textVariant } from "../utils/motion"
-import YoutubeEmbed from './YoutubeEmbed';
+import ReactPlayer from 'react-player/youtube'
 
-
-const VideoCard = ({ name, description, tags, image, embedId }) => {
+const VideoCard = ({ name, description, embedId }) => {
   return (
     <div className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full">
-        <div className="relative w-full h-[230px]">
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <YoutubeEmbed videoId={embedId} />
-          </div>
+      <div className="m-3 max-w-2xl">
+        <div className="relative aspect-video">
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${embedId}`}
+            className="absolute left-0 top-0"
+            width="100%"
+            height="100%"
+            controls
+          />
         </div>
-          <h3 className='text-white font-bold text-[24px]'>{name}</h3>
-          <p className='mt-2 text-secondary text-[14px]'>{description}</p>
-        </div>
-  )
+      </div>
+      <h3 className="text-white font-bold text-[24px]">{name}</h3>
+      <p className="mt-2 text-secondary text-[14px]">{description}</p>
+    </div>
+  );
 }
 
 const OnlinePresence = () => {

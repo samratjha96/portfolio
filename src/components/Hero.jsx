@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion"
 import { styles } from "../styles"
-import { ComputersCanvas } from './canvas'
 import Lottie from "lottie-react";
 import animationData from "../../public/astronaut-with-space-shuttle.json";
 import Typewriter from "typewriter-effect"
