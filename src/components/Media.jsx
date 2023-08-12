@@ -5,7 +5,8 @@ import { styles } from "../styles";
 import { SectionWrapper } from '../hoc';
 import { videos } from '../constants/constants';
 import { fadeIn, textVariant } from "../utils/motion"
-import ReactPlayer from "react-player/youtube"
+import { default as _ReactPlayer } from 'react-player/youtube';
+const ReactPlayer = _ReactPlayer
 
 const VideoCard = ({ name, description, embedId }) => {
   return (
