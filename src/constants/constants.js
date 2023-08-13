@@ -198,7 +198,7 @@ import {
     {
       name: "Mock Interview Prep",
       description:
-        "Mock Software Engineering interview for the interview prep site InterviewPen (https://interviewpen.com/). Watch to see how to navigate and succeed in a FAANG interview",
+        "Mock Software Engineering interview for the interview prep site [InterviewPen](https://www.interviewpen.com). Watch to see how to navigate and succeed in a FAANG interview",
       tags: [
         {
           name: "react",
@@ -218,7 +218,7 @@ import {
     {
       name: "Podcast Interview",
       description:
-        "Podcast appearance on Back2BackSWE channel (300K+ subscribers) where I give career guidance to software engineers about navigating the job hunt, how to interview and how to ultimately find the right fit",
+        "Podcast appearance on [Back2BackSWE channel](https://www.youtube.com/@BackToBackSWE) (300K+ subscribers) where I give career guidance to software engineers about navigating the job hunt, how to interview and how to ultimately find the right fit",
       embedId: "y2y_ni8WLy0",
     },
     {
