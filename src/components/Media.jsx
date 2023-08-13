@@ -44,7 +44,7 @@ const VideoCard = ({ name, description, embedId }) => {
       <div className="m-3 max-w-2xl">
         <div className="relative aspect-video">
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${embedId}`}
+            url={`https://youtube.com/watch?v=${embedId}`}
             className="absolute left-0 top-0"
             width="100%"
             height="100%"
