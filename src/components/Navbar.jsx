@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { styles } from "../styles"
-import { navLinks } from '../constants/constants';
-import personalLogo from "/personalLogo.png"
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { styles } from "../styles";
+import { navLinks } from "../constants/constants";
+import personalLogo from "/personalLogo.png";
 
-import { menu, close } from '../assets';
+import { menu, close } from "../assets";
 
 const Navbar = () => {
-  const [active, setActive] = useState("")
-  const [toggle, setToggle] = useState(false)
+  const [active, setActive] = useState("");
+  const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 ${
+      className={`${
+        styles.paddingX
+      } w-full flex items-center py-5 fixed top-0 z-20 ${
         scrolled ? "bg-primary" : "bg-transparent"
       }
     `}
@@ -42,7 +44,11 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={personalLogo} alt="logo" className="w-9 h-9 object-contain" />
+          <img
+            src={personalLogo}
+            alt="logo"
+            className="w-9 h-9 object-contain"
+          />
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
             Samrat &nbsp;
             <span className="hidden sm:block">| Portfolio</span>
@@ -94,6 +100,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

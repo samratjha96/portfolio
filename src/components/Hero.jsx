@@ -1,10 +1,10 @@
-import React from 'react'
-import { motion } from "framer-motion"
-import { rocket } from "../assets"
-import { styles } from "../styles"
+import React from "react";
+import { motion } from "framer-motion";
+import { rocket } from "../assets";
+import { styles } from "../styles";
 import Lottie from "lottie-react";
 import animationData from "../../public/astronaut-with-space-shuttle.json";
-import Typewriter from "typewriter-effect"
+import Typewriter from "typewriter-effect";
 
 const Hero = () => {
   return (
@@ -74,6 +74,6 @@ const Hero = () => {
       </div>
     </section>
   );
-}
+};
 
-export default Hero
+export default Hero;

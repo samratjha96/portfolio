@@ -24,7 +24,7 @@ import python from "./tech/python.png";
 
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
-import appian from "./company/appian.png"
+import appian from "./company/appian.png";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
