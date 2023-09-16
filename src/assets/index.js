@@ -26,9 +26,9 @@ import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
 import appian from "./company/appian.png";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+import floatingPhotoGallery from "./FloatingPhotoGallery.png";
+import parallaxPhotoGallery from "./ParallaxImageGallery.png";
+import saasLandingPage from "./SAASLandingPage.png";
 
 export {
   logo,
@@ -56,7 +56,7 @@ export {
   aws,
   appian,
   boeing,
-  carrent,
-  jobit,
-  tripguide,
+  floatingPhotoGallery,
+  parallaxPhotoGallery,
+  saasLandingPage,
 };

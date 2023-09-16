@@ -19,9 +19,9 @@ import {
   aws,
   boeing,
   threejs,
-  carrent,
-  tripguide,
-  jobit
+  saasLandingPage,
+  parallaxPhotoGallery,
+  floatingPhotoGallery
 } from "../assets";
 
 export const navLinks = [
@@ -232,25 +232,27 @@ const videos = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "SAAS Landing Page",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
-    image: carrent,
-    source_code_link: "https://github.com/",
+      "Sleek white label SAAS landing page. Complete with engaging copy, animations and eye-catching design. This landing page can be reskinned for any client or project",
+    image: saasLandingPage,
+    source_code_link: "https://github.com/samratjha96/sample-saas-landing-page",
+    demo_link: "https://sample-saas-landing-page.vercel.app/"
   },
   {
-    name: "Job IT",
+    name: "Parallax Image Gallery",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
-    image: jobit,
-    source_code_link: "https://github.com/",
+      "Sleek parallax animation showing off a collection of photos. Add a subtle but highly creative touch to your blog without cluttering the content with pictures",
+    image: parallaxPhotoGallery,
+    source_code_link: "https://github.com/samratjha96/parallax-image-gallery",
+    demo_link: "https://parallax-image-gallery-beta.vercel.app/"
   },
   {
-    name: "Trip Guide",
+    name: "Floating Images Gallery",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
-    image: tripguide,
-    source_code_link: "https://github.com/",
+      "Interactive floating images gallery built with React, Tailwind and GSAP for animation. Great way to show a collection of photographs in a museum style",
+    image: floatingPhotoGallery,
+    source_code_link: "https://floating-images-gallery.vercel.app/",
   },
 ];
 
