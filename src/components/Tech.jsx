@@ -12,7 +12,7 @@ const Tech = () => {
             <BallCanvas icon={technology.icon} />
           </div>
           <div>
-            <span className="text-white-100 text-[14px] tracking-wider">
+            <span className="text-slate-400 text-[14px] tracking-wider">
               {technology.name}
             </span>
           </div>
