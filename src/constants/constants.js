@@ -252,8 +252,8 @@ const projects = [
     description:
       "Interactive floating images gallery built with React, Tailwind and GSAP for animation. Great way to show a collection of photographs in a museum style",
     image: floatingPhotoGallery,
-    demo_link: "https://github.com/samratjha96/floating-images-gallery",
-    source_code_link: "https://floating-images-gallery.vercel.app/"
+    source_code_link: "https://github.com/samratjha96/floating-images-gallery",
+    demo_link: "https://floating-images-gallery.vercel.app/"
   },
 ];
 
