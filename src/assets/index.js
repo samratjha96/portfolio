@@ -21,6 +21,7 @@ import threejs from "./tech/threejs.svg";
 import kotlin from "./tech/kotlin.png";
 import golang from "./tech/golang.png";
 import python from "./tech/python.png";
+import rust from "./tech/rust.png"
 
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
@@ -46,6 +47,7 @@ export {
   kotlin,
   java,
   golang,
+  rust,
   python,
   git,
   javascript,

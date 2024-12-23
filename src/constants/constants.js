@@ -18,6 +18,7 @@ import {
   appian,
   aws,
   boeing,
+  rust,
   threejs,
   saasLandingPage,
   parallaxPhotoGallery,
@@ -85,6 +86,10 @@ const technologies = [
     icon: java,
   },
   {
+    name: "Rust",
+    icon: rust,
+  },
+  {
     name: "Golang",
     icon: golang,
   },
@@ -120,13 +125,25 @@ const technologies = [
 
 const experiences = [
   {
+    title: "Software Engineer @ AWS Region Expansion",
+    company_name: "AWS",
+    icon: aws,
+    iconBg: "#383E56",
+    date: "September 2024 - Current",
+    points: [
+      "Building cutting edge Generative AI applications focused on increasing efficiency in launching new AWS regions",
+    ],
+  },
+  {
     title: "Software Engineer @ AWS Outposts",
     company_name: "AWS",
     icon: aws,
     iconBg: "#383E56",
-    date: "March 2022 - Current",
+    date: "March 2022 - September 2024",
     points: [
-      "Building the next generation of edge computing infrastructure to deliver the ultimate hybrid cloud experience",
+      "Built next generation of edge computing infrastructure to deliver the ultimate hybrid cloud experience",
+      "Focused on building event driven, low latency distributed systems using AWS ECS, Lambda, DynamoDB, EventBridge, Kotlin, Typescript and Rust",
+      "Led, designed and delivered numerous large features and projects spanning multiple teams and organizations"
     ],
   },
   {
