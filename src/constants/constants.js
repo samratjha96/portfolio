@@ -21,7 +21,8 @@ import {
   threejs,
   saasLandingPage,
   parallaxPhotoGallery,
-  floatingPhotoGallery
+  floatingPhotoGallery,
+  dashboard
 } from "../assets";
 
 export const navLinks = [
@@ -238,6 +239,14 @@ const projects = [
     image: saasLandingPage,
     source_code_link: "https://github.com/samratjha96/sample-saas-landing-page",
     demo_link: "https://sample-saas-landing-page.vercel.app/"
+  },
+  {
+    name: "Hacker Dashboard",
+    description:
+      "Hacker terminal themed personal dashboard showing integrations with Stock APIs and RSS feeds",
+    image: dashboard,
+    source_code_link: "https://github.com/samratjha96/today",
+    demo_link: "https://today.techbrohomelab.xyz/"
   },
   {
     name: "Parallax Image Gallery",

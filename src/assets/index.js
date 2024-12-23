@@ -29,6 +29,7 @@ import appian from "./company/appian.png";
 import floatingPhotoGallery from "./FloatingPhotoGallery.png";
 import parallaxPhotoGallery from "./ParallaxImageGallery.png";
 import saasLandingPage from "./SAASLandingPage.png";
+import dashboard from "./dashboard.png"
 
 export {
   logo,
@@ -59,4 +60,5 @@ export {
   floatingPhotoGallery,
   parallaxPhotoGallery,
   saasLandingPage,
+  dashboard
 };
