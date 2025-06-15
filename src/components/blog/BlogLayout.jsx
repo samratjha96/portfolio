@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { StarsCanvas } from "..";
 import BlogNavbar from "./BlogNavbar";
 import { styles } from "../../styles";
 import { extractFrontMatter, getSlugFromFilename } from "../../utils/mdxUtils";
@@ -126,8 +125,6 @@ const BlogLayout = ({ children, title }) => {
           </div>
         </div>
       </div>
-
-      <StarsCanvas />
     </div>
   );
 };
