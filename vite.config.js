@@ -5,6 +5,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkGfm from "remark-gfm";
+import remarkFrontmatter from "remark-frontmatter";
 import glob from "vite-plugin-glob";
 
 // https://vitejs.dev/config/
@@ -13,7 +14,7 @@ export default defineConfig({
     react(),
     mdx({
       rehypePlugins: [rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings],
-      remarkPlugins: [remarkGfm],
+      remarkPlugins: [remarkGfm, remarkFrontmatter],
     }),
     glob(),
   ],

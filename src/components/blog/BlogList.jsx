@@ -7,29 +7,39 @@ import { extractFrontMatter, generateExcerpt, getSlugFromFilename } from "../../
 const BlogSearch = ({ onSearch }) => {
   const [query, setQuery] = useState("");
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    onSearch(query);
+  // Handle input change for real-time search
+  const handleInputChange = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+    onSearch(newQuery);
+  };
+
+  // Clear search
+  const clearSearch = () => {
+    setQuery("");
+    onSearch("");
   };
 
   return (
-    <form onSubmit={handleSearch} className="mb-8">
-      <div className="flex gap-2">
+    <div className="mb-8">
+      <div className="relative overflow-hidden">
         <input
           type="text"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Search posts..."
-          className="w-full bg-tertiary py-2 px-4 rounded-lg text-white outline-none border border-secondary"
+          className="w-full p-3 pr-10 bg-tertiary bg-opacity-70 backdrop-blur-lg rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#915eff] border border-transparent"
         />
-        <button
-          type="submit"
-          className="bg-[#915eff] text-white py-2 px-4 rounded-lg hover:bg-[#7448c8] transition-colors duration-300"
-        >
-          Search
-        </button>
+        {query && (
+          <button
+            onClick={clearSearch}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            ✕
+          </button>
+        )}
       </div>
-    </form>
+    </div>
   );
 };
 

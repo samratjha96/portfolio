@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BlogPostLayout from "./BlogPostLayout";
 import "highlight.js/styles/atom-one-dark.css"; // Syntax highlighting theme
 import { extractFrontMatter, getSlugFromFilename } from "../../utils/mdxUtils";
@@ -28,14 +28,14 @@ const BlogPost = () => {
           return;
         }
 
-        // Dynamically import the MDX component
-        const mdxModule = await mdxModules[matchingPath]();
-        const Content = mdxModule.default;
-
-        // Get raw content for metadata extraction
+        // Get raw content for metadata extraction and content processing
         const rawModules = import.meta.glob("../../blog/posts/*.mdx", { as: "raw", eager: true });
         const rawContent = rawModules[matchingPath];
         const frontMatter = extractFrontMatter(rawContent);
+
+        // Dynamically import the MDX component
+        const mdxModule = await mdxModules[matchingPath]();
+        const Content = mdxModule.default;
 
         setPost({
           title: frontMatter.title || "Untitled Post",
@@ -95,7 +95,7 @@ const BlogPost = () => {
           </div>
         </div>
 
-        <article className="prose prose-invert prose-lg max-w-none">
+        <article className="prose prose-invert prose-lg max-w-none blog-post-content">
           <PostContent />
         </article>
       </div>

@@ -1,7 +1,7 @@
 // Function to extract front matter from an MDX file
 export function extractFrontMatter(mdxContent) {
-  // Match content between {/* ... */} at the beginning of the file
-  const frontMatterMatch = mdxContent.match(/^\{\/\*\s*([\s\S]*?)\s*\*\/\}/);
+  // Match content between --- markers at the beginning of the file
+  const frontMatterMatch = mdxContent.match(/^---([\s\S]*?)---/);
 
   if (!frontMatterMatch) {
     return {};
@@ -41,10 +41,30 @@ export function extractFrontMatter(mdxContent) {
   return frontMatter;
 }
 
+// Process MDX content to remove the duplicate title (first h1 heading)
+export function processMdxContent(mdxContent, frontMatter) {
+  // Remove frontmatter
+  let content = mdxContent.replace(/^---[\s\S]*?---\s*/, "");
+
+  // Check if the content starts with a heading that matches the title
+  const titleEscaped = escapeRegExp(frontMatter.title);
+  const h1TitleRegex = new RegExp(`^\\s*# ${titleEscaped}[\\s\\n]*`, "m");
+
+  // Remove the first h1 that matches the title
+  content = content.replace(h1TitleRegex, "");
+
+  return content;
+}
+
+// Helper function to escape special characters in a string for use in a regex
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 // Generate a summary/excerpt from the content
 export function generateExcerpt(content, maxLength = 150) {
   // Remove front matter if present
-  const contentWithoutFrontMatter = content.replace(/^\{\/\*\s*[\s\S]*?\s*\*\/\}/, "");
+  const contentWithoutFrontMatter = content.replace(/^---[\s\S]*?---/, "");
 
   // Remove markdown formatting
   let plainText = contentWithoutFrontMatter
