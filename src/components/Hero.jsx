@@ -4,7 +4,6 @@ import { rocket } from "../assets";
 import { styles } from "../styles";
 import Lottie from "lottie-react";
 import animationData from "../../public/astronaut-with-space-shuttle.json";
-import Typewriter from "typewriter-effect";
 
 const Hero = () => {
   return (
@@ -20,20 +19,13 @@ const Hero = () => {
           <h1 className={`${styles.heroHeadText} text-white`}>
             Hi, I'm <span className="text-[#915eff]">Samrat Jha</span>
           </h1>
-          <div className={`${styles.heroSubText} mt-2 text-white-100`}>
-            <Typewriter
-              options={{
-                strings: [
-                  "AWS Expert",
-                  "Software Architect",
-                  "Backend Engineer",
-                  "Web Developer",
-                ],
-                autoStart: true,
-                loop: true,
-                pauseFor: 200,
-              }}
-            />
+          <div className="flex flex-col">
+            <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+              AWS Expert & Full Stack Engineer
+            </p>
+            <div className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
+              <span className="text-white">7+ years</span> building distributed systems on AWS. Currently exploring everything AI has to offer
+            </div>
           </div>
         </div>
       </div>
