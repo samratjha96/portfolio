@@ -24,7 +24,7 @@ import {
   parallaxPhotoGallery,
   floatingPhotoGallery,
   dashboard,
-  argos
+  argos,
 } from "../assets";
 
 export const navLinks = [
@@ -43,6 +43,12 @@ export const navLinks = [
   {
     id: "contact",
     title: "Contact",
+  },
+  {
+    id: "blog",
+    title: "Blog",
+    isExternal: true,
+    path: "/blog",
   },
 ];
 
@@ -144,7 +150,7 @@ const experiences = [
     points: [
       "Built next generation of edge computing infrastructure to deliver the ultimate hybrid cloud experience",
       "Focused on building event driven, low latency distributed systems using AWS ECS, Lambda, DynamoDB, EventBridge, Kotlin, Typescript and Rust",
-      "Led, designed and delivered numerous large features and projects spanning multiple teams and organizations"
+      "Led, designed and delivered numerous large features and projects spanning multiple teams and organizations",
     ],
   },
   {
@@ -256,7 +262,7 @@ const projects = [
       "Personal finance application to track net worth. Built with React, TypeScript, Tailwind CSS and shadcn-ui",
     image: argos,
     source_code_link: "https://github.com/samratjha96/networth",
-    demo_link: "https://argos.techbrohomelab.xyz/"
+    demo_link: "https://argos.techbrohomelab.xyz/",
   },
   {
     name: "SAAS Landing Page",
@@ -264,7 +270,7 @@ const projects = [
       "Sleek white label SAAS landing page. Complete with engaging copy, animations and eye-catching design. This landing page can be reskinned for any client or project",
     image: saasLandingPage,
     source_code_link: "https://github.com/samratjha96/sample-saas-landing-page",
-    demo_link: "https://sample-saas-landing-page.vercel.app/"
+    demo_link: "https://sample-saas-landing-page.vercel.app/",
   },
   {
     name: "Hacker Dashboard",
@@ -272,7 +278,7 @@ const projects = [
       "Hacker terminal themed personal dashboard showing integrations with Stock APIs and RSS feeds",
     image: dashboard,
     source_code_link: "https://github.com/samratjha96/today",
-    demo_link: "https://today.techbrohomelab.xyz/"
+    demo_link: "https://today.techbrohomelab.xyz/",
   },
   {
     name: "Parallax Image Gallery",
@@ -280,7 +286,7 @@ const projects = [
       "Sleek parallax animation showing off a collection of photos. Add a subtle but highly creative touch to your blog without cluttering the content with pictures",
     image: parallaxPhotoGallery,
     source_code_link: "https://github.com/samratjha96/parallax-image-gallery",
-    demo_link: "https://parallax-image-gallery-beta.vercel.app/"
+    demo_link: "https://parallax-image-gallery-beta.vercel.app/",
   },
   {
     name: "Floating Images Gallery",
@@ -288,7 +294,7 @@ const projects = [
       "Interactive floating images gallery built with React, Tailwind and GSAP for animation. Great way to show a collection of photographs in a museum style",
     image: floatingPhotoGallery,
     source_code_link: "https://github.com/samratjha96/floating-images-gallery",
-    demo_link: "https://floating-images-gallery.vercel.app/"
+    demo_link: "https://floating-images-gallery.vercel.app/",
   },
 ];
 

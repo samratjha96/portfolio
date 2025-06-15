@@ -1,0 +1,292 @@
+{/_
+title: React Best Practices in 2025
+date: 2025-01-15
+tags: ["react", "javascript", "frontend"]
+_/}
+
+# React Best Practices in 2025
+
+React continues to evolve as one of the most popular frontend libraries. As we move through 2025, certain practices have emerged as standards for building efficient, maintainable React applications.
+
+## Modern React Foundation
+
+### 1. Functional Components and Hooks
+
+Class components are now considered legacy code. Embrace functional components with hooks:
+
+```jsx
+// Instead of this (class component)
+class Counter extends React.Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+
+// Do this (functional component with hooks)
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### 2. Custom Hooks for Logic Reuse
+
+Extract reusable logic into custom hooks:
+
+```jsx
+// Custom hook for form handling
+function useForm(initialValues) {
+  const [values, setValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  return { values, handleChange };
+}
+
+// Usage
+function SignupForm() {
+  const { values, handleChange } = useForm({ username: "", email: "" });
+
+  return (
+    <form>
+      <input name="username" value={values.username} onChange={handleChange} />
+      <input name="email" value={values.email} onChange={handleChange} />
+    </form>
+  );
+}
+```
+
+## State Management
+
+### 1. Context API + useReducer for Global State
+
+For many applications, Redux is no longer necessary. The combination of Context API and useReducer often provides a simpler solution:
+
+```jsx
+// Create context
+const TodoContext = createContext();
+
+// Reducer
+function todoReducer(state, action) {
+  switch (action.type) {
+    case "ADD_TODO":
+      return [...state, action.payload];
+    case "TOGGLE_TODO":
+      return state.map((todo) =>
+        todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
+      );
+    default:
+      return state;
+  }
+}
+
+// Provider component
+function TodoProvider({ children }) {
+  const [todos, dispatch] = useReducer(todoReducer, []);
+
+  return <TodoContext.Provider value={{ todos, dispatch }}>{children}</TodoContext.Provider>;
+}
+
+// Consumer component
+function TodoList() {
+  const { todos, dispatch } = useContext(TodoContext);
+
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li
+          key={todo.id}
+          onClick={() =>
+            dispatch({
+              type: "TOGGLE_TODO",
+              payload: todo.id,
+            })
+          }
+          style={{
+            textDecoration: todo.completed ? "line-through" : "none",
+          }}
+        >
+          {todo.text}
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### 2. Server State Management
+
+For server data, use purpose-built libraries like React Query or SWR:
+
+```jsx
+// Using React Query
+function UserProfile({ userId }) {
+  const { data, isLoading, error } = useQuery(
+    ["user", userId],
+    () => fetchUser(userId),
+    { staleTime: 300000 } // 5 minutes
+  );
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return <UserDetails user={data} />;
+}
+```
+
+## Performance Optimization
+
+### 1. Proper Dependency Arrays in Hooks
+
+Always specify dependencies correctly in useEffect, useMemo, and useCallback:
+
+```jsx
+// Bad - missing dependencies
+useEffect(() => {
+  fetchData(userId);
+}, []); // Missing userId dependency
+
+// Good - correct dependencies
+useEffect(() => {
+  fetchData(userId);
+}, [userId]);
+```
+
+### 2. Memoization
+
+Use React.memo, useMemo, and useCallback appropriately:
+
+```jsx
+// Memoize expensive component
+const MemoizedComponent = React.memo(ExpensiveComponent);
+
+// Memoize expensive calculations
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+
+// Memoize callbacks
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+### 3. Code Splitting
+
+Split your app into smaller chunks using dynamic imports:
+
+```jsx
+// Instead of static import
+import Dashboard from "./Dashboard";
+
+// Use dynamic import with React.lazy
+const Dashboard = React.lazy(() => import("./Dashboard"));
+
+// And use with Suspense
+function App() {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <Dashboard />
+    </Suspense>
+  );
+}
+```
+
+## Modern Styling Approaches
+
+### 1. CSS-in-JS or Tailwind CSS
+
+Consider using modern styling solutions:
+
+```jsx
+// Using styled-components
+const Button = styled.button`
+  background: ${(props) => (props.primary ? "blue" : "white")};
+  color: ${(props) => (props.primary ? "white" : "blue")};
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+`;
+
+// Using Tailwind CSS
+function Button({ primary, children }) {
+  return (
+    <button
+      className={`px-4 py-2 rounded ${
+        primary ? "bg-blue-500 text-white" : "bg-white text-blue-500"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+## Testing
+
+### 1. Component Testing with React Testing Library
+
+Focus on behavior rather than implementation details:
+
+```jsx
+// Testing a form component
+test("submitting the form calls onSubmit with name", () => {
+  const handleSubmit = jest.fn();
+
+  render(<Form onSubmit={handleSubmit} />);
+
+  fireEvent.change(screen.getByLabelText(/name/i), {
+    target: { value: "John Doe" },
+  });
+
+  fireEvent.click(screen.getByText(/submit/i));
+
+  expect(handleSubmit).toHaveBeenCalledWith(expect.objectContaining({ name: "John Doe" }));
+});
+```
+
+### 2. End-to-End Testing
+
+For critical user flows, use tools like Cypress or Playwright:
+
+```javascript
+// Cypress test example
+describe("Authentication", () => {
+  it("allows users to log in", () => {
+    cy.visit("/login");
+    cy.findByLabelText(/email/i).type("user@example.com");
+    cy.findByLabelText(/password/i).type("password123");
+    cy.findByText(/log in/i).click();
+    cy.url().should("include", "/dashboard");
+    cy.findByText(/welcome/i).should("exist");
+  });
+});
+```
+
+## Conclusion
+
+React development continues to evolve, with a focus on simplicity, reusability, and performance. By following these best practices, you'll create React applications that are maintainable, performant, and enjoyable to work with.
+
+The ecosystem is constantly changing, so stay updated with the React documentation and community discussions to keep your skills sharp in the ever-evolving frontend landscape.

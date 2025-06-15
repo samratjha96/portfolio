@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import {
   About,
   Contact,
@@ -8,28 +8,37 @@ import {
   Tech,
   Media,
   StarsCanvas,
-  Projects
+  Projects,
 } from "./components";
+import { BlogList, BlogPost } from "./components/blog";
+
+const Home = () => {
+  return (
+    <div className="relative z-0 bg-primary">
+      <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+        <Navbar />
+        <Hero />
+      </div>
+      <About />
+      <Experience />
+      <Tech />
+      <Media />
+      <Projects />
+      <div className="relative z-0">
+        <Contact />
+      </div>
+      <StarsCanvas />
+    </div>
+  );
+};
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-        </div>
-        <About />
-        <Experience />
-        <Tech />
-        <Media />
-        <Projects />
-        <div className="relative z-0">
-          <Contact />
-        </div>
-        <StarsCanvas />
-      </div>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/blog" element={<BlogList />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
+    </Routes>
   );
 };
 

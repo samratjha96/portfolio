@@ -5,23 +5,27 @@ A modern and interactive portfolio website featuring 3D graphics, smooth animati
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js (version 14 or above)
 - npm (Node Package Manager)
 
 ## Getting Started
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```

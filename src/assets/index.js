@@ -21,7 +21,7 @@ import threejs from "./tech/threejs.svg";
 import kotlin from "./tech/kotlin.png";
 import golang from "./tech/golang.png";
 import python from "./tech/python.png";
-import rust from "./tech/rust.png"
+import rust from "./tech/rust.png";
 
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
@@ -31,7 +31,7 @@ import floatingPhotoGallery from "./FloatingPhotoGallery.png";
 import parallaxPhotoGallery from "./ParallaxImageGallery.png";
 import saasLandingPage from "./SAASLandingPage.png";
 import dashboard from "./dashboard.png";
-import argos from "./argos.png"
+import argos from "./argos.png";
 
 export {
   logo,
@@ -64,5 +64,5 @@ export {
   parallaxPhotoGallery,
   saasLandingPage,
   dashboard,
-  argos
+  argos,
 };

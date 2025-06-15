@@ -36,7 +36,7 @@ const Contact = () => {
           to_email: "contact@samratjha.com",
           message: form.message,
         },
-        "O6hX4RD46fMq3-86-",
+        "O6hX4RD46fMq3-86-"
       )
       .then(
         () => {
@@ -53,10 +53,8 @@ const Contact = () => {
           setLoading(false);
           setSentEmail(false);
           console.log("Error!");
-          alert(
-            "Something went wrong when sending the email. Please try again in a bit",
-          );
-        },
+          alert("Something went wrong when sending the email. Please try again in a bit");
+        }
       );
   };
 
@@ -69,11 +67,7 @@ const Contact = () => {
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="mt-12 flex flex-col gap-8"
-        >
+        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Name</span>
             <input
@@ -116,11 +110,7 @@ const Contact = () => {
           >
             {loading ? "Sending..." : "Send"}
           </button>
-          {sentEmail && (
-            <span className="text-[green] font-medium mb-4">
-              Successfully sent!
-            </span>
-          )}
+          {sentEmail && <span className="text-[green] font-medium mb-4">Successfully sent!</span>}
         </form>
       </motion.div>
 

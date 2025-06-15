@@ -24,15 +24,14 @@ const Hero = () => {
               AWS Expert & Full Stack Engineer
             </p>
             <div className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
-              <span className="text-white">7+ years</span> building distributed systems on AWS. Currently exploring everything AI has to offer
+              <span className="text-white">7+ years</span> building distributed systems on AWS.
+              Currently exploring everything AI has to offer
             </div>
           </div>
         </div>
       </div>
       {/* <ComputersCanvas /> */}
-      <div
-        className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto`}
-      >
+      <div className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto`}>
         <div className="flex justify-center items-center">
           <Lottie
             animationData={animationData}
@@ -54,11 +53,7 @@ const Hero = () => {
               }}
             >
               <div className="w-[30px]">
-                <img
-                  src={rocket}
-                  alt="Get Started"
-                  className="cursor-pointer"
-                />
+                <img src={rocket} alt="Get Started" className="cursor-pointer" />
               </div>
             </motion.div>
           </div>

@@ -57,9 +57,7 @@ const VideoCard = ({ name, description, embedId }) => {
         </div>
       </div>
       <h3 className="text-white font-bold text-[24px]">{name}</h3>
-      <p className="mt-2 text-secondary text-[14px]">
-        {parseMarkdown(description)}
-      </p>
+      <p className="mt-2 text-secondary text-[14px]">{parseMarkdown(description)}</p>
     </div>
   );
 };
@@ -86,8 +84,8 @@ const OnlinePresence = () => {
           >
             Youtube
           </a>{" "}
-          channels covering a wide variety of topics. Watch them to learn about
-          me, my thoughts and my technical skills
+          channels covering a wide variety of topics. Watch them to learn about me, my thoughts and
+          my technical skills
         </motion.p>
       </div>
 
