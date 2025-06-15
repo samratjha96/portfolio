@@ -23,7 +23,8 @@ import {
   saasLandingPage,
   parallaxPhotoGallery,
   floatingPhotoGallery,
-  dashboard
+  dashboard,
+  argos
 } from "../assets";
 
 export const navLinks = [
@@ -249,6 +250,14 @@ const videos = [
 ];
 
 const projects = [
+  {
+    name: "NetWorth Tracker",
+    description:
+      "Personal finance application to track net worth. Built with React, TypeScript, Tailwind CSS and shadcn-ui",
+    image: argos,
+    source_code_link: "https://github.com/samratjha96/networth",
+    demo_link: "https://argos.techbrohomelab.xyz/"
+  },
   {
     name: "SAAS Landing Page",
     description:
