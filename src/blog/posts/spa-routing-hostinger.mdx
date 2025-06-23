@@ -1,6 +1,6 @@
 ---
 title: Fixing 404 Errors in Single Page Apps on Hostinger and Beyond
-date: 2023-06-15
+date: 2025-06-22
 tags: ["web development", "react", "routing", "htaccess", "SPA"]
 ---
 
@@ -36,11 +36,7 @@ Drop this file in your project's public directory (the one that gets deployed to
 
 ## What Does This Actually Do?
 
-In plain English, this configuration tells the Apache server:
-
-1. "Hey, enable URL rewriting for this directory"
-2. "If someone requests a URL that isn't a real file or folder on the server..."
-3. "...serve them index.html instead, and let the client-side router handle it"
+In plain English, this configuration tells the Apache server to serve the index.html file for ANY URL the user is requesting that isn't a real file or folder
 
 That's it! With this approach, when a user visits `yourdomain.com/blog` directly, the server serves your main `index.html` file, your React app loads, and then React Router takes over and shows the correct page.
 
