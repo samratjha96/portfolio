@@ -119,7 +119,7 @@ const BlogLayout = ({ children, title }) => {
           {/* Main Content */}
           <div className="md:w-3/4 overflow-hidden">
             {title && <h1 className={`${styles.sectionHeadText} mb-6`}>{title}</h1>}
-            <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-li:text-gray-300 max-w-none">
+            <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&_code::before]:content-none [&_code::after]:content-none">
               {children}
             </div>
           </div>
