@@ -1,4 +1,4 @@
 User-Agent: *
 Disallow:
 
-Sitemap: https://samratjha.com/sitemap.xml
+Sitemap: https://www.samratjha.com/sitemap.xml
