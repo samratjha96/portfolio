@@ -1,6 +1,7 @@
 import React from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import { styles } from "../styles";
 import { services } from "../constants/constants";
@@ -42,7 +43,14 @@ const About = () => {
         deployment, testing and monitoring pipelines for all kinds of applications. And as is
         evidenced by this website, I am also quite interested and skilled in frontend development.
         I'm a quick learner and collaborate closely with clients to not just create scalable,
-        efficient applications but also applications that are user-friendly and a joy to use. Let's
+        efficient applications but also applications that are user-friendly and a joy to use. I also share my insights and experiences on my{" "}
+        <Link
+          to="/blog"
+          className="underline text-[#915eff] hover:text-blue-800 visited:text-purple-600"
+        >
+          blog
+        </Link>
+        , covering topics from software engineering to career development. Let's
         work together and bring your ideas to life!
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10">

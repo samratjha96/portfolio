@@ -19,18 +19,24 @@ const ProjectCard = ({ index, name, description, image, source_code_link, demo_l
         }}
         className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
       >
-        <div
-          className="relative w-full h-[230px] cursor-pointer"
-          onClick={() => window.open(`${demo_link ?? source_code_link}`, "_blank")}
-        >
-          <img src={image} alt={name} className="w-full h-full object-cover rounded-2xl" />
+        <div className="relative w-full h-[230px]">
+          <a
+            href={demo_link ?? source_code_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer"
+          >
+            <img src={image} alt={name} className="w-full h-full object-cover rounded-2xl" />
+          </a>
           <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
+            <a
+              href={source_code_link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
             >
               <img src={github} alt="github" className="w-1/2 h-1/2 object-contain" />
-            </div>
+            </a>
           </div>
         </div>
 
