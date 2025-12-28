@@ -1,0 +1,150 @@
+---
+title: Deploying a Full-Stack TypeScript App to Cloudflare Workers
+date: 2025-12-27
+tags: ["cloudflare", "typescript", "serverless", "deployment", "hono"]
+---
+
+I just deployed [Space Selfie](https://space-selfie.zasamrat.workers.dev) to Cloudflare Workers—a single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it.
+
+## Why Workers?
+
+Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, no cold starts, and your code runs close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine.
+
+## The Stack
+
+- **[Hono](https://hono.dev/)** - Web framework built for edge runtimes. Like Express but smaller and doesn't fight the Workers environment.
+- **TypeScript** - Types are nice.
+- **Wrangler** - Cloudflare's CLI. Handles local dev and deploys.
+
+## Project Structure
+
+```
+workers/
+├── src/
+│   ├── index.ts          # Hono app entry point
+│   ├── routes/           # API route handlers
+│   ├── services/         # Business logic
+│   └── utils/            # Helper functions
+├── public/               # Static frontend files
+│   ├── index.html
+│   └── app.js
+├── wrangler.toml         # Cloudflare config
+└── package.json
+```
+
+Workers can serve static assets alongside your API, so you don't need a separate CDN or hosting for the frontend.
+
+## wrangler.toml
+
+```toml
+name = "my-app"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+
+[dev]
+port = 8787
+```
+
+The `[assets]` block serves your `public/` folder as static files. Requests to `/index.html` or `/app.js` hit those directly. Everything else goes to your Worker.
+
+## The Hono App
+
+```typescript
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+
+const app = new Hono();
+
+app.use('*', cors());
+
+app.get('/api/health', (c) => {
+  return c.json({ status: 'ok' });
+});
+
+app.post('/api/data', async (c) => {
+  const body = await c.req.json();
+  return c.json({ received: body });
+});
+
+export default app;
+```
+
+No server setup, no port config. Export the app and Wrangler handles the rest.
+
+## Local Dev
+
+```bash
+npm install
+npx wrangler dev
+```
+
+Spins up `http://localhost:8787` with hot reload.
+
+## Deploying
+
+```bash
+npx wrangler login   # first time only
+npx wrangler deploy
+```
+
+Takes like 5 seconds. You get a URL like `https://my-app.your-subdomain.workers.dev`.
+
+## Gotchas
+
+**No Node.js APIs by default**
+
+Workers run on V8, not Node. If you need stuff like `Buffer`, add the compat flag:
+
+```toml
+compatibility_flags = ["nodejs_compat"]
+```
+
+I forgot this initially and got cryptic errors until I realized what was happening.
+
+**No axios**
+
+Use `fetch()`. It's native and works fine, but if you're used to axios interceptors you'll need to restructure.
+
+**No filesystem**
+
+Can't read/write files. For caching you have a few options:
+- In-memory variables (reset on redeploy, but fine for short-lived cache)
+- KV Storage (key-value store, free tier available)
+- D1 (SQLite, also free tier)
+
+I used in-memory caching. Didn't want to deal with more infrastructure.
+
+**CPU time limits**
+
+10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this—only actual compute. Haven't hit the limit yet doing API work.
+
+## Frontend
+
+Since API and frontend are same origin:
+
+```javascript
+const response = await fetch('/api/data', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ foo: 'bar' })
+});
+```
+
+No CORS headaches. No environment variables for API URLs.
+
+## When This Doesn't Work
+
+- Long-running tasks (30 second max, 10ms CPU on free)
+- Heavy compute like ML inference
+- Complex relational database queries (D1 is SQLite)
+- Websockets without Durable Objects
+
+For APIs and static sites with some dynamic bits, it's solid.
+
+---
+
+[Source code for Space Selfie](https://github.com/samratjha96/space-selfie) if you want to see the full setup.
