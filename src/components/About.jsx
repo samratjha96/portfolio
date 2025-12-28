@@ -39,19 +39,29 @@ const About = () => {
         className="mt-4 secondary-text-[17px] max-w-3xl leading-[30px]"
       >
         I'm a skilled software engineer with experience in building highly performant, scalable and
-        resilient applications. I am well versed with AWS and have extensive experience building out
-        deployment, testing and monitoring pipelines for all kinds of applications. And as is
+        resilient applications. I am well versed with AWS and have extensive{" "}
+        <a href="#work" className="underline text-[#915eff] hover:text-blue-800">
+          experience
+        </a>{" "}
+        building out deployment, testing and monitoring pipelines for all kinds of applications. And as is
         evidenced by this website, I am also quite interested and skilled in frontend development.
         I'm a quick learner and collaborate closely with clients to not just create scalable,
-        efficient applications but also applications that are user-friendly and a joy to use. I also share my insights and experiences on my{" "}
+        efficient applications but also applications that are user-friendly and a joy to use. Check out my{" "}
+        <a href="#projects" className="underline text-[#915eff] hover:text-blue-800">
+          projects
+        </a>{" "}
+        to see examples of my work. I also share my insights and experiences on my{" "}
         <Link
           to="/blog"
           className="underline text-[#915eff] hover:text-blue-800 visited:text-purple-600"
         >
           blog
         </Link>
-        , covering topics from software engineering to career development. Let's
-        work together and bring your ideas to life!
+        , covering topics from software engineering to career development. Feel free to{" "}
+        <a href="#contact" className="underline text-[#915eff] hover:text-blue-800">
+          contact me
+        </a>{" "}
+        - let's work together and bring your ideas to life!
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (

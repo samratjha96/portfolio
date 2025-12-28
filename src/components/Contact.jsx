@@ -66,6 +66,17 @@ const Contact = () => {
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
+        <p className="text-secondary text-[14px] mt-2">
+          Interested in collaborating or have a project in mind? I'd love to hear from you. 
+          You can also check out my{" "}
+          <a href="#work" className="underline text-[#915eff] hover:text-white">
+            work experience
+          </a>{" "}
+          or browse my{" "}
+          <a href="#projects" className="underline text-[#915eff] hover:text-white">
+            projects
+          </a>.
+        </p>
 
         <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">

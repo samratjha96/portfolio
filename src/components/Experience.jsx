@@ -9,7 +9,15 @@ import { experiences } from "../constants/constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
+const companyLinks = {
+  "AWS": "https://aws.amazon.com/",
+  "Appian": "https://appian.com/",
+  "Boeing": "https://www.boeing.com/"
+};
+
 const ExperienceCard = ({ experience }) => {
+  const companyUrl = companyLinks[experience.company_name];
+  
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "#1d1836", color: "#fff" }}
@@ -29,7 +37,18 @@ const ExperienceCard = ({ experience }) => {
       <div>
         <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
         <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
-          {experience.company_name}
+          {companyUrl ? (
+            <a 
+              href={companyUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-[#915eff] transition-colors"
+            >
+              {experience.company_name}
+            </a>
+          ) : (
+            experience.company_name
+          )}
         </p>
       </div>
       <ul className="mt-5 list-disc ml-5 space-y-2">

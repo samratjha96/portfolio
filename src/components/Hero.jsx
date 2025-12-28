@@ -25,7 +25,14 @@ const Hero = () => {
             </p>
             <div className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
               <span className="text-white">7+ years</span> building distributed systems on AWS.
-              Currently exploring everything AI has to offer
+              Currently exploring everything AI has to offer.{" "}
+              <a href="#about" className="underline text-[#915eff] hover:text-white">
+                Learn more about me
+              </a>{" "}
+              or explore my{" "}
+              <a href="#projects" className="underline text-[#915eff] hover:text-white">
+                projects
+              </a>.
             </div>
           </div>
         </div>
