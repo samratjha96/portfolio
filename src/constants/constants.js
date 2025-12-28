@@ -26,6 +26,7 @@ import {
   dashboard,
   argos,
   spaceSelfie,
+  birdRadio,
 } from "../assets";
 
 export const navLinks = [
@@ -264,6 +265,14 @@ const projects = [
     image: spaceSelfie,
     source_code_link: "https://github.com/samratjha96/space-selfie",
     demo_link: "https://space-selfie.zasamrat.workers.dev",
+  },
+  {
+    name: "Bird Radio",
+    description:
+      "A retro-styled nature sound tuner that streams bird songs from around the world. Features real-time spectrogram visualization and region-based browsing",
+    image: birdRadio,
+    source_code_link: "https://github.com/samratjha96/BirdRadio",
+    demo_link: "https://bird-radio.pages.dev/",
   },
   {
     name: "NetWorth Tracker",

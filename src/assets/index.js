@@ -33,6 +33,7 @@ import saasLandingPage from "./SAASLandingPage.png";
 import dashboard from "./dashboard.png";
 import argos from "./argos.png";
 import spaceSelfie from "./space-selfie.png";
+import birdRadio from "./bird-radio.png";
 
 export {
   logo,
@@ -67,4 +68,5 @@ export {
   dashboard,
   argos,
   spaceSelfie,
+  birdRadio,
 };
