@@ -21,11 +21,11 @@ const Hero = () => {
           </h1>
           <div className="flex flex-col">
             <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-              AWS Expert & Full Stack Engineer
+              AI Engineer & Infrastructure Architect
             </p>
             <div className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
-              <span className="text-white">7+ years</span> building distributed systems on AWS.
-              Currently exploring everything AI has to offer.{" "}
+              Building the future of AI at NVIDIA, backed by{" "}
+              <span className="text-white">7+ years</span> architecting large-scale distributed systems at AWS.{" "}
               <a href="#about" className="underline text-[#915eff] hover:text-white">
                 Learn more about me
               </a>{" "}

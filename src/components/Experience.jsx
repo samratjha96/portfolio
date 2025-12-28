@@ -10,6 +10,7 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const companyLinks = {
+  "NVIDIA": "https://www.nvidia.com/",
   "AWS": "https://aws.amazon.com/",
   "Appian": "https://appian.com/",
   "Boeing": "https://www.boeing.com/"

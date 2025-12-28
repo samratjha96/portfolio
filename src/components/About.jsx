@@ -38,30 +38,29 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 secondary-text-[17px] max-w-3xl leading-[30px]"
       >
-        I'm a skilled software engineer with experience in building highly performant, scalable and
-        resilient applications. I am well versed with AWS and have extensive{" "}
+        I'm an AI engineer at NVIDIA, building at the frontier of artificial intelligence. 
+        Before this, I spent{" "}
         <a href="#work" className="underline text-[#915eff] hover:text-blue-800">
-          experience
+          7+ years at AWS
         </a>{" "}
-        building out deployment, testing and monitoring pipelines for all kinds of applications. And as is
-        evidenced by this website, I am also quite interested and skilled in frontend development.
-        I'm a quick learner and collaborate closely with clients to not just create scalable,
-        efficient applications but also applications that are user-friendly and a joy to use. Check out my{" "}
+        architecting large-scale distributed systems—from edge computing infrastructure powering 
+        hybrid cloud, to Generative AI applications accelerating region launches, to event pipelines 
+        handling millions of requests. I bring deep infrastructure expertise to AI, having shipped 
+        systems at scale and led cross-org initiatives across multiple teams. Check out my{" "}
         <a href="#projects" className="underline text-[#915eff] hover:text-blue-800">
           projects
         </a>{" "}
-        to see examples of my work. I also share my insights and experiences on my{" "}
+        to see what I'm building. I also share technical deep-dives on my{" "}
         <Link
           to="/blog"
           className="underline text-[#915eff] hover:text-blue-800 visited:text-purple-600"
         >
           blog
         </Link>
-        , covering topics from software engineering to career development. Feel free to{" "}
+        . Interested in collaborating on AI or infrastructure challenges?{" "}
         <a href="#contact" className="underline text-[#915eff] hover:text-blue-800">
-          contact me
-        </a>{" "}
-        - let's work together and bring your ideas to life!
+          Let's connect
+        </a>.
       </motion.p>
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (

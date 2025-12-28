@@ -18,6 +18,7 @@ import {
   appian,
   aws,
   boeing,
+  nvidia,
   rust,
   threejs,
   saasLandingPage,
@@ -56,16 +57,16 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Web Developer",
+    title: "AI Engineer",
     icon: web,
   },
   {
-    title: "Backend Engineer",
-    icon: mobile,
+    title: "Infrastructure Architect",
+    icon: backend,
   },
   {
-    title: "Cloud Engineer",
-    icon: backend,
+    title: "Distributed Systems",
+    icon: mobile,
   },
   {
     title: "Content Creator",
@@ -134,13 +135,23 @@ const technologies = [
 
 const experiences = [
   {
+    title: "AI Engineer",
+    company_name: "NVIDIA",
+    icon: nvidia,
+    iconBg: "#76B900",
+    date: "December 2024 - Current",
+    points: [
+      "Building at the frontier of artificial intelligence",
+    ],
+  },
+  {
     title: "Software Engineer @ AWS Region Expansion",
     company_name: "AWS",
     icon: aws,
     iconBg: "#383E56",
-    date: "September 2024 - Current",
+    date: "September 2024 - December 2024",
     points: [
-      "Building cutting edge Generative AI applications focused on increasing efficiency in launching new AWS regions",
+      "Built Generative AI applications to accelerate AWS region launches",
     ],
   },
   {

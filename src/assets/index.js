@@ -26,6 +26,7 @@ import rust from "./tech/rust.png";
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
 import appian from "./company/appian.png";
+import nvidia from "./company/nvidia.png";
 
 import floatingPhotoGallery from "./FloatingPhotoGallery.png";
 import parallaxPhotoGallery from "./ParallaxImageGallery.png";
@@ -62,6 +63,7 @@ export {
   aws,
   appian,
   boeing,
+  nvidia,
   floatingPhotoGallery,
   parallaxPhotoGallery,
   saasLandingPage,
