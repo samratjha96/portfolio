@@ -32,6 +32,7 @@ import parallaxPhotoGallery from "./ParallaxImageGallery.png";
 import saasLandingPage from "./SAASLandingPage.png";
 import dashboard from "./dashboard.png";
 import argos from "./argos.png";
+import spaceSelfie from "./space-selfie.png";
 
 export {
   logo,
@@ -65,4 +66,5 @@ export {
   saasLandingPage,
   dashboard,
   argos,
+  spaceSelfie,
 };

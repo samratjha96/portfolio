@@ -25,6 +25,7 @@ import {
   floatingPhotoGallery,
   dashboard,
   argos,
+  spaceSelfie,
 } from "../assets";
 
 export const navLinks = [
@@ -256,6 +257,14 @@ const videos = [
 ];
 
 const projects = [
+  {
+    name: "Space Selfie",
+    description:
+      "Discover when the ISS flew over your special moments. Built with TypeScript, Cloudflare Workers, Hono, and satellite.js for orbital calculations",
+    image: spaceSelfie,
+    source_code_link: "https://github.com/samratjha96/space-selfie",
+    demo_link: "https://space-selfie.zasamrat.workers.dev",
+  },
   {
     name: "NetWorth Tracker",
     description:
