@@ -139,7 +139,7 @@ const experiences = [
     company_name: "NVIDIA",
     icon: nvidia,
     iconBg: "#76B900",
-    date: "December 2024 - Current",
+    date: "December 2025 - Current",
     points: [
       "Building at the frontier of artificial intelligence",
     ],
