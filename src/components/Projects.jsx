@@ -8,7 +8,14 @@ import { SectionWrapper } from "../hoc";
 import { projects } from "../constants/constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
-const ProjectCard = ({ index, name, description, image, source_code_link, demo_link }) => {
+const ProjectCard = ({
+  index,
+  name,
+  description,
+  image,
+  source_code_link,
+  demo_link,
+}) => {
   return (
     <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
       <Tilt
@@ -26,7 +33,11 @@ const ProjectCard = ({ index, name, description, image, source_code_link, demo_l
             rel="noopener noreferrer"
             className="cursor-pointer"
           >
-            <img src={image} alt={name} className="w-full h-full object-cover rounded-2xl" />
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover rounded-2xl"
+            />
           </a>
           <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
             <a
@@ -35,7 +46,11 @@ const ProjectCard = ({ index, name, description, image, source_code_link, demo_l
               rel="noopener noreferrer"
               className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
             >
-              <img src={github} alt="github" className="w-1/2 h-1/2 object-contain" />
+              <img
+                src={github}
+                alt="github"
+                className="w-1/2 h-1/2 object-contain"
+              />
             </a>
           </div>
         </div>
@@ -62,10 +77,8 @@ const Projects = () => {
           variants={fadeIn("", "", 0.1, 1)}
           className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
         >
-          Frollowing projects showcase my skills and design experience in delivering a beautiful
-          website. Each project is briefly described with links to code repositories and live demos
-          in it. I focus on creating engaging and unique experiences through design with an extra
-          emphasis on pictures
+          A selection of projects I've built—from AI-powered tools to creative
+          web experiences. Each includes live demos and source code.
         </motion.p>
       </div>
 

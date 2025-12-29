@@ -20,10 +20,10 @@ const Home = () => {
         <Hero />
       </div>
       <About />
+      <Projects />
       <Experience />
       <Tech />
       <Media />
-      <Projects />
       <div className="relative z-0">
         <Contact />
       </div>
