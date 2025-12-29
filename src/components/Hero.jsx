@@ -38,7 +38,7 @@ const Hero = () => {
         </div>
       </div>
       {/* <ComputersCanvas /> */}
-      <div className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto`}>
+      <div className={`${styles.paddingX} absolute inset-0 top-64 max-w-2xl mx-auto pointer-events-none`}>
         <div className="flex justify-center items-center">
           <Lottie
             animationData={animationData}
