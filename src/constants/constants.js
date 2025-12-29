@@ -313,9 +313,9 @@ const projects = [
     demo_link: "https://sample-saas-landing-page.vercel.app/",
   },
   {
-    name: "Hacker Dashboard",
+    name: "Today's Tech",
     description:
-      "Hacker terminal themed personal dashboard showing integrations with Stock APIs and RSS feeds",
+      "Personal dashboard aggregating market data, GitHub trending repos, Hacker News, and tech news in a sleek terminal-inspired interface",
     image: dashboard,
     source_code_link: "https://github.com/samratjha96/today",
     demo_link: "https://today.techbrohomelab.xyz/",
