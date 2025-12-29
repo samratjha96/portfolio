@@ -28,6 +28,7 @@ import {
   argos,
   spaceSelfie,
   birdRadio,
+  whichCard,
 } from "../assets";
 
 export const navLinks = [
@@ -271,6 +272,14 @@ const videos = [
 ];
 
 const projects = [
+  {
+    name: "Which Card",
+    description:
+      "Find the best credit card for every purchase. Search by merchant or category, compare rewards, and maximize your cashback with smart category disambiguation",
+    image: whichCard,
+    source_code_link: "https://github.com/samratjha96/which-card",
+    demo_link: "https://which-card.pages.dev",
+  },
   {
     name: "Space Selfie",
     description:

@@ -35,6 +35,7 @@ import dashboard from "./dashboard.png";
 import argos from "./argos.png";
 import spaceSelfie from "./space-selfie.png";
 import birdRadio from "./bird-radio.png";
+import whichCard from "./which-card.png";
 
 export {
   logo,
@@ -71,4 +72,5 @@ export {
   argos,
   spaceSelfie,
   birdRadio,
+  whichCard,
 };
