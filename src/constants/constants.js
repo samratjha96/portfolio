@@ -135,7 +135,7 @@ const technologies = [
 
 const experiences = [
   {
-    title: "AI Engineer",
+    title: "Senior AI Engineer",
     company_name: "NVIDIA",
     icon: nvidia,
     iconBg: "#76B900",

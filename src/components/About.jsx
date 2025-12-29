@@ -39,14 +39,14 @@ const About = () => {
         className="mt-4 secondary-text-[17px] max-w-3xl leading-[30px]"
       >
         I'm an AI engineer at NVIDIA, building at the frontier of artificial intelligence. 
-        Before this, I spent{" "}
+        I bring{" "}
         <a href="#work" className="underline text-[#915eff] hover:text-blue-800">
-          7+ years at AWS
+          7+ years of experience
         </a>{" "}
-        architecting large-scale distributed systems—from edge computing infrastructure powering 
-        hybrid cloud, to Generative AI applications accelerating region launches, to event pipelines 
-        handling millions of requests. I bring deep infrastructure expertise to AI, having shipped 
-        systems at scale and led cross-org initiatives across multiple teams. Check out my{" "}
+        architecting large-scale distributed systems, including 4 years at AWS building edge computing 
+        infrastructure, Generative AI applications, and event pipelines handling millions of requests. 
+        I've shipped systems at scale, led cross-org initiatives, and developed everything from 
+        multi-agent AI systems to enterprise data platforms. Check out my{" "}
         <a href="#projects" className="underline text-[#915eff] hover:text-blue-800">
           projects
         </a>{" "}
