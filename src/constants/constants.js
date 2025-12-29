@@ -149,9 +149,11 @@ const experiences = [
     company_name: "AWS",
     icon: aws,
     iconBg: "#383E56",
-    date: "September 2024 - December 2024",
+    date: "September 2024 - December 2025",
     points: [
-      "Built Generative AI applications to accelerate AWS region launches",
+      "Built enterprise-grade ETL pipelines to ingest millions of multi-modal documents for RAG workloads",
+      "Deployed multi-agent systems to production for planning region builds and forecasting cost/timelines",
+      "Launched AI chatbots answering thousands of questions weekly with feedback loop systems for self-improvement",
     ],
   },
   {
