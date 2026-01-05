@@ -18,4 +18,17 @@ export default defineConfig({
     }),
     glob(),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        // Separate Three.js and related 3D libraries into their own chunk
+        manualChunks: {
+          three: ["three", "@react-three/fiber", "@react-three/drei"],
+          vendor: ["react", "react-dom", "react-router-dom", "framer-motion"],
+        },
+      },
+    },
+    // Target modern browsers for smaller bundle
+    target: "es2020",
+  },
 });

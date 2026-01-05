@@ -28,14 +28,14 @@ import aws from "./company/aws.png";
 import appian from "./company/appian.png";
 import nvidia from "./company/nvidia.png";
 
-import floatingPhotoGallery from "./FloatingPhotoGallery.png";
-import parallaxPhotoGallery from "./ParallaxImageGallery.png";
-import saasLandingPage from "./SAASLandingPage.png";
-import dashboard from "./dashboard.png";
-import argos from "./argos.png";
-import spaceSelfie from "./space-selfie.png";
-import birdRadio from "./bird-radio.png";
-import whichCard from "./which-card.png";
+import floatingPhotoGallery from "./optimized/FloatingPhotoGallery.webp";
+import parallaxPhotoGallery from "./optimized/ParallaxImageGallery.webp";
+import saasLandingPage from "./optimized/SAASLandingPage.webp";
+import dashboard from "./optimized/dashboard.webp";
+import argos from "./optimized/argos.webp";
+import spaceSelfie from "./optimized/space-selfie.webp";
+import birdRadio from "./optimized/bird-radio.webp";
+import whichCard from "./optimized/which-card.webp";
 
 export {
   logo,

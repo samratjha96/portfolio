@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   About,
@@ -5,12 +6,15 @@ import {
   Experience,
   Hero,
   Navbar,
-  Tech,
   Media,
-  StarsCanvas,
   Projects,
 } from "./components";
 import { BlogList, BlogPost } from "./components/blog";
+import Loader from "./components/Loader";
+
+// Lazy load heavy 3D components to reduce initial bundle size
+const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
+const Tech = lazy(() => import("./components/Tech"));
 
 const Home = () => {
   return (
@@ -22,12 +26,16 @@ const Home = () => {
       <About />
       <Projects />
       <Experience />
-      <Tech />
+      <Suspense fallback={<div className="h-[300px]" />}>
+        <Tech />
+      </Suspense>
       <Media />
       <div className="relative z-0">
         <Contact />
       </div>
-      <StarsCanvas />
+      <Suspense fallback={null}>
+        <StarsCanvas />
+      </Suspense>
     </div>
   );
 };

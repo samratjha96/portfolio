@@ -1,5 +1,8 @@
 import React from "react";
-import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
 
 import "react-vertical-timeline-component/style.min.css";
@@ -10,15 +13,15 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const companyLinks = {
-  "NVIDIA": "https://www.nvidia.com/",
-  "AWS": "https://aws.amazon.com/",
-  "Appian": "https://appian.com/",
-  "Boeing": "https://www.boeing.com/"
+  NVIDIA: "https://www.nvidia.com/",
+  AWS: "https://aws.amazon.com/",
+  Appian: "https://appian.com/",
+  Boeing: "https://www.boeing.com/",
 };
 
 const ExperienceCard = ({ experience }) => {
   const companyUrl = companyLinks[experience.company_name];
-  
+
   return (
     <VerticalTimelineElement
       contentStyle={{ background: "#1d1836", color: "#fff" }}
@@ -30,6 +33,9 @@ const ExperienceCard = ({ experience }) => {
           <img
             src={experience.icon}
             alt={experience.company_name}
+            width={36}
+            height={36}
+            loading="lazy"
             className="w-[60%] h-[60%] object-contain"
           />
         </div>
@@ -37,11 +43,14 @@ const ExperienceCard = ({ experience }) => {
     >
       <div>
         <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
-        <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
+        <p
+          className="text-secondary text-[16px] font-semibold"
+          style={{ margin: 0 }}
+        >
           {companyUrl ? (
-            <a 
-              href={companyUrl} 
-              target="_blank" 
+            <a
+              href={companyUrl}
+              target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#915eff] transition-colors"
             >
