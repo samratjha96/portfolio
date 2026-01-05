@@ -2,78 +2,100 @@
 
 Guidelines for AI agents working on this portfolio codebase.
 
-## Image Optimization (Critical)
-
-All images in this project MUST be optimized before use. The site went from ~17MB to ~316KB of images through optimization.
-
-### Required Image Format
-
-- Use WebP format for all photographs and screenshots
-- Keep SVG for icons and simple graphics
-- Store optimized images in `src/assets/optimized/`
-
-### Converting New Images
-
-When adding a new image, ALWAYS convert it using cwebp:
+## Development Commands
 
 ```bash
-# Standard conversion with resize (for project screenshots, ~900px width)
+npm run dev      # Start dev server (http://localhost:5173)
+npm run build    # Build for production (outputs to dist/)
+npm run preview  # Preview production build locally
+```
+
+## Project Architecture
+
+3D portfolio website built with:
+
+- **Vite** - Build tool and dev server
+- **React** - UI framework
+- **Three.js** - 3D rendering (via @react-three/fiber and @react-three/drei)
+- **Framer Motion** - Animations
+- **TailwindCSS** - Styling
+- **Lottie** - Pre-built animations
+- **EmailJS** - Contact form
+
+### Key Concepts
+
+**Component Structure**: Section-based layout (Hero, About, Experience, etc.), orchestrated from App.jsx. 3D components isolated in `canvas/` folder.
+
+**3D Components**: Models loaded from `/public` using @react-three/fiber. Loaded asynchronously with Suspense and fallback loaders.
+
+**SectionWrapper HOC**: Wraps content sections with consistent styling, animations, and scroll behavior. Handles section IDs for navigation.
+
+**Data Management**: Content stored in `src/constants/constants.js`. Update this file to change experiences, projects, services.
+
+**Styling**: TailwindCSS with custom config in `tailwind.config.cjs`. Additional styles in `src/styles.js`.
+
+**Animation Systems**: Framer Motion (UI), GSAP (complex), Lottie (pre-built), Three.js (3D), Typewriter (text).
+
+**Responsive Design**: TailwindCSS breakpoints. 3D elements conditionally rendered/scaled based on device.
+
+## Image Optimization (Critical)
+
+All images MUST be optimized. The site went from ~17MB to ~316KB through optimization.
+
+### Required Format
+
+- WebP for photographs and screenshots
+- SVG for icons and simple graphics
+- Store in `src/assets/optimized/`
+
+### Converting Images
+
+```bash
+# Project screenshots (~900px width)
 cwebp -q 80 -resize 900 0 input.png -o src/assets/optimized/output.webp
 
-# For hero/background images (larger, ~1920px width)
+# Hero/background images (~1920px width)
 cwebp -q 80 -resize 1920 0 input.png -o src/assets/optimized/output.webp
 
-# For small icons/thumbnails (64-128px)
+# Small icons/thumbnails (64-128px)
 cwebp -q 85 -resize 128 0 input.png -o src/assets/optimized/output.webp
 ```
 
-### Image Import Pattern
+### Import Pattern
 
 ```javascript
-// Always import from optimized folder
+// Correct - from optimized folder
 import myImage from "./optimized/my-image.webp";
 
-// NOT from root assets
-// import myImage from "./my-image.png"; // WRONG
+// Wrong - unoptimized
+// import myImage from "./my-image.png";
 ```
 
 ### Image Element Requirements
 
 All `<img>` tags MUST include:
 
-- `width` and `height` attributes (prevents layout shift)
-- `loading="lazy"` for below-fold images
-- Descriptive `alt` text
-
 ```jsx
-// Correct
 <img
   src={image}
   alt="Project screenshot"
   width={360}
   height={230}
-  loading="lazy"
+  loading="lazy"  // for below-fold images
   className="..."
 />
-
-// Incorrect - missing dimensions and lazy loading
-<img src={image} alt="Project screenshot" className="..." />
 ```
 
 ## Code Splitting
 
 ### Lazy Loading Heavy Components
 
-Three.js and other heavy components should be lazy-loaded:
-
 ```jsx
 import { lazy, Suspense } from "react";
 
-// Lazy load 3D components
 const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 const Tech = lazy(() => import("./components/Tech"));
 
-// Use with Suspense
 <Suspense fallback={<div className="h-[300px]" />}>
   <Tech />
 </Suspense>;
@@ -91,13 +113,10 @@ The vite.config.js separates large dependencies:
 ### Running Lighthouse Locally
 
 ```bash
-# Build production version first
-npm run build
+# Build and preview first
+npm run build && npm run preview
 
-# Start preview server
-npm run preview
-
-# Run Lighthouse (in another terminal)
+# Run Lighthouse (separate terminal)
 npx lighthouse http://localhost:4173 --output=json --output-path=/tmp/lighthouse.json --chrome-flags="--headless --no-sandbox" --only-categories=performance
 
 # Extract key metrics
@@ -121,19 +140,19 @@ cat /tmp/lighthouse.json | jq '{
 
 ### Why 14 WebGL Contexts in Tech Section
 
-The Tech section creates separate Canvas instances for each technology ball. This is a known performance tradeoff for visual appeal. To significantly improve performance here, you'd need to replace with static images (major UX change - discuss with Samrat first).
+The Tech section creates separate Canvas instances for each technology ball. This is a known performance tradeoff for visual appeal. Replacing with static images would be a major UX change—discuss with Samrat first.
 
 ### Three.js Bundle Size
 
-Three.js adds ~995KB to the bundle (gzipped: ~282KB). This is unavoidable for 3D features. Mitigation:
+Three.js adds ~995KB to the bundle (gzipped: ~282KB). Unavoidable for 3D features. Mitigation:
 
 - Code-split into separate chunk (done)
 - Lazy-load components using Three.js (done)
-- Use `frameloop="demand"` on Canvas (already implemented)
+- Use `frameloop="demand"` on Canvas (done)
 
 ### Background Assets
 
-The hero background is defined in `tailwind.config.cjs`:
+Hero background defined in `tailwind.config.cjs`:
 
 ```javascript
 backgroundImage: {
@@ -142,8 +161,6 @@ backgroundImage: {
 ```
 
 ## Adding New Projects
-
-When adding a new project to `src/constants/constants.js`:
 
 1. Create optimized screenshot:
 
@@ -158,7 +175,7 @@ When adding a new project to `src/constants/constants.js`:
    export { ..., newProject };
    ```
 
-3. Add to projects array in constants.js
+3. Add to projects array in `src/constants/constants.js`
 
 ## Common Pitfalls
 

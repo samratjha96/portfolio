@@ -4,7 +4,7 @@ date: 2025-01-05
 tags: ["github-pages", "cloudflare", "dns", "deployment"]
 ---
 
-Just set up [candesign.techbrohomelab.xyz](https://candesign.techbrohomelab.xyz)—a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it.
+Just set up [candesign.techbrohomelab.xyz](https://candesign.techbrohomelab.xyz), a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it.
 
 ## The Setup
 
@@ -48,7 +48,7 @@ I initially had proxy enabled (orange cloud) and it worked, but GitHub recommend
 
 Once DNS propagates (usually seconds with Cloudflare), go back to **Settings > Pages** and enter your custom domain: `candesign.techbrohomelab.xyz`.
 
-GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes—enable it.
+GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes. Enable it.
 
 ## Gotchas
 
@@ -71,7 +71,7 @@ If you want `www.example.com`, your CNAME record name should be `www`. For apex 
 185.199.111.153
 ```
 
-Subdomains are simpler—just use CNAME.
+Subdomains are simpler. Just use CNAME.
 
 **Mixed content warnings**
 

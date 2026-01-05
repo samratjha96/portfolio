@@ -45,7 +45,7 @@ That 58 second LCP is... not great. But now I have to dig through the report to 
 
 Create a file at `.claude/commands/analyze-website-performance.md`:
 
-```markdown
+````markdown
 # Website Performance Analysis
 
 Analyze the performance of `$ARGUMENTS` using Google Lighthouse.
@@ -87,7 +87,7 @@ For each issue:
 - Loading strategies (defer, async, preload, lazy loading)
 - Caching and delivery
 - Code efficiency (tree-shaking, code splitting)
-```
+````
 
 Now run it:
 
@@ -125,7 +125,7 @@ Instead of a wall of JSON, Claude reads through everything and gives you:
 - Lazy-load the 3D planet component
 ```
 
-It cross-references the image dimensions in the DOM against the actual file sizes. My 8.87 MB PNG was being displayed at 431×230 pixels—a 2657×1890 source image squished down. I would've missed that scrolling through raw JSON.
+It cross-references the image dimensions in the DOM against the actual file sizes. My 8.87 MB PNG was being displayed at 431×230 pixels (a 2657×1890 source image squished down). I would've missed that scrolling through raw JSON.
 
 ## Why Bother
 
@@ -177,8 +177,4 @@ You can add more categories:
 --only-categories=performance,accessibility,best-practices,seo
 ```
 
-Or run multiple URLs and compare. The slash command is just a prompt template—customize it for whatever workflow you need.
-
----
-
-The command file: [.claude/commands/analyze-website-performance.md](https://github.com/samratjha96/portfolio/blob/main/.claude/commands/analyze-website-performance.md)
+Or run multiple URLs and compare. The slash command is just a prompt template, so customize it for whatever workflow you need.

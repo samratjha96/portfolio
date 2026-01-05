@@ -4,7 +4,7 @@ date: 2025-12-27
 tags: ["cloudflare", "typescript", "serverless", "deployment", "hono"]
 ---
 
-I just deployed [Space Selfie](https://space-selfie.zasamrat.workers.dev) to Cloudflare Workers—a single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it.
+I just deployed [Space Selfie](https://space-selfie.zasamrat.workers.dev) to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it.
 
 ## Why Workers?
 
@@ -120,7 +120,7 @@ I used in-memory caching. Didn't want to deal with more infrastructure.
 
 **CPU time limits**
 
-10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this—only actual compute. Haven't hit the limit yet doing API work.
+10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this, only actual compute. Haven't hit the limit yet doing API work.
 
 ## Frontend
 

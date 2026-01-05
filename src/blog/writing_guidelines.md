@@ -28,6 +28,7 @@ These guidelines help avoid AI-sounding writing when generating blog posts.
 - Too many superlatives ("fantastic", "incredibly", "dramatically")
 - Wrapping up with a neat bow ("And that's how you...")
 - Numbered lists for things that don't need numbers
+- Em dashes everywhere. Use commas, periods, or parentheses instead.
 
 ### Preachy/salesy patterns
 - Telling the reader what they should feel or do
@@ -52,9 +53,9 @@ These guidelines help avoid AI-sounding writing when generating blog posts.
 ## Structure
 
 - Start with what you built and a link to it
-- Don't over-explain motivation—one short paragraph max
+- Don't over-explain motivation. One short paragraph max.
 - Code examples should be minimal and runnable
-- Gotchas section is often the most valuable part—don't skip it
+- Gotchas section is often the most valuable part. Don't skip it.
 - End with a link to source, not a conclusion paragraph
 
 ## Length
