@@ -1,4 +1,4 @@
-import{b as n,j as i,F as o}from"./three-3c324390.js";function t(r){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",table:"table",tbody:"tbody",td:"td",th:"th",thead:"thead",tr:"tr",ul:"ul",...r.components};return i(o,{children:[i(e.p,{children:["Just set up ",n(e.a,{href:"https://candesign.techbrohomelab.xyz",children:"candesign.techbrohomelab.xyz"}),"—a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it."]}),`
+import{b as n,j as i,F as o}from"./three-3c324390.js";function t(r){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",table:"table",tbody:"tbody",td:"td",th:"th",thead:"thead",tr:"tr",ul:"ul",...r.components};return i(o,{children:[i(e.p,{children:["Just set up ",n(e.a,{href:"https://candesign.techbrohomelab.xyz",children:"candesign.techbrohomelab.xyz"}),", a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it."]}),`
 `,i(e.h2,{id:"the-setup",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-setup",children:n(e.span,{className:"icon icon-link"})}),"The Setup"]}),`
 `,i(e.p,{children:["GitHub Pages is free hosting for static sites from any public repo. Cloudflare manages my DNS. I wanted ",n(e.code,{children:"candesign.techbrohomelab.xyz"})," instead of ",n(e.code,{children:"samratjha96.github.io/candesign"}),"."]}),`
 `,i(e.h2,{id:"enable-github-pages",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#enable-github-pages",children:n(e.span,{className:"icon icon-link"})}),"Enable GitHub Pages"]}),`
@@ -22,7 +22,7 @@ import{b as n,j as i,F as o}from"./three-3c324390.js";function t(r){const e={a:"
 `,n(e.p,{children:"I initially had proxy enabled (orange cloud) and it worked, but GitHub recommends DNS-only (grey cloud) for Pages. Either works, but DNS-only avoids potential SSL certificate conflicts."}),`
 `,i(e.h2,{id:"back-to-github",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#back-to-github",children:n(e.span,{className:"icon icon-link"})}),"Back to GitHub"]}),`
 `,i(e.p,{children:["Once DNS propagates (usually seconds with Cloudflare), go back to ",n(e.strong,{children:"Settings > Pages"})," and enter your custom domain: ",n(e.code,{children:"candesign.techbrohomelab.xyz"}),"."]}),`
-`,n(e.p,{children:'GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes—enable it.'}),`
+`,n(e.p,{children:'GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes. Enable it.'}),`
 `,i(e.h2,{id:"gotchas",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#gotchas",children:n(e.span,{className:"icon icon-link"})}),"Gotchas"]}),`
 `,n(e.p,{children:n(e.strong,{children:"CNAME file gets deleted"})}),`
 `,i(e.p,{children:["If you're using a static site generator that wipes your output folder, make sure the CNAME file is in your source directory or build process copies it over. I've lost it a few times to careless ",n(e.code,{children:"rm -rf dist/*"}),"."]}),`
@@ -35,7 +35,7 @@ import{b as n,j as i,F as o}from"./three-3c324390.js";function t(r){const e={a:"
 185.199.110.153
 185.199.111.153
 `})}),`
-`,n(e.p,{children:"Subdomains are simpler—just use CNAME."}),`
+`,n(e.p,{children:"Subdomains are simpler. Just use CNAME."}),`
 `,n(e.p,{children:n(e.strong,{children:"Mixed content warnings"})}),`
 `,i(e.p,{children:["If your site loads but looks broken, check browser console for mixed content errors. Make sure all your asset URLs use ",n(e.code,{children:"https://"})," or protocol-relative ",n(e.code,{children:"//"})," paths."]}),`
 `,i(e.h2,{id:"why-not-just-use-the-default-url",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-not-just-use-the-default-url",children:n(e.span,{className:"icon icon-link"})}),"Why Not Just Use the Default URL?"]}),`

@@ -1,4 +1,4 @@
-import{b as n,j as s,F as r}from"./three-3c324390.js";function l(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(r,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers—a single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
+import{b as n,j as s,F as r}from"./three-3c324390.js";function l(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(r,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
 `,s(e.h2,{id:"why-workers",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-workers",children:n(e.span,{className:"icon icon-link"})}),"Why Workers?"]}),`
 `,n(e.p,{children:"Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, no cold starts, and your code runs close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine."}),`
 `,s(e.h2,{id:"the-stack",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-stack",children:n(e.span,{className:"icon icon-link"})}),"The Stack"]}),`
@@ -81,7 +81,7 @@ npx wrangler deploy
 `]}),`
 `,n(e.p,{children:"I used in-memory caching. Didn't want to deal with more infrastructure."}),`
 `,n(e.p,{children:n(e.strong,{children:"CPU time limits"})}),`
-`,n(e.p,{children:"10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this—only actual compute. Haven't hit the limit yet doing API work."}),`
+`,n(e.p,{children:"10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this, only actual compute. Haven't hit the limit yet doing API work."}),`
 `,s(e.h2,{id:"frontend",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#frontend",children:n(e.span,{className:"icon icon-link"})}),"Frontend"]}),`
 `,n(e.p,{children:"Since API and frontend are same origin:"}),`
 `,n(e.pre,{children:s(e.code,{className:"hljs language-javascript",children:[n(e.span,{className:"hljs-keyword",children:"const"})," response = ",n(e.span,{className:"hljs-keyword",children:"await"})," ",n(e.span,{className:"hljs-title function_",children:"fetch"}),"(",n(e.span,{className:"hljs-string",children:"'/api/data'"}),`, {
