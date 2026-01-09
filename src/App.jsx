@@ -1,5 +1,5 @@
-import { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import {
   About,
   Contact,
@@ -8,15 +8,24 @@ import {
   Navbar,
   Media,
   Projects,
+  Tech,
 } from "./components";
 import { BlogList, BlogPost } from "./components/blog";
-import Loader from "./components/Loader";
-
-// Lazy load heavy 3D components to reduce initial bundle size
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
-const Tech = lazy(() => import("./components/Tech"));
+import StarsCanvas from "./components/canvas/Stars";
 
 const Home = () => {
+  const { hash } = useLocation();
+
+  // Scroll to hash after component mounts (DOM is ready)
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
+
   return (
     <div className="relative z-0 bg-primary">
       <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
@@ -26,16 +35,12 @@ const Home = () => {
       <About />
       <Projects />
       <Experience />
-      <Suspense fallback={<div className="h-[300px]" />}>
-        <Tech />
-      </Suspense>
+      <Tech />
       <Media />
       <div className="relative z-0">
         <Contact />
       </div>
-      <Suspense fallback={null}>
-        <StarsCanvas />
-      </Suspense>
+      <StarsCanvas />
     </div>
   );
 };
