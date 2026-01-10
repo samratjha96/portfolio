@@ -1,4 +1,4 @@
-import{b as n,j as s,k as r}from"./three-419d062b.js";function l(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(r,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
+import{b as n,j as s,k as r}from"./three-2679448d.js";function l(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(r,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
 `,s(e.h2,{id:"why-workers",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-workers",children:n(e.span,{className:"icon icon-link"})}),"Why Workers?"]}),`
 `,n(e.p,{children:"Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, no cold starts, and your code runs close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine."}),`
 `,s(e.h2,{id:"the-stack",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-stack",children:n(e.span,{className:"icon icon-link"})}),"The Stack"]}),`
@@ -35,18 +35,18 @@ import{b as n,j as s,k as r}from"./three-419d062b.js";function l(a){const e={a:"
 `]})}),`
 `,s(e.p,{children:["The ",n(e.code,{children:"[assets]"})," block serves your ",n(e.code,{children:"public/"})," folder as static files. Requests to ",n(e.code,{children:"/index.html"})," or ",n(e.code,{children:"/app.js"})," hit those directly. Everything else goes to your Worker."]}),`
 `,s(e.h2,{id:"the-hono-app",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-hono-app",children:n(e.span,{className:"icon icon-link"})}),"The Hono App"]}),`
-`,n(e.pre,{children:s(e.code,{className:"hljs language-typescript",children:[n(e.span,{className:"hljs-keyword",children:"import"})," { ",n(e.span,{className:"hljs-title class_",children:"Hono"})," } ",n(e.span,{className:"hljs-keyword",children:"from"})," ",n(e.span,{className:"hljs-string",children:"'hono'"}),`;
-`,n(e.span,{className:"hljs-keyword",children:"import"})," { cors } ",n(e.span,{className:"hljs-keyword",children:"from"})," ",n(e.span,{className:"hljs-string",children:"'hono/cors'"}),`;
+`,n(e.pre,{children:s(e.code,{className:"hljs language-typescript",children:[n(e.span,{className:"hljs-keyword",children:"import"})," { ",n(e.span,{className:"hljs-title class_",children:"Hono"})," } ",n(e.span,{className:"hljs-keyword",children:"from"})," ",n(e.span,{className:"hljs-string",children:'"hono"'}),`;
+`,n(e.span,{className:"hljs-keyword",children:"import"})," { cors } ",n(e.span,{className:"hljs-keyword",children:"from"})," ",n(e.span,{className:"hljs-string",children:'"hono/cors"'}),`;
 
 `,n(e.span,{className:"hljs-keyword",children:"const"})," app = ",n(e.span,{className:"hljs-keyword",children:"new"})," ",n(e.span,{className:"hljs-title class_",children:"Hono"}),`();
 
-app.`,n(e.span,{className:"hljs-title function_",children:"use"}),"(",n(e.span,{className:"hljs-string",children:"'*'"}),", ",n(e.span,{className:"hljs-title function_",children:"cors"}),`());
+app.`,n(e.span,{className:"hljs-title function_",children:"use"}),"(",n(e.span,{className:"hljs-string",children:'"*"'}),", ",n(e.span,{className:"hljs-title function_",children:"cors"}),`());
 
-app.`,n(e.span,{className:"hljs-title function_",children:"get"}),"(",n(e.span,{className:"hljs-string",children:"'/api/health'"}),", ",s(e.span,{className:"hljs-function",children:["(",n(e.span,{className:"hljs-params",children:"c"}),") =>"]}),` {
-  `,n(e.span,{className:"hljs-keyword",children:"return"})," c.",n(e.span,{className:"hljs-title function_",children:"json"}),"({ ",n(e.span,{className:"hljs-attr",children:"status"}),": ",n(e.span,{className:"hljs-string",children:"'ok'"}),` });
+app.`,n(e.span,{className:"hljs-title function_",children:"get"}),"(",n(e.span,{className:"hljs-string",children:'"/api/health"'}),", ",s(e.span,{className:"hljs-function",children:["(",n(e.span,{className:"hljs-params",children:"c"}),") =>"]}),` {
+  `,n(e.span,{className:"hljs-keyword",children:"return"})," c.",n(e.span,{className:"hljs-title function_",children:"json"}),"({ ",n(e.span,{className:"hljs-attr",children:"status"}),": ",n(e.span,{className:"hljs-string",children:'"ok"'}),` });
 });
 
-app.`,n(e.span,{className:"hljs-title function_",children:"post"}),"(",n(e.span,{className:"hljs-string",children:"'/api/data'"}),", ",n(e.span,{className:"hljs-title function_",children:"async"}),` (c) => {
+app.`,n(e.span,{className:"hljs-title function_",children:"post"}),"(",n(e.span,{className:"hljs-string",children:'"/api/data"'}),", ",n(e.span,{className:"hljs-title function_",children:"async"}),` (c) => {
   `,n(e.span,{className:"hljs-keyword",children:"const"})," body = ",n(e.span,{className:"hljs-keyword",children:"await"})," c.",n(e.span,{className:"hljs-property",children:"req"}),".",n(e.span,{className:"hljs-title function_",children:"json"}),`();
   `,n(e.span,{className:"hljs-keyword",children:"return"})," c.",n(e.span,{className:"hljs-title function_",children:"json"}),"({ ",n(e.span,{className:"hljs-attr",children:"received"}),`: body });
 });
@@ -84,10 +84,10 @@ npx wrangler deploy
 `,n(e.p,{children:"10ms CPU time per request on free tier. Sounds brutal but network I/O doesn't count against this, only actual compute. Haven't hit the limit yet doing API work."}),`
 `,s(e.h2,{id:"frontend",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#frontend",children:n(e.span,{className:"icon icon-link"})}),"Frontend"]}),`
 `,n(e.p,{children:"Since API and frontend are same origin:"}),`
-`,n(e.pre,{children:s(e.code,{className:"hljs language-javascript",children:[n(e.span,{className:"hljs-keyword",children:"const"})," response = ",n(e.span,{className:"hljs-keyword",children:"await"})," ",n(e.span,{className:"hljs-title function_",children:"fetch"}),"(",n(e.span,{className:"hljs-string",children:"'/api/data'"}),`, {
-  `,n(e.span,{className:"hljs-attr",children:"method"}),": ",n(e.span,{className:"hljs-string",children:"'POST'"}),`,
-  `,n(e.span,{className:"hljs-attr",children:"headers"}),": { ",n(e.span,{className:"hljs-string",children:"'Content-Type'"}),": ",n(e.span,{className:"hljs-string",children:"'application/json'"}),` },
-  `,n(e.span,{className:"hljs-attr",children:"body"}),": ",n(e.span,{className:"hljs-title class_",children:"JSON"}),".",n(e.span,{className:"hljs-title function_",children:"stringify"}),"({ ",n(e.span,{className:"hljs-attr",children:"foo"}),": ",n(e.span,{className:"hljs-string",children:"'bar'"}),` })
+`,n(e.pre,{children:s(e.code,{className:"hljs language-javascript",children:[n(e.span,{className:"hljs-keyword",children:"const"})," response = ",n(e.span,{className:"hljs-keyword",children:"await"})," ",n(e.span,{className:"hljs-title function_",children:"fetch"}),"(",n(e.span,{className:"hljs-string",children:'"/api/data"'}),`, {
+  `,n(e.span,{className:"hljs-attr",children:"method"}),": ",n(e.span,{className:"hljs-string",children:'"POST"'}),`,
+  `,n(e.span,{className:"hljs-attr",children:"headers"}),": { ",n(e.span,{className:"hljs-string",children:'"Content-Type"'}),": ",n(e.span,{className:"hljs-string",children:'"application/json"'}),` },
+  `,n(e.span,{className:"hljs-attr",children:"body"}),": ",n(e.span,{className:"hljs-title class_",children:"JSON"}),".",n(e.span,{className:"hljs-title function_",children:"stringify"}),"({ ",n(e.span,{className:"hljs-attr",children:"foo"}),": ",n(e.span,{className:"hljs-string",children:'"bar"'}),` }),
 });
 `]})}),`
 `,n(e.p,{children:"No CORS headaches. No environment variables for API URLs."}),`
