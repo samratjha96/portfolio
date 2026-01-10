@@ -1,6 +1,7 @@
 ---
 title: Deploying a Full-Stack TypeScript App to Cloudflare Workers
 date: 2025-12-27
+description: Deploy a full-stack TypeScript app to Cloudflare Workers with Hono. Single deployment serving API and frontend on the edge globally for $0/month.
 tags: ["cloudflare", "typescript", "serverless", "deployment", "hono"]
 ---
 
@@ -54,18 +55,18 @@ The `[assets]` block serves your `public/` folder as static files. Requests to `
 ## The Hono App
 
 ```typescript
-import { Hono } from 'hono';
-import { cors } from 'hono/cors';
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 
 const app = new Hono();
 
-app.use('*', cors());
+app.use("*", cors());
 
-app.get('/api/health', (c) => {
-  return c.json({ status: 'ok' });
+app.get("/api/health", (c) => {
+  return c.json({ status: "ok" });
 });
 
-app.post('/api/data', async (c) => {
+app.post("/api/data", async (c) => {
   const body = await c.req.json();
   return c.json({ received: body });
 });
@@ -112,6 +113,7 @@ Use `fetch()`. It's native and works fine, but if you're used to axios intercept
 **No filesystem**
 
 Can't read/write files. For caching you have a few options:
+
 - In-memory variables (reset on redeploy, but fine for short-lived cache)
 - KV Storage (key-value store, free tier available)
 - D1 (SQLite, also free tier)
@@ -127,10 +129,10 @@ I used in-memory caching. Didn't want to deal with more infrastructure.
 Since API and frontend are same origin:
 
 ```javascript
-const response = await fetch('/api/data', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ foo: 'bar' })
+const response = await fetch("/api/data", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ foo: "bar" }),
 });
 ```
 
