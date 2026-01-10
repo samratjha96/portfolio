@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="en" style="--line-color: #FFF;"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/personalLogo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Lighthouse Audits with Claude Code | Samrat Jha</title>
+    <meta name="description" content="Samrat Jha is an AI engineer at NVIDIA, backed by 7+ years architecting large-scale distributed systems at AWS. Explore my portfolio, technical blog, and infrastructure projects.">
+    <meta name="keywords" content="Samrat Jha, AI Engineer, AWS, Generative AI, Machine Learning, Infrastructure Architect, Distributed Systems, Cloud Architecture, Large-Scale Systems, Portfolio">
+    <meta name="author" content="Samrat Jha">
+    <meta name="robots" content="index, follow">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://umami.techbrohomelab.xyz" crossorigin="">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://samratjha.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://samratjha.com/">
+    <meta property="og:site_name" content="Samrat Jha Portfolio">
+    <meta property="og:title" content="Samrat Jha | AI Engineer &amp; Infrastructure Architect">
+    <meta property="og:description" content="AI engineer at NVIDIA, backed by 7+ years architecting large-scale distributed systems at AWS. Explore my portfolio and technical blog.">
+    <meta property="og:image" content="https://samratjha.com/personalLogo.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://samratjha.com/">
+    <meta name="twitter:title" content="Samrat Jha | AI Engineer &amp; Infrastructure Architect">
+    <meta name="twitter:description" content="AI engineer at NVIDIA, backed by 7+ years architecting large-scale systems at AWS. Portfolio &amp; technical blog.">
+    <meta name="twitter:image" content="https://samratjha.com/personalLogo.png">
+
+    <!-- Schema.org structured data -->
+    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/b75a8e80/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/b75a8e80/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Jha",
+        "url": "https://samratjha.com",
+        "image": "https://samratjha.com/personalLogo.png",
+        "jobTitle": "Senior AI Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "NVIDIA"
+        },
+        "description": "AI engineer at NVIDIA with 7+ years of experience architecting large-scale distributed systems at AWS. Expert in cloud infrastructure, Generative AI, and building systems at scale.",
+        "sameAs": ["https://github.com/samratjha96"],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Generative AI",
+          "Machine Learning",
+          "Distributed Systems",
+          "Cloud Architecture",
+          "AWS",
+          "NVIDIA",
+          "Large-Scale Infrastructure",
+          "Python",
+          "CUDA"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Samrat Jha Portfolio",
+        "url": "https://samratjha.com",
+        "description": "Portfolio and technical blog of Samrat Jha, AI engineer at NVIDIA with extensive AWS infrastructure experience",
+        "author": {
+          "@type": "Person",
+          "name": "Samrat Jha"
+        }
+      }
+    </script>
+
+    <script defer="" src="https://umami.techbrohomelab.xyz/script.js" data-website-id="bdbad683-6e04-45f6-a3a6-f09ea3b42f01"></script>
+    <script type="module" crossorigin="" src="/assets/index-7ddce874.js"></script>
+    <link rel="modulepreload" crossorigin="" href="/assets/three-114a71c7.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/vendor-616fc9c5.js">
+    <link rel="stylesheet" href="/assets/index-3b13bb55.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="/assets/YouTube-6a33ce73.js"><script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script><link rel="modulepreload" as="script" crossorigin="" href="/assets/lighthouse-ai-workflow-800bb8dc.js"><link rel="canonical" href="https://samratjha.com/blog/lighthouse-ai-workflow" data-rh="true"><meta name="title" content="Automated Lighthouse Audits with Claude Code | Samrat Jha" data-rh="true"><meta name="description" content="Set up a slash command in Claude Code that runs Lighthouse audits and tells you exactly what to fix. Takes 5 minutes to set up, saves 20+ minutes per audit." data-rh="true"><meta name="author" content="Samrat Jha" data-rh="true"><meta name="keywords" content="performance, lighthouse, claude-code, web-dev, tooling" data-rh="true"><meta property="og:type" content="article" data-rh="true"><meta property="og:url" content="https://samratjha.com/blog/lighthouse-ai-workflow" data-rh="true"><meta property="og:title" content="Automated Lighthouse Audits with Claude Code" data-rh="true"><meta property="og:description" content="Set up a slash command in Claude Code that runs Lighthouse audits and tells you exactly what to fix. Takes 5 minutes to set up, saves 20+ minutes per audit." data-rh="true"><meta property="og:site_name" content="Samrat Jha" data-rh="true"><meta property="article:published_time" content="2025-01-05T00:00:00.000Z" data-rh="true"><meta property="article:author" content="https://samratjha.com" data-rh="true"><meta property="article:tag" content="performance" data-rh="true"><meta property="article:tag" content="lighthouse" data-rh="true"><meta property="article:tag" content="claude-code" data-rh="true"><meta property="article:tag" content="web-dev" data-rh="true"><meta property="article:tag" content="tooling" data-rh="true"><meta name="twitter:card" content="summary" data-rh="true"><meta name="twitter:url" content="https://samratjha.com/blog/lighthouse-ai-workflow" data-rh="true"><meta name="twitter:title" content="Automated Lighthouse Audits with Claude Code" data-rh="true"><meta name="twitter:description" content="Set up a slash command in Claude Code that runs Lighthouse audits and tells you exactly what to fix. Takes 5 minutes to set up, saves 20+ minutes per audit." data-rh="true"><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Automated Lighthouse Audits with Claude Code","description":"Set up a slash command in Claude Code that runs Lighthouse audits and tells you exactly what to fix. Takes 5 minutes to set up, saves 20+ minutes per audit.","datePublished":"2025-01-05T00:00:00.000Z","dateModified":"2025-01-05T00:00:00.000Z","author":{"@type":"Person","name":"Samrat Jha","url":"https://samratjha.com","jobTitle":"Senior AI Engineer"},"publisher":{"@type":"Person","name":"Samrat Jha","url":"https://samratjha.com"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://samratjha.com/blog/lighthouse-ai-workflow"},"keywords":"performance, lighthouse, claude-code, web-dev, tooling"}</script><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://samratjha.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://samratjha.com/blog"},{"@type":"ListItem","position":3,"name":"Automated Lighthouse Audits with Claude Code","item":"https://samratjha.com/blog/lighthouse-ai-workflow"}]}</script></head>
+  <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          max-width: 800px;
+          margin: 0 auto;
+          font-family: system-ui, sans-serif;
+        "
+      >
+        <h1>Samrat Jha - AI Engineer & Infrastructure Architect</h1>
+        <p>
+          Building the future of AI at NVIDIA, backed by 7+ years architecting
+          large-scale distributed systems at AWS.
+        </p>
+
+        <h2>About</h2>
+        <p>
+          I'm an AI engineer at NVIDIA, building at the frontier of artificial
+          intelligence. Before this, I spent 7+ years at AWS architecting
+          large-scale distributed systems—from edge computing infrastructure
+          powering hybrid cloud, to Generative AI applications accelerating
+          region launches, to event pipelines handling millions of requests. I
+          bring deep infrastructure expertise to AI.
+        </p>
+
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>AI Engineer @ NVIDIA</strong> (2024 - Present) - Building at
+            the frontier of artificial intelligence
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Region Expansion</strong> (2024) -
+            Built Generative AI applications to accelerate AWS region launches
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Outposts</strong> (2022 - 2024) -
+            Architected edge computing infrastructure powering hybrid cloud at
+            scale
+          </li>
+          <li>
+            <strong>Senior Software Engineer @ Appian</strong> (2021 - 2022) -
+            Led cross-continental integration, implemented Robotic Process
+            Automation
+          </li>
+          <li>
+            <strong>Software Engineer @ Appian</strong> (2018 - 2021) - Built
+            low-latency event pipelines, managed AWS fleet for 100+ engineers
+          </li>
+        </ul>
+
+        <h2>Projects</h2>
+        <ul>
+          <li>
+            <a href="https://space-selfie.zasamrat.workers.dev">Space Selfie</a>
+            - Discover when the ISS flew over your special moments
+          </li>
+          <li>
+            <a href="https://bird-radio.pages.dev/">Bird Radio</a> -
+            Retro-styled nature sound tuner with bird songs from around the
+            world
+          </li>
+          <li>
+            <a href="https://argos.techbrohomelab.xyz/">NetWorth Tracker</a> -
+            Personal finance application built with React and TypeScript
+          </li>
+        </ul>
+
+        <h2>Skills</h2>
+        <p>
+          Artificial Intelligence, Generative AI, CUDA, AWS, Distributed
+          Systems, Python, Rust, Golang, TypeScript, Docker
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Visit <a href="https://samratjha.com">samratjha.com</a> with
+          JavaScript enabled for the full interactive experience, or reach out
+          via <a href="https://github.com/samratjha96">GitHub</a>.
+        </p>
+
+        <p>
+          <a href="/blog">Read my blog</a> for technical deep-dives on AI,
+          infrastructure, and software engineering.
+        </p>
+
+        <img
+          src="/personalLogo.png"
+          alt="Samrat Jha - AI Engineer at NVIDIA"
+          width="200"
+          height="200"
+        />
+      </div>
+    </noscript>
+    <div id="root"><div class="relative z-0 bg-primary"><nav class="sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-20 bg-transparent
+    "><div class="w-full flex justify-between items-center max-w-7xl mx-auto"><a class="flex items-center gap-2" href="/"><img src="/personalLogo.png" alt="logo" class="w-9 h-9 object-contain"><p class="text-white text-[18px] font-bold cursor-pointer flex">Samrat &nbsp;<span class="hidden sm:block">| Portfolio</span></p></a><ul class="list-none hidden sm:flex flex-row gap-10"><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#about">About</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#work">Work</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#media">Media</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#contact">Contact</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/blog">Blog</a></li></ul><div class="sm:hidden flex flex-1 justify-end items-center"><img src="/assets/menu-242d80a8.svg" alt="menu" class="w-[28px] h-[28px] object-contain cursor-pointer"><div class="hidden p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl"><ul class="list-none flex justify-end items-start flex-col gap-4"><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#about">About</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#work">Work</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#media">Media</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#contact">Contact</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/blog">Blog</a></li></ul></div></div></div></nav><div class="sm:px-16 px-6 sm:py-16 py-10 max-w-7xl mx-auto relative z-0 mt-20"><div class="mb-16"><h1 class="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] mb-6">Automated Lighthouse Audits with Claude Code</h1><div class="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&amp;_code::before]:content-none [&amp;_code::after]:content-none"><div><div class="mb-6"><p class="text-secondary">2025-01-05</p><div class="flex flex-wrap gap-2 mt-2"><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#performance</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#lighthouse</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#claude-code</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#web-dev</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#tooling</span></div></div><article class="prose prose-invert prose-lg max-w-none blog-post-content"><p>I got tired of running Lighthouse, squinting at the JSON output, and manually figuring out what actually matters. So I set up a slash command in Claude Code that runs the audit and tells me what to fix. Took about 5 minutes to set up, saves me 20+ minutes every time I check performance.</p>
+<h2 id="the-manual-way"><a aria-hidden="true" tabindex="-1" href="#the-manual-way"><span class="icon icon-link"></span></a>The Manual Way</h2>
+<p>If you've never used Lighthouse from the command line:</p>
+<pre><code class="hljs language-bash">npx lighthouse https://yoursite.com \
+  --output=json \
+  --output-path=/tmp/lighthouse-report.json \
+  --chrome-flags=<span class="hljs-string">"--headless"</span> \
+  --only-categories=performance
+</code></pre>
+<p>This dumps a ~500KB JSON blob. You can open it in Chrome DevTools or pipe it through <code>jq</code> to extract what you care about:</p>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">cat</span> /tmp/lighthouse-report.json | jq <span class="hljs-string">'{
+  score: (.categories.performance.score * 100),
+  lcp: .audits["largest-contentful-paint"].displayValue,
+  cls: .audits["cumulative-layout-shift"].displayValue,
+  tbt: .audits["total-blocking-time"].displayValue
+}'</span>
+</code></pre>
+<p>Output:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">55</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"lcp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"58.1 s"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"cls"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"0"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"tbt"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"0 ms"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>That 58 second LCP is... not great. But now I have to dig through the full report to figure out <em>why</em>, and that's where I usually give up and go do something else.</p>
+<h2 id="the-slash-command"><a aria-hidden="true" tabindex="-1" href="#the-slash-command"><span class="icon icon-link"></span></a>The Slash Command</h2>
+<p>Create a file at <code>.claude/commands/analyze-website-performance.md</code>:</p>
+<pre><code class="hljs language-markdown"><span class="hljs-section"># Website Performance Analysis</span>
+
+Analyze the performance of <span class="hljs-code">`$ARGUMENTS`</span> using Google Lighthouse.
+
+<span class="hljs-section">## Steps</span>
+
+<span class="hljs-bullet">1.</span> <span class="hljs-strong">**Run Lighthouse audit**</span>:
+
+   <span class="hljs-code">```bash
+   npx lighthouse $ARGUMENTS --output=json --output-path=/tmp/lighthouse-report.json --chrome-flags="--headless" --only-categories=performance
+   ```</span>
+
+<span class="hljs-bullet">2.</span> <span class="hljs-strong">**Read the report**</span> from <span class="hljs-code">`/tmp/lighthouse-report.json`</span>
+
+<span class="hljs-bullet">3.</span> <span class="hljs-strong">**Analyze and summarize**</span>:
+<span class="hljs-bullet">   -</span> Current performance score
+<span class="hljs-bullet">   -</span> Each failing audit with its impact
+<span class="hljs-bullet">   -</span> Specific fixes for each issue
+<span class="hljs-bullet">   -</span> Estimated score improvement from each fix
+
+<span class="hljs-section">## Output Format</span>
+
+<span class="hljs-section">### Performance Score: X/100</span>
+
+<span class="hljs-section">### Critical Issues (blocking 95+ score)</span>
+
+For each issue:
+
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**What**</span>: The specific problem
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**Impact**</span>: How many points this costs
+<span class="hljs-bullet">-</span> <span class="hljs-strong">**Fix**</span>: Exact steps to resolve
+
+<span class="hljs-section">## Constraints</span>
+
+<span class="hljs-strong">**Do not recommend changes that would:**</span>
+
+<span class="hljs-bullet">-</span> Alter the DOM structure significantly
+<span class="hljs-bullet">-</span> Change the visual design
+<span class="hljs-bullet">-</span> Remove features or content
+
+<span class="hljs-strong">**Focus only on:**</span>
+
+<span class="hljs-bullet">-</span> Asset optimization (compression, formats, sizing)
+<span class="hljs-bullet">-</span> Loading strategies (defer, async, preload, lazy loading)
+<span class="hljs-bullet">-</span> Caching and delivery
+<span class="hljs-bullet">-</span> Code efficiency (tree-shaking, code splitting)
+</code></pre>
+<p>Now run it:</p>
+<pre><code class="hljs language-bash">claude
+&gt; /analyze-website-performance https://samratjha.com
+</code></pre>
+<h2 id="what-comes-back"><a aria-hidden="true" tabindex="-1" href="#what-comes-back"><span class="icon icon-link"></span></a>What Comes Back</h2>
+<p>Instead of a wall of JSON, you get something like:</p>
+<pre><code>## Performance Score: 55/100
+
+### Critical Issues
+
+### 1. Massive Image Files - Est. Savings: 15,654 KiB (~15.3 MB)
+
+| Image | Current Size | Displayed At | Savings |
+|-------|-------------|--------------|---------|
+| ParallaxImageGallery.png | 8.87 MB | 431×230 px | 8.86 MB |
+| bird-radio.png | 2.30 MB | 450×230 px | 2.29 MB |
+
+**Fix**:
+1. Convert all PNG images to WebP or AVIF format
+2. Resize images to match display dimensions
+3. Use `srcset` for responsive images
+
+### 2. Unused JavaScript - Est. Savings: 258 KiB, 1,350ms
+
+**What**: `index-d312cac4.js` (648 KB) has 41% unused code
+**Fix**:
+- Code-split Three.js and heavy dependencies
+- Lazy-load the 3D planet component
+</code></pre>
+<p>It cross-references the image dimensions in the DOM against the actual file sizes. My 8.87 MB PNG was being displayed at 431×230 pixels. The source image was 2657×1890. I definitely would've missed that scrolling through raw JSON.</p>
+<h2 id="the-difference"><a aria-hidden="true" tabindex="-1" href="#the-difference"><span class="icon icon-link"></span></a>The Difference</h2>
+<p>Lighthouse tells you <em>what's wrong</em>. This tells you <em>what to do about it</em>.</p>
+<p>Raw Lighthouse output:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"image-delivery-insight"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"displayValue"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"Est savings of 15,654 KiB"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>What Claude gives you:</p>
+<pre><code>ParallaxImageGallery.png:
+- Current: 2657×1890 PNG (8.87 MB)
+- Displayed: 431×230 px
+- Target: 862×460 WebP (~50-100 KB)
+- Savings: 8.86 MB (99% reduction)
+</code></pre>
+<p>One tells me there's a problem. The other tells me exactly which file, what size it should be, and what format to use. That's the difference between "I should optimize images" and actually doing it.</p>
+<h2 id="gotchas"><a aria-hidden="true" tabindex="-1" href="#gotchas"><span class="icon icon-link"></span></a>Gotchas</h2>
+<p><strong>Chrome needs to be installed</strong></p>
+<p>Lighthouse spawns a headless Chrome instance. If you're on a server without Chrome, this won't work. Use the PageSpeed Insights API instead (I haven't bothered setting that up).</p>
+<p><strong>The JSON is huge</strong></p>
+<p>~500KB for a single page. If you're reading the file directly in Claude, you might hit context limits on complex pages. The slash command handles this by having Claude extract only the relevant parts, but I've still had it choke on really bloated reports.</p>
+<p><strong>Scores vary between runs</strong></p>
+<p>Network conditions, server load, whatever. I've seen ±5 points between consecutive runs. Don't obsess over small score differences.</p>
+<p><strong>Mobile vs Desktop</strong></p>
+<p>Default is mobile throttling. Add <code>--preset=desktop</code> if you want desktop scores. Mobile is usually worse, which is why it's the default.</p>
+<p>You can also add more categories (<code>--only-categories=performance,accessibility,best-practices,seo</code>) or run multiple URLs. The slash command is just a prompt template, so modify it for whatever you need.</p></article></div></div></div><div class="mt-12 pt-8 border-t border-gray-800"><button class="flex items-center text-white font-medium mb-4 hover:text-[#915eff] transition-colors duration-300"><span class="mr-2">►</span><h3 class="font-bold text-xl">Recent Posts</h3></button></div></div></div></div>
+    
+  
+
+</body></html>

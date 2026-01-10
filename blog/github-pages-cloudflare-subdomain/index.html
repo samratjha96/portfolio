@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en" style="--line-color: #FFF;"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/personalLogo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages with a Cloudflare Custom Subdomain | Samrat Jha</title>
+    <meta name="description" content="Samrat Jha is an AI engineer at NVIDIA, backed by 7+ years architecting large-scale distributed systems at AWS. Explore my portfolio, technical blog, and infrastructure projects.">
+    <meta name="keywords" content="Samrat Jha, AI Engineer, AWS, Generative AI, Machine Learning, Infrastructure Architect, Distributed Systems, Cloud Architecture, Large-Scale Systems, Portfolio">
+    <meta name="author" content="Samrat Jha">
+    <meta name="robots" content="index, follow">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://umami.techbrohomelab.xyz" crossorigin="">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://samratjha.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://samratjha.com/">
+    <meta property="og:site_name" content="Samrat Jha Portfolio">
+    <meta property="og:title" content="Samrat Jha | AI Engineer &amp; Infrastructure Architect">
+    <meta property="og:description" content="AI engineer at NVIDIA, backed by 7+ years architecting large-scale distributed systems at AWS. Explore my portfolio and technical blog.">
+    <meta property="og:image" content="https://samratjha.com/personalLogo.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://samratjha.com/">
+    <meta name="twitter:title" content="Samrat Jha | AI Engineer &amp; Infrastructure Architect">
+    <meta name="twitter:description" content="AI engineer at NVIDIA, backed by 7+ years architecting large-scale systems at AWS. Portfolio &amp; technical blog.">
+    <meta name="twitter:image" content="https://samratjha.com/personalLogo.png">
+
+    <!-- Schema.org structured data -->
+    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/b75a8e80/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/b75a8e80/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Jha",
+        "url": "https://samratjha.com",
+        "image": "https://samratjha.com/personalLogo.png",
+        "jobTitle": "Senior AI Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "NVIDIA"
+        },
+        "description": "AI engineer at NVIDIA with 7+ years of experience architecting large-scale distributed systems at AWS. Expert in cloud infrastructure, Generative AI, and building systems at scale.",
+        "sameAs": ["https://github.com/samratjha96"],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Generative AI",
+          "Machine Learning",
+          "Distributed Systems",
+          "Cloud Architecture",
+          "AWS",
+          "NVIDIA",
+          "Large-Scale Infrastructure",
+          "Python",
+          "CUDA"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Samrat Jha Portfolio",
+        "url": "https://samratjha.com",
+        "description": "Portfolio and technical blog of Samrat Jha, AI engineer at NVIDIA with extensive AWS infrastructure experience",
+        "author": {
+          "@type": "Person",
+          "name": "Samrat Jha"
+        }
+      }
+    </script>
+
+    <script defer="" src="https://umami.techbrohomelab.xyz/script.js" data-website-id="bdbad683-6e04-45f6-a3a6-f09ea3b42f01"></script>
+    <script type="module" crossorigin="" src="/assets/index-7ddce874.js"></script>
+    <link rel="modulepreload" crossorigin="" href="/assets/three-114a71c7.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/vendor-616fc9c5.js">
+    <link rel="stylesheet" href="/assets/index-3b13bb55.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="/assets/YouTube-6a33ce73.js"><script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script><link rel="modulepreload" as="script" crossorigin="" href="/assets/github-pages-cloudflare-subdomain-362efbac.js"><link rel="canonical" href="https://samratjha.com/blog/github-pages-cloudflare-subdomain" data-rh="true"><meta name="title" content="GitHub Pages with a Cloudflare Custom Subdomain | Samrat Jha" data-rh="true"><meta name="description" content="Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas." data-rh="true"><meta name="author" content="Samrat Jha" data-rh="true"><meta name="keywords" content="github-pages, cloudflare, dns, deployment" data-rh="true"><meta property="og:type" content="article" data-rh="true"><meta property="og:url" content="https://samratjha.com/blog/github-pages-cloudflare-subdomain" data-rh="true"><meta property="og:title" content="GitHub Pages with a Cloudflare Custom Subdomain" data-rh="true"><meta property="og:description" content="Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas." data-rh="true"><meta property="og:site_name" content="Samrat Jha" data-rh="true"><meta property="article:published_time" content="2025-01-05T00:00:00.000Z" data-rh="true"><meta property="article:author" content="https://samratjha.com" data-rh="true"><meta property="article:tag" content="github-pages" data-rh="true"><meta property="article:tag" content="cloudflare" data-rh="true"><meta property="article:tag" content="dns" data-rh="true"><meta property="article:tag" content="deployment" data-rh="true"><meta name="twitter:card" content="summary" data-rh="true"><meta name="twitter:url" content="https://samratjha.com/blog/github-pages-cloudflare-subdomain" data-rh="true"><meta name="twitter:title" content="GitHub Pages with a Cloudflare Custom Subdomain" data-rh="true"><meta name="twitter:description" content="Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas." data-rh="true"><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BlogPosting","headline":"GitHub Pages with a Cloudflare Custom Subdomain","description":"Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas.","datePublished":"2025-01-05T00:00:00.000Z","dateModified":"2025-01-05T00:00:00.000Z","author":{"@type":"Person","name":"Samrat Jha","url":"https://samratjha.com","jobTitle":"Senior AI Engineer"},"publisher":{"@type":"Person","name":"Samrat Jha","url":"https://samratjha.com"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://samratjha.com/blog/github-pages-cloudflare-subdomain"},"keywords":"github-pages, cloudflare, dns, deployment"}</script><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://samratjha.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://samratjha.com/blog"},{"@type":"ListItem","position":3,"name":"GitHub Pages with a Cloudflare Custom Subdomain","item":"https://samratjha.com/blog/github-pages-cloudflare-subdomain"}]}</script></head>
+  <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          max-width: 800px;
+          margin: 0 auto;
+          font-family: system-ui, sans-serif;
+        "
+      >
+        <h1>Samrat Jha - AI Engineer & Infrastructure Architect</h1>
+        <p>
+          Building the future of AI at NVIDIA, backed by 7+ years architecting
+          large-scale distributed systems at AWS.
+        </p>
+
+        <h2>About</h2>
+        <p>
+          I'm an AI engineer at NVIDIA, building at the frontier of artificial
+          intelligence. Before this, I spent 7+ years at AWS architecting
+          large-scale distributed systems—from edge computing infrastructure
+          powering hybrid cloud, to Generative AI applications accelerating
+          region launches, to event pipelines handling millions of requests. I
+          bring deep infrastructure expertise to AI.
+        </p>
+
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>AI Engineer @ NVIDIA</strong> (2024 - Present) - Building at
+            the frontier of artificial intelligence
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Region Expansion</strong> (2024) -
+            Built Generative AI applications to accelerate AWS region launches
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Outposts</strong> (2022 - 2024) -
+            Architected edge computing infrastructure powering hybrid cloud at
+            scale
+          </li>
+          <li>
+            <strong>Senior Software Engineer @ Appian</strong> (2021 - 2022) -
+            Led cross-continental integration, implemented Robotic Process
+            Automation
+          </li>
+          <li>
+            <strong>Software Engineer @ Appian</strong> (2018 - 2021) - Built
+            low-latency event pipelines, managed AWS fleet for 100+ engineers
+          </li>
+        </ul>
+
+        <h2>Projects</h2>
+        <ul>
+          <li>
+            <a href="https://space-selfie.zasamrat.workers.dev">Space Selfie</a>
+            - Discover when the ISS flew over your special moments
+          </li>
+          <li>
+            <a href="https://bird-radio.pages.dev/">Bird Radio</a> -
+            Retro-styled nature sound tuner with bird songs from around the
+            world
+          </li>
+          <li>
+            <a href="https://argos.techbrohomelab.xyz/">NetWorth Tracker</a> -
+            Personal finance application built with React and TypeScript
+          </li>
+        </ul>
+
+        <h2>Skills</h2>
+        <p>
+          Artificial Intelligence, Generative AI, CUDA, AWS, Distributed
+          Systems, Python, Rust, Golang, TypeScript, Docker
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Visit <a href="https://samratjha.com">samratjha.com</a> with
+          JavaScript enabled for the full interactive experience, or reach out
+          via <a href="https://github.com/samratjha96">GitHub</a>.
+        </p>
+
+        <p>
+          <a href="/blog">Read my blog</a> for technical deep-dives on AI,
+          infrastructure, and software engineering.
+        </p>
+
+        <img
+          src="/personalLogo.png"
+          alt="Samrat Jha - AI Engineer at NVIDIA"
+          width="200"
+          height="200"
+        />
+      </div>
+    </noscript>
+    <div id="root"><div class="relative z-0 bg-primary"><nav class="sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-20 bg-transparent
+    "><div class="w-full flex justify-between items-center max-w-7xl mx-auto"><a class="flex items-center gap-2" href="/"><img src="/personalLogo.png" alt="logo" class="w-9 h-9 object-contain"><p class="text-white text-[18px] font-bold cursor-pointer flex">Samrat &nbsp;<span class="hidden sm:block">| Portfolio</span></p></a><ul class="list-none hidden sm:flex flex-row gap-10"><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#about">About</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#work">Work</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#media">Media</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#contact">Contact</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/blog">Blog</a></li></ul><div class="sm:hidden flex flex-1 justify-end items-center"><img src="/assets/menu-242d80a8.svg" alt="menu" class="w-[28px] h-[28px] object-contain cursor-pointer"><div class="hidden p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl"><ul class="list-none flex justify-end items-start flex-col gap-4"><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#about">About</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#work">Work</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#media">Media</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#contact">Contact</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/blog">Blog</a></li></ul></div></div></div></nav><div class="sm:px-16 px-6 sm:py-16 py-10 max-w-7xl mx-auto relative z-0 mt-20"><div class="mb-16"><h1 class="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] mb-6">GitHub Pages with a Cloudflare Custom Subdomain</h1><div class="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&amp;_code::before]:content-none [&amp;_code::after]:content-none"><div><div class="mb-6"><p class="text-secondary">2025-01-05</p><div class="flex flex-wrap gap-2 mt-2"><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#github-pages</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#cloudflare</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#dns</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#deployment</span></div></div><article class="prose prose-invert prose-lg max-w-none blog-post-content"><p>Just set up <a href="https://candesign.techbrohomelab.xyz">candesign.techbrohomelab.xyz</a>, a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it.</p>
+<h2 id="the-setup"><a aria-hidden="true" tabindex="-1" href="#the-setup"><span class="icon icon-link"></span></a>The Setup</h2>
+<p>GitHub Pages is free hosting for static sites from any public repo. Cloudflare manages my DNS. I wanted <code>candesign.techbrohomelab.xyz</code> instead of <code>samratjha96.github.io/candesign</code>.</p>
+<h2 id="enable-github-pages"><a aria-hidden="true" tabindex="-1" href="#enable-github-pages"><span class="icon icon-link"></span></a>Enable GitHub Pages</h2>
+<p>In your repo, go to <strong>Settings &gt; Pages</strong>. Under "Build and deployment":</p>
+<ul>
+<li>Source: <strong>Deploy from a branch</strong></li>
+<li>Branch: <code>main</code> (or whatever branch has your site)</li>
+<li>Folder: <code>/ (root)</code> unless your site lives in <code>/docs</code></li>
+</ul>
+<p>Save it. GitHub will deploy to <code>https://&lt;username&gt;.github.io/&lt;repo-name&gt;</code>.</p>
+<h2 id="add-the-cname-file"><a aria-hidden="true" tabindex="-1" href="#add-the-cname-file"><span class="icon icon-link"></span></a>Add the CNAME File</h2>
+<p>Create a file called <code>CNAME</code> in your repo root with just your custom domain:</p>
+<pre><code>candesign.techbrohomelab.xyz
+</code></pre>
+<p>No trailing slash, no <code>https://</code>. Commit and push it.</p>
+<p>GitHub needs this to know which custom domain maps to your repo. Without it, custom domain requests 404.</p>
+<h2 id="cloudflare-dns"><a aria-hidden="true" tabindex="-1" href="#cloudflare-dns"><span class="icon icon-link"></span></a>Cloudflare DNS</h2>
+<p>In Cloudflare, add a CNAME record:</p>
+<table><thead><tr><th>Type</th><th>Name</th><th>Target</th><th>Proxy</th></tr></thead><tbody><tr><td>CNAME</td><td>candesign</td><td>samratjha96.github.io</td><td>Off</td></tr></tbody></table>
+<p>The name is just the subdomain part. Target is your GitHub Pages URL (without the repo name).</p>
+<p>I initially had proxy enabled (orange cloud) and it worked, but GitHub recommends DNS-only (grey cloud) for Pages. Either works, but DNS-only avoids potential SSL certificate conflicts.</p>
+<h2 id="back-to-github"><a aria-hidden="true" tabindex="-1" href="#back-to-github"><span class="icon icon-link"></span></a>Back to GitHub</h2>
+<p>Once DNS propagates (usually seconds with Cloudflare), go back to <strong>Settings &gt; Pages</strong> and enter your custom domain: <code>candesign.techbrohomelab.xyz</code>.</p>
+<p>GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes. Enable it.</p>
+<h2 id="gotchas"><a aria-hidden="true" tabindex="-1" href="#gotchas"><span class="icon icon-link"></span></a>Gotchas</h2>
+<p><strong>CNAME file gets deleted</strong></p>
+<p>If you're using a static site generator that wipes your output folder, make sure the CNAME file is in your source directory or build process copies it over. I've lost it a few times to careless <code>rm -rf dist/*</code>.</p>
+<p><strong>DNS propagation "issues"</strong></p>
+<p>If GitHub says it can't verify your domain, wait 5 minutes. It's almost always just propagation delay, not a config problem. Don't start changing things.</p>
+<p><strong>www vs non-www</strong></p>
+<p>If you want <code>www.example.com</code>, your CNAME record name should be <code>www</code>. For apex domains (<code>example.com</code>), you need A records pointing to GitHub's IPs instead:</p>
+<pre><code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+</code></pre>
+<p>Subdomains are simpler. Just use CNAME.</p>
+<p><strong>Mixed content warnings</strong></p>
+<p>If your site loads but looks broken, check browser console for mixed content errors. Make sure all your asset URLs use <code>https://</code> or protocol-relative <code>//</code> paths.</p>
+<h2 id="why-not-just-use-the-default-url"><a aria-hidden="true" tabindex="-1" href="#why-not-just-use-the-default-url"><span class="icon icon-link"></span></a>Why Not Just Use the Default URL?</h2>
+<p>Vanity, mostly. But also: if you ever move hosting, your URLs don't break. And <code>techbrohomelab.xyz</code> is more memorable than <code>github.io/candesign</code> for sharing.</p>
+<hr>
+<p>Live site: <a href="https://candesign.techbrohomelab.xyz">candesign.techbrohomelab.xyz</a></p>
+<p>Source: <a href="https://github.com/samratjha96/candesign">github.com/samratjha96/candesign</a></p></article></div></div></div><div class="mt-12 pt-8 border-t border-gray-800"><button class="flex items-center text-white font-medium mb-4 hover:text-[#915eff] transition-colors duration-300"><span class="mr-2">►</span><h3 class="font-bold text-xl">Recent Posts</h3></button></div></div></div></div>
+    
+  
+
+</body></html>
