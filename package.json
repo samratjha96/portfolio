@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/generate-sitemap.js",
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender.js",
     "preview": "vite preview",
     "lint": "eslint --fix .",
-    "sitemap": "node scripts/generate-sitemap.js"
+    "sitemap": "node scripts/generate-sitemap.js",
+    "prerender": "node scripts/prerender.js"
   },
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "^7.37.5",
     "postcss": "^8.4.21",
     "prettier": "^3.5.3",
+    "puppeteer": "^24.34.0",
     "tailwindcss": "^3.2.7",
     "vite": "^4.1.0"
   }
