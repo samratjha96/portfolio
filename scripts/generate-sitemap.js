@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = "https://samratjha.com";
+const SITE_URL = "https://www.samratjha.com";
 const POSTS_DIR = path.join(__dirname, "../src/blog/posts");
 const OUTPUT_PATH = path.join(__dirname, "../public/sitemap.xml");
 
@@ -76,13 +76,13 @@ function generateSitemap() {
       priority: "1.0",
     },
     {
-      loc: `${SITE_URL}/blog`,
+      loc: `${SITE_URL}/blog/`,
       changefreq: "weekly",
       priority: "0.9",
     },
     // Blog posts
     ...posts.map((post) => ({
-      loc: `${SITE_URL}/blog/${post.slug}`,
+      loc: `${SITE_URL}/blog/${post.slug}/`,
       lastmod: post.lastmod,
       changefreq: "monthly",
       priority: "0.8",

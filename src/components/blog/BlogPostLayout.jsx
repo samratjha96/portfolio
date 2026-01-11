@@ -85,7 +85,7 @@ const BlogPostLayout = ({ children, title }) => {
                 {displayPosts.map((post, index) => (
                   <div key={post.slug} className="border-b border-gray-700/30 pb-4 last:border-b-0">
                     <Link
-                      to={`/blog/${post.slug}`}
+                      to={`/blog/${post.slug}/`}
                       className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
                     >
                       {post.title}

@@ -68,7 +68,7 @@ const About = () => {
         </a>{" "}
         to see what I'm building. I also share technical deep-dives on my{" "}
         <Link
-          to="/blog"
+          to="/blog/"
           className="underline text-[#915eff] hover:text-blue-800 visited:text-purple-600"
         >
           blog

@@ -177,6 +177,65 @@ backgroundImage: {
 
 3. Add to projects array in `src/constants/constants.js`
 
+## URL Standards (Critical for SEO)
+
+All URLs MUST follow these rules to avoid SEO issues (canonical redirects, duplicate content).
+
+### Canonical Domain
+
+The canonical domain is `https://www.samratjha.com` (with `www`).
+
+- `.htaccess` redirects `samratjha.com` → `www.samratjha.com`
+- All hardcoded URLs must use `www.samratjha.com`
+
+### Trailing Slashes
+
+All URLs MUST include trailing slashes:
+
+```javascript
+// Correct
+const SITE_URL = "https://www.samratjha.com";
+const blogUrl = `${SITE_URL}/blog/`;
+const postUrl = `${SITE_URL}/blog/${slug}/`;
+
+// Wrong - will cause redirect chain
+const blogUrl = `${SITE_URL}/blog`;
+const postUrl = `${SITE_URL}/blog/${slug}`;
+```
+
+### Internal Links
+
+React Router `<Link>` components must use trailing slashes:
+
+```jsx
+// Correct
+<Link to="/blog/">Blog</Link>
+<Link to={`/blog/${post.slug}/`}>{post.title}</Link>
+
+// Wrong
+<Link to="/blog">Blog</Link>
+<Link to={`/blog/${post.slug}`}>{post.title}</Link>
+```
+
+### Files to Update When Adding New Routes
+
+When adding new pages/routes, ensure URLs are correct in:
+
+1. `src/constants/constants.js` - Navigation links
+2. `src/components/blog/*.jsx` - Any Link components
+3. `public/sitemap.xml` - Add new URLs with trailing slashes
+4. `scripts/generate-sitemap.js` - If auto-generating sitemap
+
+### SITE_URL Constants
+
+The `SITE_URL` constant is defined in:
+
+- `src/components/blog/BlogList.jsx`
+- `src/components/blog/BlogPost.jsx`
+- `scripts/generate-sitemap.js`
+
+All must use `https://www.samratjha.com` (with www, no trailing slash on the base URL).
+
 ## Common Pitfalls
 
 1. **Adding unoptimized images**: Always convert to WebP first
@@ -184,3 +243,5 @@ backgroundImage: {
 3. **Eager loading below-fold images**: Use `loading="lazy"`
 4. **Testing on dev server**: Always test performance on production build
 5. **Importing from wrong path**: Use `./optimized/` folder for images
+6. **URLs without www**: Always use `www.samratjha.com`
+7. **URLs without trailing slashes**: Always add trailing slashes to paths (e.g., `/blog/` not `/blog`)

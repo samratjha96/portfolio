@@ -59,7 +59,7 @@ const BlogNavbar = () => {
                   } hover:text-white text-[18px] font-medium cursor-pointer`}
                   onClick={() => setActive(link.title)}
                 >
-                  <Link to="/blog">{link.title}</Link>
+                  <Link to="/blog/">{link.title}</Link>
                 </li>
               );
             }
@@ -105,7 +105,7 @@ const BlogNavbar = () => {
                         setActive(link.title);
                       }}
                     >
-                      <Link to="/blog">{link.title}</Link>
+                      <Link to="/blog/">{link.title}</Link>
                     </li>
                   );
                 }

@@ -12,10 +12,10 @@ import {
   generateExcerpt,
 } from "../../utils/mdxUtils";
 
-const SITE_URL = "https://samratjha.com";
+const SITE_URL = "https://www.samratjha.com";
 const AUTHOR = {
   name: "Samrat Jha",
-  url: "https://samratjha.com",
+  url: "https://www.samratjha.com/",
   jobTitle: "Senior AI Engineer",
   employer: "NVIDIA",
 };
@@ -110,7 +110,7 @@ const BlogPost = () => {
       },
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": `${SITE_URL}/blog/${post.slug}`,
+        "@id": `${SITE_URL}/blog/${post.slug}/`,
       },
       keywords: post.tags.join(", "),
     };
@@ -128,19 +128,19 @@ const BlogPost = () => {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: SITE_URL,
+          item: `${SITE_URL}/`,
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Blog",
-          item: `${SITE_URL}/blog`,
+          item: `${SITE_URL}/blog/`,
         },
         {
           "@type": "ListItem",
           position: 3,
           name: post.title,
-          item: `${SITE_URL}/blog/${post.slug}`,
+          item: `${SITE_URL}/blog/${post.slug}/`,
         },
       ],
     };
@@ -178,7 +178,7 @@ const BlogPost = () => {
   }
 
   const PostContent = post.component;
-  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`;
   const articleSchema = generateArticleSchema();
   const breadcrumbSchema = generateBreadcrumbSchema();
 

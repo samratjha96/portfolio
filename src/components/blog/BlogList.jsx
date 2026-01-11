@@ -12,7 +12,7 @@ import {
   getSlugFromFilename,
 } from "../../utils/mdxUtils";
 
-const SITE_URL = "https://samratjha.com";
+const SITE_URL = "https://www.samratjha.com";
 
 const BlogSearch = ({ onSearch }) => {
   const [query, setQuery] = useState("");
@@ -140,11 +140,11 @@ const BlogList = () => {
     name: "Blog | Samrat Jha",
     description:
       "Technical blog posts on AI, infrastructure, web development, and software engineering by Samrat Jha.",
-    url: `${SITE_URL}/blog`,
+    url: `${SITE_URL}/blog/`,
     author: {
       "@type": "Person",
       name: "Samrat Jha",
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
     },
   };
 
@@ -156,11 +156,11 @@ const BlogList = () => {
           name="description"
           content="Technical blog posts on AI, infrastructure, web development, and software engineering by Samrat Jha."
         />
-        <link rel="canonical" href={`${SITE_URL}/blog`} />
+        <link rel="canonical" href={`${SITE_URL}/blog/`} />
 
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${SITE_URL}/blog`} />
+        <meta property="og:url" content={`${SITE_URL}/blog/`} />
         <meta property="og:title" content="Blog | Samrat Jha" />
         <meta
           property="og:description"

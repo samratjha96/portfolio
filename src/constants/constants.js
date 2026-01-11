@@ -52,7 +52,7 @@ export const navLinks = [
     id: "blog",
     title: "Blog",
     isExternal: true,
-    path: "/blog",
+    path: "/blog/",
   },
 ];
 

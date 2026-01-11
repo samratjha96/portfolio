@@ -65,7 +65,7 @@ const BlogSearch = ({ posts = [] }) => {
               {searchResults.map((post) => (
                 <li key={post.slug} className="py-3 first:pt-0 last:pb-0">
                   <Link
-                    to={`/blog/${post.slug}`}
+                    to={`/blog/${post.slug}/`}
                     className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
                   >
                     {post.title}

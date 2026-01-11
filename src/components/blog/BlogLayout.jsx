@@ -69,7 +69,7 @@ const BlogLayout = ({ children, title }) => {
                 {displayPosts.map((post, index) => (
                   <li key={post.slug} className={`py-4 ${index === 0 ? "pt-0" : ""}`}>
                     <Link
-                      to={`/blog/${post.slug}`}
+                      to={`/blog/${post.slug}/`}
                       className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
                     >
                       {post.title}
