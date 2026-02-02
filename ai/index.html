@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop Wasting Money on AI Tools | Samrat Jha</title>
+    <meta
+      name="description"
+      content="I help small businesses implement the 2-3 AI tools that will actually save them $50K+ per year. No hype. No affiliate kickbacks. Just what works."
+    />
+    <meta
+      property="og:title"
+      content="Stop Wasting Money on AI Tools | Samrat Jha"
+    />
+    <meta
+      property="og:description"
+      content="I help small businesses implement the 2-3 AI tools that will actually save them $50K+ per year. No hype. No affiliate kickbacks. Just what works."
+    />
+    <meta property="og:url" content="https://www.samratjha.com/ai/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://www.samratjha.com/ai/og-image.png"
+    />
+    <meta property="og:image:width" content="1424" />
+    <meta property="og:image:height" content="752" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Stop Wasting Money on AI Tools | Samrat Jha"
+    />
+    <meta
+      name="twitter:description"
+      content="I help small businesses implement the 2-3 AI tools that will actually save them $50K+ per year. No hype. No affiliate kickbacks. Just what works."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.samratjha.com/ai/og-image.png"
+    />
+    <link rel="canonical" href="https://www.samratjha.com/ai/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f5f0;
+        --red: #e63946;
+        --gray: #6b6b6b;
+        --border: 3px solid var(--black);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "IBM Plex Mono", monospace;
+        background: var(--white);
+        color: var(--black);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* Brutalist grid background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Header */
+      header {
+        padding: 20px 0;
+        border-bottom: var(--border);
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        color: var(--black);
+      }
+
+      .creds {
+        font-size: 11px;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 80px 0 60px;
+        border-bottom: var(--border);
+      }
+
+      .hero-label {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        transform: rotate(-1deg);
+      }
+
+      h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(48px, 8vw, 96px);
+        font-weight: 400;
+        line-height: 1.05;
+        max-width: 900px;
+        margin-bottom: 40px;
+      }
+
+      h1 .strike {
+        text-decoration: line-through;
+        text-decoration-thickness: 4px;
+        color: var(--gray);
+      }
+
+      h1 em {
+        font-style: italic;
+      }
+
+      .hero-sub {
+        font-size: 18px;
+        max-width: 600px;
+        color: var(--gray);
+        margin-bottom: 40px;
+      }
+
+      .cta-primary {
+        display: inline-block;
+        background: var(--black);
+        color: var(--white);
+        padding: 18px 36px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border: var(--border);
+        transition: all 0.15s ease;
+        position: relative;
+      }
+
+      .cta-primary:hover {
+        background: var(--white);
+        color: var(--black);
+        transform: translate(-4px, -4px);
+        box-shadow: 4px 4px 0 var(--black);
+      }
+
+      /* Problem Section */
+      .problems {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .section-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gray);
+        margin-bottom: 40px;
+      }
+
+      .problem-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+      }
+
+      .problem-card {
+        border: var(--border);
+        padding: 30px;
+        position: relative;
+        background: var(--white);
+      }
+
+      .problem-card::before {
+        content: attr(data-num);
+        position: absolute;
+        top: -15px;
+        left: 20px;
+        background: var(--white);
+        padding: 0 10px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .problem-quote {
+        font-family: "Instrument Serif", serif;
+        font-size: 24px;
+        font-style: italic;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+
+      .problem-source {
+        font-size: 11px;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Stats */
+      .stats {
+        padding: 60px 0;
+        background: var(--black);
+        color: var(--white);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        text-align: center;
+      }
+
+      .stat-num {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(48px, 6vw, 72px);
+        font-weight: 400;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-top: 10px;
+      }
+
+      /* What I Do */
+      .offer {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .offer-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 400;
+        line-height: 1.1;
+      }
+
+      .offer-intro {
+        font-size: 16px;
+        color: var(--gray);
+        align-self: end;
+      }
+
+      .offer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: var(--border);
+      }
+
+      .offer-item {
+        padding: 30px;
+        border-right: var(--border);
+      }
+
+      .offer-item:last-child {
+        border-right: none;
+      }
+
+      .offer-week {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        color: var(--red);
+      }
+
+      .offer-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      .offer-desc {
+        font-size: 13px;
+        color: var(--gray);
+        line-height: 1.7;
+      }
+
+      /* Guarantee */
+      .guarantee {
+        padding: 80px 0;
+        background: var(--red);
+        color: var(--white);
+      }
+
+      .guarantee-inner {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .guarantee-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        opacity: 0.8;
+      }
+
+      .guarantee h2 {
+        margin-top: 20px;
+      }
+
+      .guarantee-text {
+        font-size: 18px;
+        line-height: 1.8;
+        opacity: 0.9;
+      }
+
+      /* Anti-pitch */
+      .anti {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .anti-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+      }
+
+      .anti-col h3 {
+        font-family: "Instrument Serif", serif;
+        font-size: 28px;
+        font-weight: 400;
+        margin-bottom: 30px;
+      }
+
+      .anti-list {
+        list-style: none;
+      }
+
+      .anti-list li {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        font-size: 15px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .anti-list .icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .anti-list.do .icon {
+        color: #2d6a4f;
+      }
+
+      .anti-list.dont .icon {
+        color: var(--red);
+      }
+
+      /* CTA */
+      .final-cta {
+        padding: 100px 0;
+        text-align: center;
+        background: var(--black);
+        color: var(--white);
+      }
+
+      .final-cta h2 {
+        margin-bottom: 20px;
+      }
+
+      .final-cta p {
+        font-size: 16px;
+        opacity: 0.7;
+        margin-bottom: 40px;
+      }
+
+      .cta-secondary {
+        display: inline-block;
+        background: var(--white);
+        color: var(--black);
+        padding: 18px 36px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        border: 3px solid var(--white);
+        transition: all 0.15s ease;
+      }
+
+      .cta-secondary:hover {
+        background: transparent;
+        color: var(--white);
+      }
+
+      /* Footer */
+      footer {
+        padding: 40px 0;
+        border-top: var(--border);
+        text-align: center;
+      }
+
+      footer p {
+        font-size: 12px;
+        color: var(--gray);
+      }
+
+      footer a {
+        color: var(--gray);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: var(--black);
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .offer-header,
+        .anti-grid,
+        .guarantee-inner {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .offer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .offer-item {
+          border-bottom: var(--border);
+        }
+
+        .offer-item:nth-child(2),
+        .offer-item:nth-child(4) {
+          border-right: none;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .offer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .offer-item {
+          border-right: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container header-inner">
+        <a href="https://www.samratjha.com/" class="logo">Samrat Jha</a>
+        <div class="creds">Former AWS & NVIDIA</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">AI Consulting for $2-10M Businesses</div>
+        <h1>
+          Stop <span class="strike">burning cash</span> on AI tools that
+          <em>don't work</em>
+        </h1>
+        <p class="hero-sub">
+          I help small businesses implement the 2-3 AI tools that will actually
+          save them $50K+ per year. No hype. No affiliate kickbacks. Just what
+          works.
+        </p>
+        <a href="https://cal.com/samrat-jha-akdwhz/30min" class="cta-primary"
+          >Book a Free Call</a
+        >
+      </div>
+    </section>
+
+    <section class="problems">
+      <div class="container">
+        <div class="section-label">What Business Owners Actually Say</div>
+        <div class="problem-grid">
+          <div class="problem-card" data-num="01">
+            <p class="problem-quote">
+              "Wasted probably 2k on tools that promised the world and delivered
+              basic automation I could've done with Zapier."
+            </p>
+            <p class="problem-source">r/smallbusiness</p>
+          </div>
+          <div class="problem-card" data-num="02">
+            <p class="problem-quote">
+              "$15k chatbot that customers hate. Too robotic, can't handle basic
+              questions."
+            </p>
+            <p class="problem-source">r/AiForSmallBusiness</p>
+          </div>
+          <div class="problem-card" data-num="03">
+            <p class="problem-quote">
+              "How do you figure out what's legit vs just hype?"
+            </p>
+            <p class="problem-source">r/smallbusiness</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-num">95%</div>
+            <div class="stat-label">AI projects fail to deliver impact</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$50K+</div>
+            <div class="stat-label">Avg. annual savings I find</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2-3</div>
+            <div class="stat-label">Tools you actually need</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer">
+      <div class="container">
+        <div class="offer-header">
+          <h2>The AI Clarity Sprint</h2>
+          <p class="offer-intro">
+            4 weeks to cut through the noise. You'll know exactly what to
+            implement, in what order, and why it matters for your specific
+            business.
+          </p>
+        </div>
+        <div class="offer-grid">
+          <div class="offer-item">
+            <div class="offer-week">Week 1</div>
+            <div class="offer-title">AI Audit</div>
+            <p class="offer-desc">
+              2-hour deep dive into your operations. I find where AI actually
+              fits—not where vendors want to sell you something.
+            </p>
+          </div>
+          <div class="offer-item">
+            <div class="offer-week">Week 2</div>
+            <div class="offer-title">Tool Blueprint</div>
+            <p class="offer-desc">
+              Kill redundant subscriptions. Get a personalized stack with real
+              cost analysis, not affiliate-driven recommendations.
+            </p>
+          </div>
+          <div class="offer-item">
+            <div class="offer-week">Week 3</div>
+            <div class="offer-title">90-Day Roadmap</div>
+            <p class="offer-desc">
+              Prioritized implementation plan. Quick wins first, bigger
+              transformations after. You'll know what to do Monday morning.
+            </p>
+          </div>
+          <div class="offer-item">
+            <div class="offer-week">Week 4+</div>
+            <div class="offer-title">Launch Support</div>
+            <p class="offer-desc">
+              Implementation kickoff plus 30 days of Slack support. I don't
+              disappear after taking your money.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guarantee">
+      <div class="container guarantee-inner">
+        <div>
+          <div class="guarantee-label">The Guarantee</div>
+          <h2>$25K in savings or full refund</h2>
+        </div>
+        <p class="guarantee-text">
+          If we can't identify at least $25K in annual savings or time
+          equivalent during our engagement, you pay nothing. I've spent years
+          building AI systems at companies with unlimited budgets. I know what
+          works and what's snake oil. I'm betting my fee on it.
+        </p>
+      </div>
+    </section>
+
+    <section class="anti">
+      <div class="container">
+        <div class="anti-grid">
+          <div class="anti-col">
+            <h3>What I do</h3>
+            <ul class="anti-list do">
+              <li>
+                <span class="icon">+</span> Find specific opportunities in YOUR
+                operations
+              </li>
+              <li>
+                <span class="icon">+</span> Recommend tools I've personally
+                vetted
+              </li>
+              <li>
+                <span class="icon">+</span> Show all my work—transparent
+                reasoning
+              </li>
+              <li>
+                <span class="icon">+</span> Stay available during implementation
+              </li>
+              <li>
+                <span class="icon">+</span> Give you a plan your team will
+                actually use
+              </li>
+            </ul>
+          </div>
+          <div class="anti-col">
+            <h3>What I don't do</h3>
+            <ul class="anti-list dont">
+              <li>
+                <span class="icon">×</span> Sell you tools (no affiliate
+                kickbacks)
+              </li>
+              <li>
+                <span class="icon">×</span> Give you a generic PDF playbook
+              </li>
+              <li>
+                <span class="icon">×</span> Recommend ChatGPT wrappers with
+                $99/mo price tags
+              </li>
+              <li>
+                <span class="icon">×</span> Disappear after the check clears
+              </li>
+              <li><span class="icon">×</span> Pretend AI solves everything</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="contact">
+      <div class="container">
+        <h2>Taking 5 clients this month</h2>
+        <p>
+          Free 30-minute call to see if this is right for your business. No
+          pitch, no pressure.
+        </p>
+        <a href="https://cal.com/samrat-jha-akdwhz/30min" class="cta-secondary"
+          >Schedule a Call</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>
+          Built AI systems at AWS and NVIDIA. Now I help smaller companies
+          access the same strategies.
+          <a href="https://www.samratjha.com/">Back to Portfolio</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
