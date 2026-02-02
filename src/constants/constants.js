@@ -54,6 +54,13 @@ export const navLinks = [
     isExternal: true,
     path: "/blog/",
   },
+  {
+    id: "ai",
+    title: "AI Consulting",
+    isExternal: true,
+    path: "/ai/",
+    isFullPage: true,
+  },
 ];
 
 const services = [
@@ -141,9 +148,7 @@ const experiences = [
     icon: nvidia,
     iconBg: "#76B900",
     date: "December 2025 - Current",
-    points: [
-      "Building at the frontier of artificial intelligence",
-    ],
+    points: ["Building at the frontier of artificial intelligence"],
   },
   {
     title: "Software Engineer @ AWS Region Expansion",

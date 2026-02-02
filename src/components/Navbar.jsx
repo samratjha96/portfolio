@@ -42,7 +42,11 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={personalLogo} alt="logo" className="w-9 h-9 object-contain" />
+          <img
+            src={personalLogo}
+            alt="logo"
+            className="w-9 h-9 object-contain"
+          />
           <p className="text-white text-[18px] font-bold cursor-pointer flex">
             Samrat &nbsp;
             <span className="hidden sm:block">| Portfolio</span>
@@ -58,7 +62,11 @@ const Navbar = () => {
               onClick={() => setActive(link.title)}
             >
               {link.isExternal ? (
-                <Link to={link.path}>{link.title}</Link>
+                link.isFullPage ? (
+                  <a href={link.path}>{link.title}</a>
+                ) : (
+                  <Link to={link.path}>{link.title}</Link>
+                )
               ) : (
                 <a href={`#${link.id}`}>{link.title}</a>
               )}
@@ -90,7 +98,11 @@ const Navbar = () => {
                   }}
                 >
                   {link.isExternal ? (
-                    <Link to={link.path}>{link.title}</Link>
+                    link.isFullPage ? (
+                      <a href={link.path}>{link.title}</a>
+                    ) : (
+                      <Link to={link.path}>{link.title}</Link>
+                    )
                   ) : (
                     <a href={`#${link.id}`}>{link.title}</a>
                   )}
