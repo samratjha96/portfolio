@@ -1,8 +1,10 @@
 # Enable rewriting
 RewriteEngine On
 
-# Force www (redirect non-www to www)
-RewriteCond %{HTTP_HOST} ^samratjha\.com$ [NC]
+# Force HTTPS and www in a single 301 redirect
+# Matches if: not HTTPS OR not www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^(.*)$ https://www.samratjha.com/$1 [R=301,L]
 
 # If the request is not for a real file or directory
