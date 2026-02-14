@@ -2,3 +2,4 @@ User-Agent: *
 Disallow:
 
 Sitemap: https://www.samratjha.com/sitemap.xml
+Llms-Txt: https://www.samratjha.com/llms.txt

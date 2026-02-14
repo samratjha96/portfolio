@@ -1,0 +1,50 @@
+# Samrat Jha
+
+> Senior AI Engineer at NVIDIA. 7+ years building large-scale distributed systems at AWS and NVIDIA. Expert in cloud infrastructure, Generative AI, and shipping systems at scale. Also offers AI consulting for small businesses.
+
+Website: https://www.samratjha.com/
+GitHub: https://github.com/samratjha96
+LinkedIn: https://www.linkedin.com/in/samratjha96/
+Contact: contact@samratjha.com
+
+## About
+
+Samrat is an AI engineer at NVIDIA, building at the frontier of artificial intelligence. He brings 7+ years of experience architecting large-scale distributed systems, including 4 years at AWS building edge computing infrastructure, Generative AI applications, and event pipelines handling millions of requests. He has shipped systems at scale, led cross-org initiatives, and developed everything from multi-agent AI systems to enterprise data platforms.
+
+Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker, CUDA, Machine Learning, Generative AI, Cloud Architecture, Large-Scale Infrastructure.
+
+## Experience
+
+- **Senior AI Engineer @ NVIDIA** (Dec 2025 - Present): Building at the frontier of artificial intelligence.
+- **Software Engineer @ AWS Region Expansion** (Sep 2024 - Dec 2025): Built enterprise ETL pipelines ingesting millions of multi-modal documents for RAG workloads. Deployed multi-agent systems to production for planning region builds. Launched AI chatbots answering thousands of questions weekly.
+- **Software Engineer @ AWS Outposts** (Mar 2022 - Sep 2024): Built next-gen edge computing infrastructure. Designed event-driven, low-latency distributed systems using ECS, Lambda, DynamoDB, EventBridge, Kotlin, TypeScript, and Rust.
+- **Senior Software Engineer @ Appian** (Mar 2021 - Jan 2022): Led integration with acquired company in Spain. Won company-wide award for technical innovation. Shipped RPA as a native platform capability.
+- **Software Engineer @ Appian** (Aug 2018 - Mar 2021): Built full-stack Twilio integration for Intelligent Contact Center. Designed templatized delivery pipeline used to ship thousands of applications. Created open-source Terraform provider for Twilio.
+
+## Projects
+
+- [Which Card](https://github.com/samratjha96/which-card): Find the best credit card for every purchase. Search by merchant, compare rewards, maximize cashback. [Demo](https://which-card.pages.dev)
+- [Space Selfie](https://github.com/samratjha96/space-selfie): Discover when the ISS flew over your special moments. Built with TypeScript, Cloudflare Workers, and satellite.js. [Demo](https://space-selfie.zasamrat.workers.dev)
+- [Bird Radio](https://github.com/samratjha96/BirdRadio): Retro-styled nature sound tuner streaming bird songs worldwide with real-time spectrogram visualization. [Demo](https://bird-radio.pages.dev/)
+- [NetWorth Tracker](https://github.com/samratjha96/networth): Personal finance app to track net worth. React, TypeScript, Tailwind, shadcn-ui. [Demo](https://argos.techbrohomelab.xyz/)
+- [Today's Tech](https://github.com/samratjha96/today): Personal dashboard aggregating market data, GitHub trending, Hacker News, and tech news. [Demo](https://today.techbrohomelab.xyz/)
+- [SAAS Landing Page](https://github.com/samratjha96/sample-saas-landing-page): White-label SAAS landing page with animations. Reskinnable for any client. [Demo](https://sample-saas-landing-page.vercel.app/)
+
+## Blog
+
+- [Deploying a Full-Stack TypeScript App to Cloudflare Workers](https://www.samratjha.com/blog/cloudflare-workers-full-stack/): Deploy a full-stack TypeScript app with Hono to Cloudflare Workers. Single deployment serving API and frontend on the edge for $0/month.
+- [Fixing React Router 404 Errors on Hostinger](https://www.samratjha.com/blog/spa-routing-hostinger/): Direct links returning 404 on your React SPA? The .htaccess fix for Apache-based hosts.
+- [GitHub Pages with a Cloudflare Custom Subdomain](https://www.samratjha.com/blog/github-pages-cloudflare-subdomain/): Set up a custom subdomain for GitHub Pages using Cloudflare DNS. CNAME setup, SSL, and common gotchas.
+- [How I Finally Organized My Notes](https://www.samratjha.com/blog/how-i-finally-organized-my-notes/): Johnny Decimal + Obsidian for note organization that actually works.
+- [Automated Lighthouse Audits with Claude Code](https://www.samratjha.com/blog/lighthouse-ai-workflow/): Set up a Claude Code slash command that runs Lighthouse audits and tells you what to fix.
+
+## AI Consulting
+
+- [AI Consulting Services](https://www.samratjha.com/ai/): AI consulting for small businesses ($2-10M revenue). The "AI Clarity Sprint" is a 4-week engagement: AI audit, tool blueprint, 90-day roadmap, and launch support. Guarantee: $25K in identified savings or full refund. No affiliate kickbacks.
+- [Book a Free Call](https://cal.com/samrat-jha-akdwhz/30min): Free 30-minute consultation to evaluate fit.
+
+## Media
+
+- [Mock Software Engineering Interview](https://youtube.com/watch?v=bmqZ5AhNr3g): Mock FAANG interview for InterviewPen demonstrating how to navigate technical interviews.
+- [Career Guidance Podcast](https://youtube.com/watch?v=y2y_ni8WLy0): Podcast on Back2BackSWE (300K+ subscribers) covering job hunting, interviewing, and finding the right fit.
+- [College Commencement Speech](https://youtube.com/watch?v=xxNa51UFGGI?start=2627): Commencement speech on immigration, struggles, and achievements.
