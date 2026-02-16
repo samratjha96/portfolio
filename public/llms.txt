@@ -40,7 +40,7 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 
 ## AI Consulting
 
-- [AI Consulting Services](https://www.samratjha.com/ai/): AI consulting for small businesses ($2-10M revenue). The "AI Clarity Sprint" is a 4-week engagement: AI audit, tool blueprint, 90-day roadmap, and launch support. Guarantee: $25K in identified savings or full refund. No affiliate kickbacks.
+- [AI Consulting Services](https://www.samratjha.com/ai/): AI consulting for small and mid-size businesses. The "AI Clarity Sprint" is a 4-week engagement: workflow audit, first automation deployed in Week 1, tool blueprint, 90-day roadmap, and launch support. Guarantee: one automation live in your systems within the first week or you don't pay. No affiliate kickbacks.
 - [Book a Free Call](https://cal.com/samrat-jha-akdwhz/30min): Free 30-minute consultation to evaluate fit.
 
 ## Media
