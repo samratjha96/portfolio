@@ -27,8 +27,8 @@ function getBlogSlugs() {
     .map((file) => file.replace(".mdx", ""));
 }
 
-// Routes to prerender
-const routes = ["/", "/blog", ...getBlogSlugs().map((slug) => `/blog/${slug}`)];
+// Routes to prerender (trailing slashes match canonical URLs and avoid Apache directory redirects)
+const routes = ["/", "/blog/", ...getBlogSlugs().map((slug) => `/blog/${slug}/`)];
 
 // Simple static file server
 function startServer() {
@@ -104,6 +104,40 @@ async function prerender() {
       // Wait a bit for React to fully render
       await page.waitForSelector("#root", { timeout: 10000 });
       await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Remove static index.html meta tags that react-helmet-async has overridden.
+      // Helmet appends tags with data-rh="true" but doesn't remove the static ones,
+      // causing duplicate description, canonical, og:url, etc. on every page.
+      await page.evaluate(() => {
+        const rhElements = document.querySelectorAll("[data-rh]");
+        if (rhElements.length === 0) return;
+
+        const overriddenNames = new Set();
+        const overriddenProperties = new Set();
+        let hasCanonical = false;
+
+        rhElements.forEach((el) => {
+          const name = el.getAttribute("name");
+          const property = el.getAttribute("property");
+          const rel = el.getAttribute("rel");
+          if (name) overriddenNames.add(name);
+          if (property) overriddenProperties.add(property);
+          if (rel === "canonical") hasCanonical = true;
+        });
+
+        const toRemove = [];
+        document.head.querySelectorAll("meta, link").forEach((el) => {
+          if (el.hasAttribute("data-rh")) return;
+          const name = el.getAttribute("name");
+          const property = el.getAttribute("property");
+          const rel = el.getAttribute("rel");
+          if (name && overriddenNames.has(name)) toRemove.push(el);
+          if (property && overriddenProperties.has(property)) toRemove.push(el);
+          if (rel === "canonical" && hasCanonical) toRemove.push(el);
+        });
+
+        toRemove.forEach((el) => el.remove());
+      });
 
       // Get the rendered HTML
       const html = await page.content();
