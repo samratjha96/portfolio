@@ -1,0 +1,70 @@
+---
+title: The AI ROI Gap
+date: 2026-03-02
+description: Companies are pouring money into AI and most have almost nothing to show for it. The projects actually working aren't the exciting ones.
+tags: ["ai", "enterprise", "productivity", "analysis"]
+---
+
+I've been looking at enterprise AI adoption numbers lately and something doesn't add up.
+
+Spending is up everywhere. Every earnings call has an AI section. And yet: research into enterprise AI adoption finds only 4% of companies report _significant_ returns. 95% of pilots fail before scaling. Only 26% of organizations ship a working product at all.
+
+The gap between the hype and the ROI has a weird explanation. The companies making money aren't doing what everyone else is building.
+
+## Where the money went
+
+Organizations put more than half their AI budgets into sales and marketing tools. Makes sense on paper: AI should generate leads, improve conversion, personalize outreach at scale. Revenue is measurable. Easy to justify to a CFO.
+
+The actual ROI data points the other direction. The highest returns came from back-office automation. Invoice processing. Fraud detection. Internal routing and classification. Stuff nobody demos at a conference.
+
+This isn't surprising if you think about it for a minute. Sales and marketing AI operates in an adversarial environment where your competitors are running the same tools, customers are developing immunity to AI-generated content, and success still requires human judgment about timing and relationships. Back-office automation competes against _a spreadsheet_. If you automate invoice matching at 90% accuracy, you've won, because the human doing it at 85% costs $80k a year and hates the job.
+
+The companies that got good at AI started with the boring stuff. The companies still failing started with the chatbot.
+
+## The data problem everyone misdiagnoses
+
+80% of AI projects fail before production. Post-mortems almost always say the same thing: data quality.
+
+So companies hire data engineers, buy data governance platforms, start a data quality initiative. And still fail.
+
+The actual issue is bidirectional. AI tools don't adapt to how your organization works. But organizations also don't have frameworks for integrating AI into how they actually work. You can't fix one without the other.
+
+Generic tools fail at enterprise scale not because they're bad tools. It's that enterprise workflows are _specific_. ChatGPT works great for an individual who can steer it, correct it, and use it opportunistically. It falls apart for an organization that needs consistent, auditable outputs woven into processes designed in 2012.
+
+Most "AI transformations" are trying to adapt the organization to the tool. The ones that work figured out the specific task first, then found the tool for that task.
+
+## When the AI works exactly as intended
+
+There's a failure mode that doesn't make it into case studies: agents that function correctly and still cause disasters.
+
+Customer service agents have committed companies to binding contracts. 50% discounts on non-discountable products. Full refunds on non-refundable tickets. The agents weren't hallucinating. They were resolving complaints, which is what they were told to do. They just didn't have the judgment to understand "resolve" has limits.
+
+Loan decision agents have passed every technical benchmark but couldn't produce fair-lending citations when regulators asked. The system worked. The deployment failed.
+
+This is different from a hallucination problem. The model output was correct for the objective it was given. The objective was wrong. Someone defined "resolve customer complaints" without defining what resolution isn't allowed to look like, and nobody thought about the regulator question until after launch.
+
+## The safety mechanism problem
+
+Organizations building agentic systems quickly learned that humans need to be in the loop. Every action gets approved before execution. Reasonable.
+
+Then users started getting hundreds of approval requests per day. Sometimes thousands. They clicked through without reading. Eventually some organizations enabled auto-approve modes because the constant interruptions were destroying productivity.
+
+The human review layer became the vulnerability. Not because attackers exploited it, but because humans adapted to being constantly interrupted by making the interruptions stop. Normal behavior. Completely predictable. Apparently not anticipated.
+
+## What's actually working
+
+Fraud detection keeps coming up as a real success. The pattern: one agent flags anomalies, a second checks compliance, a third writes the summary. A human makes the final call. AI handles the parts that require processing thousands of data points in milliseconds; the human handles the judgment.
+
+It works because the task is narrow and well-defined. Failure modes are understood in advance. The human role is real, not performative. Success is measurable: fraud got caught or it didn't.
+
+That pattern doesn't map to every use case. But it explains why back-office numbers are better. Narrow, specific, auditable tasks where the cost of doing it wrong is known and the definition of done is unambiguous.
+
+## Putting it together
+
+The AI industry is genuinely good at demos. Much less good at enterprise ROI at scale. Those two things are connected: demo conditions are optimized for impressive outputs, and enterprise conditions are optimized for boring, consistent, auditable ones.
+
+95% failure rate. 4% significant returns. The companies in that 4% aren't doing anything exotic. They're just clear on what the task is.
+
+---
+
+Sources: MIT Sloan research on enterprise AI adoption · International AI Safety Report 2026 (Yoshua Bengio, 100+ researchers)
