@@ -4,6 +4,7 @@ import { rocket } from "../assets";
 import { styles } from "../styles";
 import Lottie from "lottie-react";
 import animationData from "../../public/astronaut-with-space-shuttle.json";
+import DitherText from "./DitherText";
 
 const Hero = () => {
   return (
@@ -18,7 +19,7 @@ const Hero = () => {
           </div>
           <div className="flex-1">
             <h1 className={`${styles.heroHeadText} text-white`}>
-              Hi, I'm <span className="text-[#915eff]">Samrat Jha</span>
+              Hi, I'm <DitherText text="Samrat Jha" className="text-[#915eff]" dotScale={2} />
             </h1>
             <div className="flex flex-col">
               <p className={`${styles.heroSubText} mt-2 text-white-100`}>
