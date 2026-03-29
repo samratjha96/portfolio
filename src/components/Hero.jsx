@@ -23,19 +23,29 @@ const Hero = () => {
             </h1>
             <div className="flex flex-col">
               <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-                AI Engineer & Infrastructure Architect
+                I help businesses build AI that works beyond the demo.
               </p>
-              <div className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
-                Building the future of AI at NVIDIA.{" "}
+              <p className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
+                9 years at NVIDIA and AWS building distributed systems,
+                private infrastructure, and AI agents at enterprise
+                scale. I help teams cut past the hype and build AI
+                systems that are production-ready from day one.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-4">
                 <a
                   href="https://cal.com/samrat-jha-akdwhz/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-[#915eff] hover:text-white"
+                  className="px-6 py-3 rounded-xl bg-[#915eff] hover:bg-[#7a4de0] text-white font-semibold text-[15px] transition-colors duration-200 shadow-md shadow-[#915eff]/25"
                 >
                   Book a meeting
-                </a>{" "}
-                or explore the rest of my website to learn more.
+                </a>
+                <a
+                  href="#projects"
+                  className="px-6 py-3 rounded-xl border border-[#915eff]/40 hover:border-[#915eff] text-[#dfd9ff] hover:text-white font-semibold text-[15px] transition-colors duration-200"
+                >
+                  View my work
+                </a>
               </div>
             </div>
           </div>
