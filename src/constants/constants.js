@@ -278,6 +278,30 @@ const videos = [
 
 const projects = [
   {
+    name: "Today's Tech",
+    description:
+      "Personal dashboard aggregating market data, GitHub trending repos, Hacker News, and tech news in a sleek terminal-inspired interface",
+    image: dashboard,
+    source_code_link: "https://github.com/samratjha96/today",
+    demo_link: "https://today.techbrohomelab.xyz/",
+  },
+  {
+    name: "NetWorth Tracker",
+    description:
+      "Personal finance application to track net worth. Built with React, TypeScript, Tailwind CSS and shadcn-ui",
+    image: argos,
+    source_code_link: "https://github.com/samratjha96/networth",
+    demo_link: "https://argos.techbrohomelab.xyz/",
+  },
+  {
+    name: "Bird Radio",
+    description:
+      "A retro-styled nature sound tuner that streams bird songs from around the world. Features real-time spectrogram visualization and region-based browsing",
+    image: birdRadio,
+    source_code_link: "https://github.com/samratjha96/BirdRadio",
+    demo_link: "https://bird-radio.pages.dev/",
+  },
+  {
     name: "Which Card",
     description:
       "Find the best credit card for every purchase. Search by merchant or category, compare rewards, and maximize your cashback with smart category disambiguation",
@@ -294,36 +318,12 @@ const projects = [
     demo_link: "https://space-selfie.zasamrat.workers.dev",
   },
   {
-    name: "Bird Radio",
-    description:
-      "A retro-styled nature sound tuner that streams bird songs from around the world. Features real-time spectrogram visualization and region-based browsing",
-    image: birdRadio,
-    source_code_link: "https://github.com/samratjha96/BirdRadio",
-    demo_link: "https://bird-radio.pages.dev/",
-  },
-  {
-    name: "NetWorth Tracker",
-    description:
-      "Personal finance application to track net worth. Built with React, TypeScript, Tailwind CSS and shadcn-ui",
-    image: argos,
-    source_code_link: "https://github.com/samratjha96/networth",
-    demo_link: "https://argos.techbrohomelab.xyz/",
-  },
-  {
     name: "SAAS Landing Page",
     description:
       "Sleek white label SAAS landing page. Complete with engaging copy, animations and eye-catching design. This landing page can be reskinned for any client or project",
     image: saasLandingPage,
     source_code_link: "https://github.com/samratjha96/sample-saas-landing-page",
     demo_link: "https://sample-saas-landing-page.vercel.app/",
-  },
-  {
-    name: "Today's Tech",
-    description:
-      "Personal dashboard aggregating market data, GitHub trending repos, Hacker News, and tech news in a sleek terminal-inspired interface",
-    image: dashboard,
-    source_code_link: "https://github.com/samratjha96/today",
-    demo_link: "https://today.techbrohomelab.xyz/",
   },
   {
     name: "Parallax Image Gallery",
