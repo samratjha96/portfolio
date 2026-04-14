@@ -1,0 +1,163 @@
+---
+title: My tmux Config, Explained
+date: 2026-04-13
+description: What's in my tmux config, why it's there, and what I'd have added sooner.
+tags: ["tmux", "terminal", "productivity", "tools", "macos"]
+---
+
+My `~/.tmux.conf` grew one frustration at a time. This is an explanation of what's in it and what the defaults get wrong.
+
+## The prefix
+
+The default tmux prefix is `C-b`. I changed it to `C-a`:
+
+```bash
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+```
+
+`C-a` is what GNU Screen used, and it sits better under the left hand. The tradeoff: it conflicts with Bash/Zsh's "go to beginning of line" shortcut. In practice I just use Option+Left to jump to the front of a line, or drop into vi mode.
+
+I also remap Caps Lock to Control at the OS level. That makes the prefix Caps Lock + a, which you can hit without moving your hand at all. Highly recommend it on any keyboard where Control is buried in the corner.
+
+## Escape time
+
+```bash
+set -s escape-time 0
+```
+
+By default tmux waits 500ms after an Escape keypress to see if it's the start of a key sequence. That delay is noticeable in any editor. Setting it to zero fixes this completely. I don't know why this isn't the default.
+
+## True color
+
+```bash
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+set -ga terminal-overrides ",tmux-256color:Tc"
+```
+
+Without this, colorschemes look washed out inside tmux even when the terminal supports true color. The `Tc` flag tells tmux to pass through 24-bit color instead of capping at 256. The `default-terminal` setting needs to match something your system has in its terminfo database; `tmux-256color` is the right choice on modern macOS.
+
+## Focus events
+
+```bash
+set -s focus-events on
+```
+
+This lets tmux pass focus events through to applications inside panes. Editors use this to detect when you switch back to them and reload files that changed on disk. Without it, you're working with stale buffers and don't know it.
+
+## History
+
+```bash
+set -g history-limit 50000
+```
+
+The default is 2000 lines. That's not enough for anything involving log output or long test runs. 50k is still fast and covers everything I've thrown at it.
+
+## Window and pane numbering
+
+```bash
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+```
+
+Windows and panes start at 1 instead of 0. `1` through `9` map directly to the number keys on the keyboard. `C-a 1` to jump to window 1 is more natural than `C-a 0`. `renumber-windows on` means if you close window 2, window 3 becomes the new 2, so there are no gaps.
+
+## Stop renaming my windows
+
+```bash
+set -g allow-rename off
+```
+
+By default, tmux renames windows based on whatever process is currently running in them. You rename a window "api", switch to it, run a command, and now it's called "node". This setting stops that. Name your windows once, they stay named.
+
+## Quiet bell
+
+```bash
+set -g bell-action none
+```
+
+Silences all terminal bells. Programs send BEL constantly: completion hooks, SSH prompts, test runners. tmux surfaces all of it as status bar alerts by default. I don't want any of it.
+
+## Splits that make sense
+
+```bash
+bind-key h split-window -v -c "#{pane_current_path}"
+bind-key v split-window -h -c "#{pane_current_path}"
+```
+
+`h` for horizontal split (stacked top/bottom), `v` for vertical split (side by side). The `-c "#{pane_current_path}"` part makes the new pane open in the same directory as the current one, which is almost always what you want. The default behavior opens in your home directory.
+
+Same thing for new windows:
+
+```bash
+bind-key c new-window -c "#{pane_current_path}"
+```
+
+## Pane navigation
+
+```bash
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
+```
+
+`M-` means Alt. `Alt+hjkl` switches panes with no prefix required. I also have arrow key equivalents for muscle memory from before I was fully on hjkl.
+
+## Vi copy mode
+
+```bash
+set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi Y send-keys -X copy-end-of-line
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+```
+
+`prefix + [` enters copy mode. Then `v` to start a selection, `y` to yank to the macOS clipboard, `Y` to yank to end of line (vim-consistent). `C-v` toggles block selection for columnar yanks.
+
+Mouse drag also copies to clipboard:
+
+```bash
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+```
+
+And paste from clipboard with `prefix + P` (uppercase):
+
+```bash
+bind-key P run-shell "pbpaste | tmux load-buffer - && tmux paste-buffer"
+```
+
+## Sync panes
+
+```bash
+bind y setw synchronize-panes
+```
+
+`prefix + y` toggles synchronized input across all panes in the current window. Useful for running the same command on multiple servers at once. I use it rarely, but when I need it there's no substitute.
+
+## Plugins
+
+```bash
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+set -g @continuum-restore 'on'
+set -g @resurrect-capture-pane-contents 'on'
+```
+
+[TPM](https://github.com/tmux-plugins/tpm) is the plugin manager. The two plugins I actually use:
+
+**tmux-resurrect** saves your entire session layout: windows, panes, working directories, and running programs, so you can restore it after a reboot. Without this, every restart means rebuilding your workspace from scratch.
+
+**tmux-continuum** runs resurrect automatically in the background, saving every 15 minutes and restoring on tmux start. `continuum-restore on` means the last saved session loads automatically when you open a new tmux server.
+
+These two together mean I haven't thought about "setting up my terminal" in years. It's just there when I open my laptop.
+
+## The full config
+
+[`~/.tmux.conf` on GitHub](https://github.com/samratjha96/dotfiles/blob/master/.tmux.conf)
