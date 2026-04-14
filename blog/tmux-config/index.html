@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="en" style="--line-color: #FFF;"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/personalLogo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My tmux Config, Explained | Samrat Jha</title>
+    
+    
+    
+    <meta name="robots" content="index, follow">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://umami.techbrohomelab.xyz" crossorigin="">
+
+    <!-- Canonical URL -->
+    
+
+    <!-- LLMs.txt for AI agents -->
+    <link rel="llms-txt" href="/llms.txt">
+
+    <!-- Open Graph / Facebook -->
+    
+    
+    
+    
+    
+    <meta property="og:image" content="https://www.samratjha.com/personalLogo.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    
+    
+    
+    
+    <meta name="twitter:image" content="https://www.samratjha.com/personalLogo.png">
+
+    <!-- Schema.org structured data -->
+    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/041232d8/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/041232d8/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Jha",
+        "url": "https://www.samratjha.com/",
+        "image": "https://www.samratjha.com/personalLogo.png",
+        "jobTitle": "Senior AI Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "NVIDIA"
+        },
+        "description": "AI engineer at NVIDIA with 7+ years of experience architecting large-scale distributed systems at AWS. Expert in cloud infrastructure, Generative AI, and building systems at scale.",
+        "sameAs": ["https://github.com/samratjha96"],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Generative AI",
+          "Machine Learning",
+          "Distributed Systems",
+          "Cloud Architecture",
+          "AWS",
+          "NVIDIA",
+          "Large-Scale Infrastructure",
+          "Python",
+          "CUDA"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Samrat Jha Portfolio",
+        "url": "https://www.samratjha.com/",
+        "description": "Portfolio and technical blog of Samrat Jha, AI engineer at NVIDIA with extensive AWS infrastructure experience",
+        "author": {
+          "@type": "Person",
+          "name": "Samrat Jha"
+        }
+      }
+    </script>
+
+    <script defer="" src="https://umami.techbrohomelab.xyz/script.js" data-website-id="bdbad683-6e04-45f6-a3a6-f09ea3b42f01"></script>
+    <script type="module" crossorigin="" src="/assets/index-de512aba.js"></script>
+    <link rel="modulepreload" crossorigin="" href="/assets/three-114a71c7.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/vendor-616fc9c5.js">
+    <link rel="stylesheet" href="/assets/index-bc80204b.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="/assets/YouTube-c22ab72b.js"><script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script><link rel="modulepreload" as="script" crossorigin="" href="/assets/tmux-config-fbd40a1b.js"><link rel="canonical" href="https://www.samratjha.com/blog/tmux-config/" data-rh="true"><meta name="title" content="My tmux Config, Explained | Samrat Jha" data-rh="true"><meta name="description" content="What's in my tmux config, why it's there, and what I'd have added sooner." data-rh="true"><meta name="author" content="Samrat Jha" data-rh="true"><meta name="keywords" content="tmux, terminal, productivity, tools, macos" data-rh="true"><meta property="og:type" content="article" data-rh="true"><meta property="og:url" content="https://www.samratjha.com/blog/tmux-config/" data-rh="true"><meta property="og:title" content="My tmux Config, Explained" data-rh="true"><meta property="og:description" content="What's in my tmux config, why it's there, and what I'd have added sooner." data-rh="true"><meta property="og:site_name" content="Samrat Jha" data-rh="true"><meta property="article:published_time" content="2026-04-13T00:00:00.000Z" data-rh="true"><meta property="article:author" content="https://www.samratjha.com/" data-rh="true"><meta property="article:tag" content="tmux" data-rh="true"><meta property="article:tag" content="terminal" data-rh="true"><meta property="article:tag" content="productivity" data-rh="true"><meta property="article:tag" content="tools" data-rh="true"><meta property="article:tag" content="macos" data-rh="true"><meta name="twitter:card" content="summary" data-rh="true"><meta name="twitter:url" content="https://www.samratjha.com/blog/tmux-config/" data-rh="true"><meta name="twitter:title" content="My tmux Config, Explained" data-rh="true"><meta name="twitter:description" content="What's in my tmux config, why it's there, and what I'd have added sooner." data-rh="true"><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BlogPosting","headline":"My tmux Config, Explained","description":"What's in my tmux config, why it's there, and what I'd have added sooner.","datePublished":"2026-04-13T00:00:00.000Z","dateModified":"2026-04-13T00:00:00.000Z","author":{"@type":"Person","name":"Samrat Jha","url":"https://www.samratjha.com/","jobTitle":"Senior AI Engineer"},"publisher":{"@type":"Person","name":"Samrat Jha","url":"https://www.samratjha.com/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.samratjha.com/blog/tmux-config/"},"keywords":"tmux, terminal, productivity, tools, macos"}</script><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.samratjha.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.samratjha.com/blog/"},{"@type":"ListItem","position":3,"name":"My tmux Config, Explained","item":"https://www.samratjha.com/blog/tmux-config/"}]}</script></head>
+  <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          max-width: 800px;
+          margin: 0 auto;
+          font-family: system-ui, sans-serif;
+        "
+      >
+        <p><strong>Samrat Jha - AI Engineer & Infrastructure Architect</strong></p>
+        <p>
+          Building the future of AI at NVIDIA, backed by 7+ years architecting
+          large-scale distributed systems at AWS.
+        </p>
+
+        <h2>About</h2>
+        <p>
+          I'm an AI engineer at NVIDIA, building at the frontier of artificial
+          intelligence. Before this, I spent 7+ years at AWS architecting
+          large-scale distributed systems—from edge computing infrastructure
+          powering hybrid cloud, to Generative AI applications accelerating
+          region launches, to event pipelines handling millions of requests. I
+          bring deep infrastructure expertise to AI.
+        </p>
+
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>AI Engineer @ NVIDIA</strong> (2024 - Present) - Building at
+            the frontier of artificial intelligence
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Region Expansion</strong> (2024) -
+            Built Generative AI applications to accelerate AWS region launches
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Outposts</strong> (2022 - 2024) -
+            Architected edge computing infrastructure powering hybrid cloud at
+            scale
+          </li>
+          <li>
+            <strong>Senior Software Engineer @ Appian</strong> (2021 - 2022) -
+            Led cross-continental integration, implemented Robotic Process
+            Automation
+          </li>
+          <li>
+            <strong>Software Engineer @ Appian</strong> (2018 - 2021) - Built
+            low-latency event pipelines, managed AWS fleet for 100+ engineers
+          </li>
+        </ul>
+
+        <h2>Projects</h2>
+        <ul>
+          <li>
+            <a href="https://space-selfie.zasamrat.workers.dev">Space Selfie</a>
+            - Discover when the ISS flew over your special moments
+          </li>
+          <li>
+            <a href="https://bird-radio.pages.dev/">Bird Radio</a> -
+            Retro-styled nature sound tuner with bird songs from around the
+            world
+          </li>
+          <li>
+            <a href="https://argos.techbrohomelab.xyz/">NetWorth Tracker</a> -
+            Personal finance application built with React and TypeScript
+          </li>
+        </ul>
+
+        <h2>Skills</h2>
+        <p>
+          Artificial Intelligence, Generative AI, CUDA, AWS, Distributed
+          Systems, Python, Rust, Golang, TypeScript, Docker
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Visit <a href="https://www.samratjha.com/">samratjha.com</a> with
+          JavaScript enabled for the full interactive experience, or reach out
+          via <a href="https://github.com/samratjha96">GitHub</a>.
+        </p>
+
+        <p>
+          <a href="/blog/">Read my blog</a> for technical deep-dives on AI,
+          infrastructure, and software engineering.
+        </p>
+
+        <img
+          src="/personalLogo.png"
+          alt="Samrat Jha - AI Engineer at NVIDIA"
+          width="200"
+          height="200"
+        />
+      </div>
+    </noscript>
+    <div id="root"><div class="relative z-0 bg-primary"><nav class="sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-20 bg-transparent
+    "><div class="w-full flex justify-between items-center max-w-7xl mx-auto"><a class="flex items-center gap-2" href="/"><img src="/personalLogo.png" alt="logo" class="w-9 h-9 object-contain"><p class="text-white text-[18px] font-bold cursor-pointer flex">Samrat &nbsp;<span class="hidden sm:block">| Portfolio</span></p></a><ul class="list-none hidden sm:flex flex-row gap-10"><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#about">About</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#work">Work</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#media">Media</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#contact">Contact</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/blog/">Blog</a></li><li class="text-secondary hover:text-white text-[18px] font-medium cursor-pointer"><a href="/#ai">AI Consulting</a></li></ul><div class="sm:hidden flex flex-1 justify-end items-center"><img src="/assets/menu-242d80a8.svg" alt="menu" class="w-[28px] h-[28px] object-contain cursor-pointer"><div class="hidden p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl"><ul class="list-none flex justify-end items-start flex-col gap-4"><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#about">About</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#work">Work</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#media">Media</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#contact">Contact</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/blog/">Blog</a></li><li class="text-secondary font-poppins font-medium cursor-pointer text-[16px]"><a href="/#ai">AI Consulting</a></li></ul></div></div></div></nav><div class="sm:px-16 px-6 sm:py-16 py-10 max-w-7xl mx-auto relative z-0 mt-20"><div class="mb-16"><h1 class="text-white font-black md:text-[60px] sm:text-[50px] xs:text-[40px] text-[30px] mb-6">My tmux Config, Explained</h1><div class="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&amp;_code::before]:content-none [&amp;_code::after]:content-none"><div><div class="mb-6"><p class="text-secondary">2026-04-13</p><div class="flex flex-wrap gap-2 mt-2"><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#tmux</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#terminal</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#productivity</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#tools</span><span class="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full">#macos</span></div></div><article class="prose prose-invert prose-lg max-w-none blog-post-content"><p>My <code>~/.tmux.conf</code> grew one frustration at a time. This is an explanation of what's in it and what the defaults get wrong.</p>
+<h2 id="the-prefix"><a aria-hidden="true" tabindex="-1" href="#the-prefix"><span class="icon icon-link"></span></a>The prefix</h2>
+<p>The default tmux prefix is <code>C-b</code>. I changed it to <code>C-a</code>:</p>
+<pre><code class="hljs language-bash">unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+</code></pre>
+<p><code>C-a</code> is what GNU Screen used, and it sits better under the left hand. The tradeoff: it conflicts with Bash/Zsh's "go to beginning of line" shortcut. In practice I just use Option+Left to jump to the front of a line, or drop into vi mode.</p>
+<p>I also remap Caps Lock to Control at the OS level. That makes the prefix Caps Lock + a, which you can hit without moving your hand at all. Highly recommend it on any keyboard where Control is buried in the corner.</p>
+<h2 id="escape-time"><a aria-hidden="true" tabindex="-1" href="#escape-time"><span class="icon icon-link"></span></a>Escape time</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -s escape-time 0
+</code></pre>
+<p>By default tmux waits 500ms after an Escape keypress to see if it's the start of a key sequence. That delay is noticeable in any editor. Setting it to zero fixes this completely. I don't know why this isn't the default.</p>
+<h2 id="true-color"><a aria-hidden="true" tabindex="-1" href="#true-color"><span class="icon icon-link"></span></a>True color</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g default-terminal <span class="hljs-string">"tmux-256color"</span>
+<span class="hljs-built_in">set</span> -ga terminal-overrides <span class="hljs-string">",xterm-256color:Tc"</span>
+<span class="hljs-built_in">set</span> -ga terminal-overrides <span class="hljs-string">",tmux-256color:Tc"</span>
+</code></pre>
+<p>Without this, colorschemes look washed out inside tmux even when the terminal supports true color. The <code>Tc</code> flag tells tmux to pass through 24-bit color instead of capping at 256. The <code>default-terminal</code> setting needs to match something your system has in its terminfo database; <code>tmux-256color</code> is the right choice on modern macOS.</p>
+<h2 id="focus-events"><a aria-hidden="true" tabindex="-1" href="#focus-events"><span class="icon icon-link"></span></a>Focus events</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -s focus-events on
+</code></pre>
+<p>This lets tmux pass focus events through to applications inside panes. Editors use this to detect when you switch back to them and reload files that changed on disk. Without it, you're working with stale buffers and don't know it.</p>
+<h2 id="history"><a aria-hidden="true" tabindex="-1" href="#history"><span class="icon icon-link"></span></a>History</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g history-limit 50000
+</code></pre>
+<p>The default is 2000 lines. That's not enough for anything involving log output or long test runs. 50k is still fast and covers everything I've thrown at it.</p>
+<h2 id="window-and-pane-numbering"><a aria-hidden="true" tabindex="-1" href="#window-and-pane-numbering"><span class="icon icon-link"></span></a>Window and pane numbering</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g base-index 1
+setw -g pane-base-index 1
+<span class="hljs-built_in">set</span> -g renumber-windows on
+</code></pre>
+<p>Windows and panes start at 1 instead of 0. <code>1</code> through <code>9</code> map directly to the number keys on the keyboard. <code>C-a 1</code> to jump to window 1 is more natural than <code>C-a 0</code>. <code>renumber-windows on</code> means if you close window 2, window 3 becomes the new 2, so there are no gaps.</p>
+<h2 id="stop-renaming-my-windows"><a aria-hidden="true" tabindex="-1" href="#stop-renaming-my-windows"><span class="icon icon-link"></span></a>Stop renaming my windows</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g allow-rename off
+</code></pre>
+<p>By default, tmux renames windows based on whatever process is currently running in them. You rename a window "api", switch to it, run a command, and now it's called "node". This setting stops that. Name your windows once, they stay named.</p>
+<h2 id="quiet-bell"><a aria-hidden="true" tabindex="-1" href="#quiet-bell"><span class="icon icon-link"></span></a>Quiet bell</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g bell-action none
+</code></pre>
+<p>Silences all terminal bells. Programs send BEL constantly: completion hooks, SSH prompts, test runners. tmux surfaces all of it as status bar alerts by default. I don't want any of it.</p>
+<h2 id="splits-that-make-sense"><a aria-hidden="true" tabindex="-1" href="#splits-that-make-sense"><span class="icon icon-link"></span></a>Splits that make sense</h2>
+<pre><code class="hljs language-bash">bind-key h split-window -v -c <span class="hljs-string">"#{pane_current_path}"</span>
+bind-key v split-window -h -c <span class="hljs-string">"#{pane_current_path}"</span>
+</code></pre>
+<p><code>h</code> for horizontal split (stacked top/bottom), <code>v</code> for vertical split (side by side). The <code>-c "#{pane_current_path}"</code> part makes the new pane open in the same directory as the current one, which is almost always what you want. The default behavior opens in your home directory.</p>
+<p>Same thing for new windows:</p>
+<pre><code class="hljs language-bash">bind-key c new-window -c <span class="hljs-string">"#{pane_current_path}"</span>
+</code></pre>
+<h2 id="pane-navigation"><a aria-hidden="true" tabindex="-1" href="#pane-navigation"><span class="icon icon-link"></span></a>Pane navigation</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">bind</span> -n M-h select-pane -L
+<span class="hljs-built_in">bind</span> -n M-j select-pane -D
+<span class="hljs-built_in">bind</span> -n M-k select-pane -U
+<span class="hljs-built_in">bind</span> -n M-l select-pane -R
+</code></pre>
+<p><code>M-</code> means Alt. <code>Alt+hjkl</code> switches panes with no prefix required. I also have arrow key equivalents for muscle memory from before I was fully on hjkl.</p>
+<h2 id="vi-copy-mode"><a aria-hidden="true" tabindex="-1" href="#vi-copy-mode"><span class="icon icon-link"></span></a>Vi copy mode</h2>
+<pre><code class="hljs language-bash">set-window-option -g mode-keys vi
+bind-key -T copy-mode-vi v send -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel <span class="hljs-string">"pbcopy"</span>
+bind-key -T copy-mode-vi Y send-keys -X copy-end-of-line
+bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+</code></pre>
+<p><code>prefix + [</code> enters copy mode. Then <code>v</code> to start a selection, <code>y</code> to yank to the macOS clipboard, <code>Y</code> to yank to end of line (vim-consistent). <code>C-v</code> toggles block selection for columnar yanks.</p>
+<p>Mouse drag also copies to clipboard:</p>
+<pre><code class="hljs language-bash">bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel <span class="hljs-string">"pbcopy"</span>
+</code></pre>
+<p>And paste from clipboard with <code>prefix + P</code> (uppercase):</p>
+<pre><code class="hljs language-bash">bind-key P run-shell <span class="hljs-string">"pbpaste | tmux load-buffer - &amp;&amp; tmux paste-buffer"</span>
+</code></pre>
+<h2 id="sync-panes"><a aria-hidden="true" tabindex="-1" href="#sync-panes"><span class="icon icon-link"></span></a>Sync panes</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">bind</span> y setw synchronize-panes
+</code></pre>
+<p><code>prefix + y</code> toggles synchronized input across all panes in the current window. Useful for running the same command on multiple servers at once. I use it rarely, but when I need it there's no substitute.</p>
+<h2 id="plugins"><a aria-hidden="true" tabindex="-1" href="#plugins"><span class="icon icon-link"></span></a>Plugins</h2>
+<pre><code class="hljs language-bash"><span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tpm'</span>
+<span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-resurrect'</span>
+<span class="hljs-built_in">set</span> -g @plugin <span class="hljs-string">'tmux-plugins/tmux-continuum'</span>
+
+<span class="hljs-built_in">set</span> -g @continuum-restore <span class="hljs-string">'on'</span>
+<span class="hljs-built_in">set</span> -g @resurrect-capture-pane-contents <span class="hljs-string">'on'</span>
+</code></pre>
+<p><a href="https://github.com/tmux-plugins/tpm">TPM</a> is the plugin manager. The two plugins I actually use:</p>
+<p><strong>tmux-resurrect</strong> saves your entire session layout: windows, panes, working directories, and running programs, so you can restore it after a reboot. Without this, every restart means rebuilding your workspace from scratch.</p>
+<p><strong>tmux-continuum</strong> runs resurrect automatically in the background, saving every 15 minutes and restoring on tmux start. <code>continuum-restore on</code> means the last saved session loads automatically when you open a new tmux server.</p>
+<p>These two together mean I haven't thought about "setting up my terminal" in years. It's just there when I open my laptop.</p>
+<h2 id="the-full-config"><a aria-hidden="true" tabindex="-1" href="#the-full-config"><span class="icon icon-link"></span></a>The full config</h2>
+<p><a href="https://github.com/samratjha96/dotfiles/blob/master/.tmux.conf"><code>~/.tmux.conf</code> on GitHub</a></p></article></div></div></div><div class="mt-12 pt-8 border-t border-gray-800"><button class="flex items-center text-white font-medium mb-4 hover:text-[#915eff] transition-colors duration-300"><span class="mr-2">►</span><h3 class="font-bold text-xl">Recent Posts</h3></button></div></div></div></div>
+    
+  
+
+</body></html>
