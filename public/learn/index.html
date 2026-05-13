@@ -387,36 +387,51 @@
         color: var(--black);
       }
 
-      .credential-list {
-        list-style: none;
+      .bio-credentials {
+        border: var(--border);
         display: flex;
         flex-direction: column;
-        gap: 0;
-        border: var(--border);
       }
 
-      .credential-list li {
-        padding: 18px 24px;
+      .bio-block {
+        padding: 32px 36px;
         border-bottom: var(--border);
-        font-size: 13px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
       }
 
-      .credential-list li:last-child {
+      .bio-block:last-child {
         border-bottom: none;
       }
 
-      .credential-list .cred-role {
-        font-weight: 600;
+      .bio-tag {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gray);
+        margin-bottom: 14px;
       }
 
-      .credential-list .cred-company {
-        font-size: 11px;
-        color: var(--gray);
+      .bio-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 28px;
+        line-height: 1.2;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .nvidia-name {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #76b900;
         text-transform: uppercase;
-        letter-spacing: 1px;
+      }
+
+      .bio-prev-list {
+        font-size: 14px;
+        color: var(--gray);
+        line-height: 1.8;
       }
 
       /* Footer */
@@ -628,24 +643,17 @@
               English.
             </p>
           </div>
-          <ul class="credential-list">
-            <li>
-              <span class="cred-role">Senior AI Engineer</span>
-              <span class="cred-company">NVIDIA</span>
-            </li>
-            <li>
-              <span class="cred-role">Software Engineer</span>
-              <span class="cred-company">Amazon Web Services</span>
-            </li>
-            <li>
-              <span class="cred-role">Senior Software Engineer</span>
-              <span class="cred-company">Appian</span>
-            </li>
-            <li>
-              <span class="cred-role">Software Engineer</span>
-              <span class="cred-company">Boeing</span>
-            </li>
-          </ul>
+          <div class="bio-credentials">
+            <div class="bio-block">
+              <span class="bio-tag">Currently</span>
+              <span class="bio-title">Senior AI Engineer</span>
+              <span class="nvidia-name">NVIDIA</span>
+            </div>
+            <div class="bio-block">
+              <span class="bio-tag">Previously</span>
+              <p class="bio-prev-list">Amazon Web Services<br />Appian &nbsp;·&nbsp; Boeing</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
