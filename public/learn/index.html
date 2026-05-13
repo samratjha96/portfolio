@@ -6,12 +6,12 @@
     <title>Learn AI Without the Hype | Samrat Jha</title>
     <meta
       name="description"
-      content="Free workshops on using AI in your daily work. No fluff, no jargon — just practical skills you can use the same day. Arlington, VA."
+      content="Free workshops on using AI at work, in your business, or in your daily life. No jargon, no pressure. Arlington, VA."
     />
     <meta property="og:title" content="Learn AI Without the Hype | Samrat Jha" />
     <meta
       property="og:description"
-      content="Free workshops on using AI in your daily work. No fluff, no jargon — just practical skills you can use the same day."
+      content="Free workshops on using AI in your daily work. No fluff, no jargon. Just practical skills you can use the same day."
     />
     <meta property="og:url" content="https://www.samratjha.com/learn/" />
     <meta property="og:type" content="website" />
@@ -324,43 +324,48 @@
 
       /* Events */
       .events {
-        padding: 80px 0;
+        padding: 48px 0;
         border-bottom: var(--border);
       }
 
-      .events-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin-bottom: 40px;
+      .events .section-label {
+        margin-bottom: 20px;
       }
 
       .coming-soon-box {
         border: var(--border);
-        padding: 48px;
-        text-align: center;
-        position: relative;
+        padding: 32px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .coming-soon-left {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
       .coming-soon-tag {
         display: inline-block;
         background: var(--black);
         color: var(--white);
-        padding: 6px 14px;
-        font-size: 11px;
+        padding: 5px 12px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
-        margin-bottom: 20px;
+        align-self: flex-start;
       }
 
-      .coming-soon-box p {
-        font-family: "Instrument Serif", serif;
-        font-size: 22px;
+      .coming-soon-text {
+        font-size: 14px;
         color: var(--gray);
-        max-width: 440px;
-        margin: 0 auto;
-        line-height: 1.4;
+      }
+
+      .coming-soon-form {
+        flex-shrink: 0;
       }
 
       /* About */
@@ -487,10 +492,13 @@
           border-bottom: none;
         }
 
-        .events-header {
+        .coming-soon-box {
           flex-direction: column;
           align-items: flex-start;
-          gap: 10px;
+        }
+
+        .coming-soon-form {
+          width: 100%;
         }
 
         .footer-inner {
@@ -520,9 +528,10 @@
             <div class="hero-label">Free Workshops · Arlington, VA</div>
             <h1>AI, Explained<br /><em>for Humans</em></h1>
             <p class="hero-sub">
-              Not a sales pitch. Not a vendor demo. Just practical skills for using
-              AI in your daily work — taught by someone who builds these systems
-              for a living.
+              Think of it as a personal AI crash course with someone who
+              actually builds this stuff. We apply it to real use cases,
+              hands on. No sponsored tools. No agenda. Nothing to sell.
+              Bring every question. Nothing is off limits.
             </p>
           </div>
 
@@ -559,29 +568,29 @@
         <div class="topics-grid">
           <div class="topic-card">
             <span class="topic-num">01</span>
-            <p class="topic-title">Real tools,<br />real tasks</p>
+            <p class="topic-title">Reclaim<br />your time</p>
             <p class="topic-desc">
-              We skip the theory and go straight to doing. You'll use AI to
-              write, summarize, research, and automate — on your own device,
-              during the session.
+              You'll leave with at least one thing you currently do manually
+              that AI can take off your plate. Tried on your own device,
+              during the session, no setup required.
             </p>
           </div>
           <div class="topic-card">
             <span class="topic-num">02</span>
-            <p class="topic-title">Cut through<br />the noise</p>
+            <p class="topic-title">The full<br />picture</p>
             <p class="topic-desc">
-              The AI hype cycle is loud. You'll leave knowing which tools are
-              actually worth your time and which are marketing. No subscriptions
-              you don't need.
+              There's a whole world of tools beyond ChatGPT: for writing,
+              organizing, researching, scheduling, and more. We map what
+              exists so you can find what fits your work and your life.
             </p>
           </div>
           <div class="topic-card">
             <span class="topic-num">03</span>
-            <p class="topic-title">Something to try<br />this week</p>
+            <p class="topic-title">Confidence to<br />move forward</p>
             <p class="topic-desc">
-              Every session ends with a specific, concrete action. Not "explore
-              AI more" — but one thing you can do tomorrow that saves you an
-              hour.
+              Leave knowing exactly how AI fits into your day, with real
+              examples you can share with your team, your manager, or
+              anyone who asks what this is all actually good for.
             </p>
           </div>
         </div>
@@ -592,14 +601,14 @@
     <section class="audience">
       <div class="container">
         <p class="section-label">Who this is for</p>
-        <h2>No technical background<br />required. Seriously.</h2>
+        <h2>You don't need to be<br />technical. Not even a little.</h2>
         <ul class="audience-list">
-          <li>Federal employees & contractors</li>
-          <li>Small business owners</li>
-          <li>Marketing & communications pros</li>
-          <li>HR and operations teams</li>
-          <li>Job seekers & career changers</li>
-          <li>Anyone AI-curious and time-poor</li>
+          <li>You're curious about AI but not sure where it fits in your life</li>
+          <li>You want to save time on the repetitive parts of your job</li>
+          <li>You run a small business and want to do more with less</li>
+          <li>You manage your own finances, schedule, or clients solo</li>
+          <li>Your team is starting to use AI and you want to keep up</li>
+          <li>You've heard about it constantly and finally want to see it in action</li>
         </ul>
       </div>
     </section>
@@ -607,18 +616,27 @@
     <!-- Upcoming Events -->
     <section class="events">
       <div class="container">
-        <div class="events-header">
-          <div>
-            <p class="section-label">Upcoming sessions</p>
-            <h2>Coming soon<br />to Arlington</h2>
-          </div>
-        </div>
+        <p class="section-label">Upcoming sessions</p>
+        <!-- REPLACE: same YOUR_FORM_ID as above -->
         <div class="coming-soon-box">
-          <span class="coming-soon-tag">First session being scheduled</span>
-          <p>
-            Drop your email above and you'll be the first to know when,
-            where, and how to reserve a spot.
-          </p>
+          <div class="coming-soon-left">
+            <span class="coming-soon-tag">First session being scheduled</span>
+            <p class="coming-soon-text">Be the first to know when it's announced.</p>
+          </div>
+          <form
+            class="capture-form coming-soon-form"
+            action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions"
+            method="post"
+          >
+            <input
+              type="email"
+              name="email_address"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            />
+            <button type="submit">Notify me</button>
+          </form>
         </div>
       </div>
     </section>
@@ -631,16 +649,16 @@
             <p class="section-label">About the instructor</p>
             <h2>Built by someone<br />who builds this</h2>
             <p>
-              <strong>Samrat Jha</strong> is a Senior AI Engineer at NVIDIA and
-              former AWS engineer who has shipped multi-agent AI systems,
-              RAG pipelines, and production ML infrastructure serving thousands
-              of users.
+              <strong>Samrat Jha</strong> has spent his career building AI at
+              NVIDIA and Amazon, two companies at the center of where this
+              technology is actually going. He's shipped systems used by
+              millions of people. He's here to translate that into something
+              that works for you.
             </p>
             <p>
-              These workshops exist because most AI education is either too
-              technical or too shallow. You deserve something in between —
-              grounded in how these systems actually work, taught in plain
-              English.
+              These sessions exist because AI should feel useful and
+              approachable, not intimidating. The goal is simple: you
+              leave with something you can actually use, today.
             </p>
           </div>
           <div class="bio-credentials">
@@ -662,7 +680,7 @@
     <footer>
       <div class="container">
         <div class="footer-inner">
-          <span>© 2025 Samrat Jha</span>
+          <span>© 2026 Samrat Jha</span>
           <span>
             <a href="https://www.samratjha.com/">Portfolio</a>
             &nbsp;·&nbsp;
