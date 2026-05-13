@@ -1,11 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
+
+const WEB3FORMS_KEY = "93d0e20c-3f99-44c1-98ab-0b1d8db713c4";
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -13,7 +14,6 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  const formRef = useRef();
   const [loading, setLoading] = useState(false);
   const [sentEmail, setSentEmail] = useState(false);
 
@@ -21,41 +21,35 @@ const Contact = () => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setSentEmail(false);
-    emailjs
-      .send(
-        "service_z8ymp4p",
-        "template_o58e5yh",
-        {
-          from_name: form.name,
-          to_name: "Samrat",
-          from_email: form.email,
-          to_email: "contact@samratjha.com",
-          message: form.message,
-        },
-        "O6hX4RD46fMq3-86-"
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setSentEmail(true);
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          setSentEmail(false);
-          console.log("Error!");
-          alert("Something went wrong when sending the email. Please try again in a bit");
-        }
-      );
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSentEmail(true);
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch {
+      alert("Something went wrong when sending the email. Please try again in a bit.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -78,7 +72,7 @@ const Contact = () => {
           </a>.
         </p>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
+        <form onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
           <label className="flex flex-col">
             <span className="text-white font-medium mb-4">Your Name</span>
             <input

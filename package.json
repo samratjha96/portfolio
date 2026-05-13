@@ -13,7 +13,6 @@
     "prerender": "node scripts/prerender.js"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.10.0",
     "@mdx-js/react": "^3.1.0",
     "@mdx-js/rollup": "^3.1.0",
     "@react-three/drei": "^9.57.2",
