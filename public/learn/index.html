@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn AI Without the Hype | Samrat Jha</title>
+    <meta
+      name="description"
+      content="Free workshops on using AI in your daily work. No fluff, no jargon — just practical skills you can use the same day. Arlington, VA."
+    />
+    <meta property="og:title" content="Learn AI Without the Hype | Samrat Jha" />
+    <meta
+      property="og:description"
+      content="Free workshops on using AI in your daily work. No fluff, no jargon — just practical skills you can use the same day."
+    />
+    <meta property="og:url" content="https://www.samratjha.com/learn/" />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://www.samratjha.com/learn/" />
+    <link rel="llms-txt" href="/llms.txt" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f5f0;
+        --red: #e63946;
+        --gray: #6b6b6b;
+        --border: 3px solid var(--black);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "IBM Plex Mono", monospace;
+        background: var(--white);
+        color: var(--black);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Header */
+      header {
+        padding: 20px 0;
+        border-bottom: var(--border);
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        color: var(--black);
+      }
+
+      .creds {
+        font-size: 11px;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 80px 0 60px;
+        border-bottom: var(--border);
+      }
+
+      .hero-label {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        transform: rotate(-1deg);
+      }
+
+      h1 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(48px, 8vw, 96px);
+        font-weight: 400;
+        line-height: 1.05;
+        max-width: 900px;
+        margin-bottom: 30px;
+      }
+
+      h1 em {
+        font-style: italic;
+      }
+
+      .hero-sub {
+        font-size: 18px;
+        max-width: 580px;
+        color: var(--gray);
+        margin-bottom: 50px;
+        line-height: 1.7;
+      }
+
+      /* Email capture */
+      .capture-box {
+        border: var(--border);
+        padding: 40px;
+        max-width: 560px;
+        background: var(--white);
+        position: relative;
+      }
+
+      .capture-box::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        right: -6px;
+        width: 100%;
+        height: 100%;
+        border: var(--border);
+        z-index: -1;
+      }
+
+      .capture-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gray);
+        margin-bottom: 12px;
+      }
+
+      .capture-heading {
+        font-family: "Instrument Serif", serif;
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+
+      .capture-form {
+        display: flex;
+        gap: 0;
+        margin-top: 24px;
+      }
+
+      .capture-form input[type="email"] {
+        flex: 1;
+        padding: 14px 16px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        border: var(--border);
+        border-right: none;
+        background: var(--white);
+        color: var(--black);
+        outline: none;
+      }
+
+      .capture-form input[type="email"]::placeholder {
+        color: var(--gray);
+      }
+
+      .capture-form button {
+        padding: 14px 24px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: var(--black);
+        color: var(--white);
+        border: var(--border);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .capture-form button:hover {
+        background: var(--red);
+        border-color: var(--red);
+      }
+
+      .capture-note {
+        margin-top: 12px;
+        font-size: 11px;
+        color: var(--gray);
+      }
+
+      /* What you'll learn */
+      .learn {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .section-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--gray);
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: 50px;
+      }
+
+      .topics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 0;
+        border: var(--border);
+      }
+
+      .topic-card {
+        padding: 36px;
+        border-right: var(--border);
+        position: relative;
+      }
+
+      .topic-card:last-child {
+        border-right: none;
+      }
+
+      .topic-num {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--red);
+        letter-spacing: 2px;
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .topic-title {
+        font-family: "Instrument Serif", serif;
+        font-size: 26px;
+        line-height: 1.2;
+        margin-bottom: 14px;
+      }
+
+      .topic-desc {
+        font-size: 13px;
+        color: var(--gray);
+        line-height: 1.7;
+      }
+
+      /* Who this is for */
+      .audience {
+        padding: 80px 0;
+        border-bottom: var(--border);
+        background: var(--black);
+        color: var(--white);
+      }
+
+      .audience .section-label {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .audience h2 {
+        color: var(--white);
+        margin-bottom: 40px;
+      }
+
+      .audience-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        list-style: none;
+      }
+
+      .audience-list li {
+        padding: 20px 24px;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .audience-list li::before {
+        content: "→ ";
+        color: var(--red);
+        font-weight: 700;
+      }
+
+      /* Events */
+      .events {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .events-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+      }
+
+      .coming-soon-box {
+        border: var(--border);
+        padding: 48px;
+        text-align: center;
+        position: relative;
+      }
+
+      .coming-soon-tag {
+        display: inline-block;
+        background: var(--black);
+        color: var(--white);
+        padding: 6px 14px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+      }
+
+      .coming-soon-box p {
+        font-family: "Instrument Serif", serif;
+        font-size: 22px;
+        color: var(--gray);
+        max-width: 440px;
+        margin: 0 auto;
+        line-height: 1.4;
+      }
+
+      /* About */
+      .about {
+        padding: 80px 0;
+        border-bottom: var(--border);
+      }
+
+      .about-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+
+      .about p {
+        font-size: 15px;
+        color: var(--gray);
+        line-height: 1.8;
+        margin-bottom: 16px;
+      }
+
+      .about p strong {
+        color: var(--black);
+      }
+
+      .credential-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: var(--border);
+      }
+
+      .credential-list li {
+        padding: 18px 24px;
+        border-bottom: var(--border);
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .credential-list li:last-child {
+        border-bottom: none;
+      }
+
+      .credential-list .cred-role {
+        font-weight: 600;
+      }
+
+      .credential-list .cred-company {
+        font-size: 11px;
+        color: var(--gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* Footer */
+      footer {
+        padding: 30px 0;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: var(--gray);
+      }
+
+      .footer-inner a {
+        color: var(--black);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .footer-inner a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .about-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .topic-card {
+          border-right: none;
+          border-bottom: var(--border);
+        }
+
+        .topic-card:last-child {
+          border-bottom: none;
+        }
+
+        .capture-form {
+          flex-direction: column;
+        }
+
+        .capture-form input[type="email"] {
+          border-right: var(--border);
+          border-bottom: none;
+        }
+
+        .events-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          gap: 8px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="header-inner">
+          <a href="https://www.samratjha.com/" class="logo">Samrat Jha</a>
+          <span class="creds">Ex-AWS &nbsp;·&nbsp; NVIDIA</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero + Email Capture -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-label">Free Workshops · Arlington, VA</div>
+        <h1>AI, Explained<br /><em>for Humans</em></h1>
+        <p class="hero-sub">
+          Not a sales pitch. Not a vendor demo. Just practical skills for using
+          AI in your daily work — taught by someone who builds these systems
+          for a living.
+        </p>
+
+        <!-- Kit email capture form -->
+        <!-- REPLACE: swap YOUR_FORM_ID with your Kit form ID -->
+        <div class="capture-box">
+          <p class="capture-label">Stay in the loop</p>
+          <p class="capture-heading">Get notified about<br />upcoming sessions</p>
+          <form
+            class="capture-form"
+            action="https://app.kit.com/forms/YOUR_FORM_ID/subscriptions"
+            method="post"
+          >
+            <input
+              type="email"
+              name="email_address"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            />
+            <button type="submit">Notify me</button>
+          </form>
+          <p class="capture-note">No spam. One email when the next session is announced.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What you'll learn -->
+    <section class="learn">
+      <div class="container">
+        <p class="section-label">What you'll walk away with</p>
+        <h2>30 minutes of doing<br />beats 2 hours of slides</h2>
+        <div class="topics-grid">
+          <div class="topic-card">
+            <span class="topic-num">01</span>
+            <p class="topic-title">Real tools,<br />real tasks</p>
+            <p class="topic-desc">
+              We skip the theory and go straight to doing. You'll use AI to
+              write, summarize, research, and automate — on your own device,
+              during the session.
+            </p>
+          </div>
+          <div class="topic-card">
+            <span class="topic-num">02</span>
+            <p class="topic-title">Cut through<br />the noise</p>
+            <p class="topic-desc">
+              The AI hype cycle is loud. You'll leave knowing which tools are
+              actually worth your time and which are marketing. No subscriptions
+              you don't need.
+            </p>
+          </div>
+          <div class="topic-card">
+            <span class="topic-num">03</span>
+            <p class="topic-title">Something to try<br />this week</p>
+            <p class="topic-desc">
+              Every session ends with a specific, concrete action. Not "explore
+              AI more" — but one thing you can do tomorrow that saves you an
+              hour.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who this is for -->
+    <section class="audience">
+      <div class="container">
+        <p class="section-label">Who this is for</p>
+        <h2>No technical background<br />required. Seriously.</h2>
+        <ul class="audience-list">
+          <li>Federal employees & contractors</li>
+          <li>Small business owners</li>
+          <li>Marketing & communications pros</li>
+          <li>HR and operations teams</li>
+          <li>Job seekers & career changers</li>
+          <li>Anyone AI-curious and time-poor</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="events">
+      <div class="container">
+        <div class="events-header">
+          <div>
+            <p class="section-label">Upcoming sessions</p>
+            <h2>Coming soon<br />to Arlington</h2>
+          </div>
+        </div>
+        <div class="coming-soon-box">
+          <span class="coming-soon-tag">First session being scheduled</span>
+          <p>
+            Drop your email above and you'll be the first to know when,
+            where, and how to reserve a spot.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about">
+      <div class="container">
+        <div class="about-inner">
+          <div>
+            <p class="section-label">About the instructor</p>
+            <h2>Built by someone<br />who builds this</h2>
+            <p>
+              <strong>Samrat Jha</strong> is a Senior AI Engineer at NVIDIA and
+              former AWS engineer who has shipped multi-agent AI systems,
+              RAG pipelines, and production ML infrastructure serving thousands
+              of users.
+            </p>
+            <p>
+              These workshops exist because most AI education is either too
+              technical or too shallow. You deserve something in between —
+              grounded in how these systems actually work, taught in plain
+              English.
+            </p>
+          </div>
+          <ul class="credential-list">
+            <li>
+              <span class="cred-role">Senior AI Engineer</span>
+              <span class="cred-company">NVIDIA</span>
+            </li>
+            <li>
+              <span class="cred-role">Software Engineer</span>
+              <span class="cred-company">Amazon Web Services</span>
+            </li>
+            <li>
+              <span class="cred-role">Senior Software Engineer</span>
+              <span class="cred-company">Appian</span>
+            </li>
+            <li>
+              <span class="cred-role">Software Engineer</span>
+              <span class="cred-company">Boeing</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <span>© 2025 Samrat Jha</span>
+          <span>
+            <a href="https://www.samratjha.com/">Portfolio</a>
+            &nbsp;·&nbsp;
+            <a href="https://www.samratjha.com/blog/">Blog</a>
+            &nbsp;·&nbsp;
+            <a href="https://www.linkedin.com/in/samratjha96/">LinkedIn</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
