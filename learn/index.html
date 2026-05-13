@@ -689,20 +689,13 @@
       </div>
     </footer>
   <script>
-    document.querySelectorAll(".capture-form").forEach((form) => {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = form.querySelector('input[type="email"]').value;
-        fetch(form.action, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: "email_address=" + encodeURIComponent(email),
-        });
-        form.innerHTML =
-          '<p style="font-family:\'IBM Plex Mono\',monospace;font-size:0.85rem;color:var(--black);margin:0;">You\'re on the list. We\'ll be in touch.</p>';
-      });
-    });
+    if (new URLSearchParams(window.location.search).get("subscribed") === "1") {
+      var banner = document.createElement("div");
+      banner.style.cssText =
+        "position:fixed;top:0;left:0;right:0;background:var(--black);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:0.85rem;text-align:center;padding:12px;z-index:999;";
+      banner.textContent = "You're on the list. We'll be in touch.";
+      document.body.prepend(banner);
+    }
   </script>
   </body>
 </html>
