@@ -32,11 +32,14 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 
 ## Blog
 
-- [Deploying a Full-Stack TypeScript App to Cloudflare Workers](https://www.samratjha.com/blog/cloudflare-workers-full-stack/): Deploy a full-stack TypeScript app with Hono to Cloudflare Workers. Single deployment serving API and frontend on the edge for $0/month.
-- [Fixing React Router 404 Errors on Hostinger](https://www.samratjha.com/blog/spa-routing-hostinger/): Direct links returning 404 on your React SPA? The .htaccess fix for Apache-based hosts.
-- [GitHub Pages with a Cloudflare Custom Subdomain](https://www.samratjha.com/blog/github-pages-cloudflare-subdomain/): Set up a custom subdomain for GitHub Pages using Cloudflare DNS. CNAME setup, SSL, and common gotchas.
-- [How I Finally Organized My Notes](https://www.samratjha.com/blog/how-i-finally-organized-my-notes/): Johnny Decimal + Obsidian for note organization that actually works.
-- [Automated Lighthouse Audits with Claude Code](https://www.samratjha.com/blog/lighthouse-ai-workflow/): Set up a Claude Code slash command that runs Lighthouse audits and tells you what to fix.
+- [My tmux Config, Explained](https://www.samratjha.com/blog/tmux-config/): What's in my tmux config, why it's there, and what I'd have added sooner.
+- [The AI ROI Gap](https://www.samratjha.com/blog/enterprise-ai-roi/): Companies are pouring money into AI and most have almost nothing to show for it. The projects actually working aren't the exciting ones.
+- [Protecting Homelab Apps with Cloudflare Zero Trust Access](https://www.samratjha.com/blog/cloudflare-zero-trust-homelab/): Add email-based authentication to any self-hosted app using Cloudflare Tunnels and Zero Trust Access. No code changes, no accounts to manage, free tier.
+- [Full-Stack TypeScript on Cloudflare Workers](https://www.samratjha.com/blog/cloudflare-workers-full-stack/): Deploy a full-stack TypeScript app to Cloudflare Workers with Hono. Single deployment serving API and frontend on the edge globally for $0/month.
+- [Fix React Router 404 Errors on Hostinger](https://www.samratjha.com/blog/spa-routing-hostinger/): Direct links and page refreshes returning 404 on your React app? Here's the .htaccess fix for Hostinger and other Apache-based hosts.
+- [GitHub Pages with a Cloudflare Custom Subdomain](https://www.samratjha.com/blog/github-pages-cloudflare-subdomain/): Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas.
+- [How I Finally Organized My Notes](https://www.samratjha.com/blog/how-i-finally-organized-my-notes/): After years of scattered notes across apps, I finally found a system that works. Johnny Decimal + Obsidian gives structure without the complexity.
+- [Automated Lighthouse Audits with Claude Code](https://www.samratjha.com/blog/lighthouse-ai-workflow/): Set up a slash command in Claude Code that runs Lighthouse audits and tells you exactly what to fix. Takes 5 minutes to set up, saves 20+ minutes per audit.
 
 ## AI Consulting
 
@@ -48,3 +51,9 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 - [Mock Software Engineering Interview](https://youtube.com/watch?v=bmqZ5AhNr3g): Mock FAANG interview for InterviewPen demonstrating how to navigate technical interviews.
 - [Career Guidance Podcast](https://youtube.com/watch?v=y2y_ni8WLy0): Podcast on Back2BackSWE (300K+ subscribers) covering job hunting, interviewing, and finding the right fit.
 - [College Commencement Speech](https://youtube.com/watch?v=xxNa51UFGGI?start=2627): Commencement speech on immigration, struggles, and achievements.
+---
+User-Agent: *
+Disallow:
+
+Sitemap: https://www.samratjha.com/sitemap.xml
+Llms-Txt: https://www.samratjha.com/llms.txt
