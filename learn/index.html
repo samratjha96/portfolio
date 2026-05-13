@@ -689,13 +689,35 @@
       </div>
     </footer>
   <script>
-    if (new URLSearchParams(window.location.search).get("subscribed") === "1") {
-      var banner = document.createElement("div");
-      banner.style.cssText =
-        "position:fixed;top:0;left:0;right:0;background:var(--black);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:0.85rem;text-align:center;padding:12px;z-index:999;";
-      banner.textContent = "You're on the list. We'll be in touch.";
-      document.body.prepend(banner);
-    }
+    document.querySelectorAll(".capture-form").forEach(function (form) {
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var email = form.querySelector('input[type="email"]').value;
+        var btn = form.querySelector("button[type='submit']");
+        btn.textContent = "...";
+        btn.disabled = true;
+        try {
+          var res = await fetch(
+            "https://app.convertkit.com/forms/9436689/subscriptions",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json", Accept: "application/json" },
+              body: JSON.stringify({ email_address: email }),
+            }
+          );
+          if (res.ok) {
+            form.innerHTML =
+              "<p style=\"font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--black);margin:0;\">You're on the list. We'll be in touch.</p>";
+          } else {
+            btn.textContent = "Notify me";
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = "Notify me";
+          btn.disabled = false;
+        }
+      });
+    });
   </script>
   </body>
 </html>
