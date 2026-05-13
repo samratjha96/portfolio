@@ -10,43 +10,40 @@ import glob from "vite-plugin-glob";
 import fs from "node:fs";
 import path from "node:path";
 
-const aiStaticPage = () => {
-  const serveAiIndex = (root, res) => {
-    const filePath = path.resolve(root, "public/ai/index.html");
-
-    try {
-      const html = fs.readFileSync(filePath, "utf8");
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html; charset=utf-8");
-      res.end(html);
-    } catch {
-      res.statusCode = 404;
-      res.setHeader("Content-Type", "text/plain; charset=utf-8");
-      res.end("AI page not found");
-    }
-  };
-
+// Serves standalone HTML pages from public/<slug>/index.html, bypassing React Router.
+const staticPages = (slugs) => {
   const middleware = (root) => (req, res, next) => {
     const url = req.url || "";
 
-    if (url === "/ai") {
-      res.statusCode = 302;
-      res.setHeader("Location", "/ai/");
-      res.end();
-      return;
-    }
+    for (const slug of slugs) {
+      if (url === `/${slug}`) {
+        res.statusCode = 302;
+        res.setHeader("Location", `/${slug}/`);
+        res.end();
+        return;
+      }
 
-    // Only handle the directory URL; let Vite serve /ai/* assets normally.
-    if (url === "/ai/" || url === "/ai/index.html") {
-      serveAiIndex(root, res);
-      return;
+      if (url === `/${slug}/` || url === `/${slug}/index.html`) {
+        const filePath = path.resolve(root, `public/${slug}/index.html`);
+        try {
+          const html = fs.readFileSync(filePath, "utf8");
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "text/html; charset=utf-8");
+          res.end(html);
+        } catch {
+          res.statusCode = 404;
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+          res.end(`Page not found: /${slug}/`);
+        }
+        return;
+      }
     }
 
     next();
   };
 
   return {
-    name: "ai-static-page",
+    name: "static-pages",
     configureServer(server) {
       server.middlewares.use(middleware(server.config.root));
     },
@@ -65,7 +62,7 @@ export default defineConfig({
       remarkPlugins: [remarkGfm, remarkFrontmatter],
     }),
     glob(),
-    aiStaticPage(),
+    staticPages(["ai", "learn"]),
   ],
   build: {
     rollupOptions: {
