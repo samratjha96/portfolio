@@ -706,6 +706,8 @@
             }
           );
           if (res.ok) {
+            var staleHint = form.parentNode.querySelector(".privacy-hint");
+            if (staleHint) staleHint.remove();
             form.innerHTML =
               "<p style=\"font-family:'IBM Plex Mono',monospace;font-size:0.85rem;color:var(--black);margin:0;\">You're on the list. We'll be in touch.</p>";
           } else {
@@ -715,6 +717,14 @@
         } catch {
           btn.textContent = "Notify me";
           btn.disabled = false;
+          var existing = form.parentNode.querySelector(".privacy-hint");
+          if (!existing) {
+            var hint = document.createElement("p");
+            hint.className = "privacy-hint";
+            hint.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--gray);margin-top:10px;line-height:1.6;";
+            hint.innerHTML = "Looks like an ad blocker is running — the email provider here needs to be reachable to capture your address. Try disabling it for this page, or just email me directly at <a href=\"mailto:contact@samratjha.com\" style=\"color:var(--black);\">contact@samratjha.com</a>.";
+            form.insertAdjacentElement("afterend", hint);
+          }
         }
       });
     });
