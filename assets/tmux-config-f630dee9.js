@@ -1,4 +1,4 @@
-import{b as n,j as s,k as t}from"./three-114a71c7.js";function a(i){const e={a:"a",code:"code",h2:"h2",p:"p",pre:"pre",span:"span",strong:"strong",...i.components};return s(t,{children:[s(e.p,{children:["My ",n(e.code,{children:"~/.tmux.conf"})," grew one frustration at a time. This is an explanation of what's in it and what the defaults get wrong."]}),`
+import{b as n,j as s,k as t}from"./three-5874ebf6.js";function a(i){const e={a:"a",code:"code",h2:"h2",p:"p",pre:"pre",span:"span",strong:"strong",...i.components};return s(t,{children:[s(e.p,{children:["My ",n(e.code,{children:"~/.tmux.conf"})," grew one frustration at a time. This is an explanation of what's in it and what the defaults get wrong."]}),`
 `,s(e.h2,{id:"the-prefix",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-prefix",children:n(e.span,{className:"icon icon-link"})}),"The prefix"]}),`
 `,s(e.p,{children:["The default tmux prefix is ",n(e.code,{children:"C-b"}),". I changed it to ",n(e.code,{children:"C-a"}),":"]}),`
 `,n(e.pre,{children:n(e.code,{className:"hljs language-bash",children:`unbind C-b
