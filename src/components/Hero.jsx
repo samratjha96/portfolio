@@ -1,90 +1,54 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { rocket } from "../assets";
+import { Link } from "react-router-dom";
 import { styles } from "../styles";
-import Lottie from "lottie-react";
-import animationData from "../../public/astronaut-with-space-shuttle.json";
 import DitherText from "./DitherText";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen mx-auto overflow-hidden flex flex-col">
-      {/* Main content container - uses flex to prevent overlap */}
-      <div className={`${styles.paddingX} flex-1 flex flex-col pt-[120px] pb-24 max-w-7xl mx-auto w-full min-h-0`}>
-        {/* Text content */}
-        <div className="flex flex-row items-start gap-5 shrink-0">
-          <div className="flex flex-col justify-center items-center mt-5">
-            <div className="w-5 h-5 rounded-full bg-[#915eff]" />
-            <div className="w-1 sm:h-80 h-40 violet-gradient" />
-          </div>
-          <div className="flex-1">
-            <h1 className={`${styles.heroHeadText} text-white`}>
-              Hi, I'm <DitherText text="Samrat Jha" className="text-[#915eff]" dotScale={2} />
-            </h1>
-            <div className="flex flex-col">
-              <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-                I help businesses build AI that works beyond the demo.
+    <section id="about" className="relative w-full mx-auto">
+      <div className={`${styles.paddingX} max-w-7xl mx-auto pt-28 pb-16 sm:pt-36 sm:pb-20`}>
+        <div className="max-w-5xl border-l border-[#915eff]/50 pl-6 sm:pl-8">
+          <div className="grid gap-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+            <div>
+              <h1 className="font-black text-white text-[46px] leading-[56px] sm:text-[54px] sm:leading-[64px] lg:text-[64px] lg:leading-[72px]">
+                <DitherText text="Samrat" dotScale={2} />
+                <br />
+                <DitherText text="Jha" dotScale={2} />
+              </h1>
+              <p className={`${styles.heroSubText} mt-5`}>
+                I help teams build AI systems that work beyond the demo.
               </p>
-              <p className="mt-3 text-[#dfd9ff] font-medium lg:text-[18px] sm:text-[16px] text-[14px] max-w-2xl">
-                9 years at NVIDIA and AWS building distributed systems,
-                private infrastructure, and AI agents at enterprise
-                scale. I help teams cut past the hype and build AI
-                systems that are production-ready from day one.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-[15px] font-semibold">
                 <a
                   href="https://cal.com/samrat-jha-akdwhz/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-[#915eff] hover:bg-[#7a4de0] text-white font-semibold text-[15px] transition-colors duration-200 shadow-md shadow-[#915eff]/25"
+                  className="text-white underline decoration-[#915eff] decoration-2 underline-offset-8 hover:text-[#dfd9ff]"
                 >
                   Book a meeting
                 </a>
-                <a
-                  href="#projects"
-                  className="px-6 py-3 rounded-xl border border-[#915eff]/40 hover:border-[#915eff] text-[#dfd9ff] hover:text-white font-semibold text-[15px] transition-colors duration-200"
-                >
-                  View my work
-                </a>
+                <Link to="/blog/" className="text-[#dfd9ff] hover:text-white">
+                  Latest writing →
+                </Link>
               </div>
+            </div>
+            <div className="max-w-2xl text-[16px] leading-8 sm:text-[18px]">
+              <p className="text-[#dfd9ff]">
+                I am a Senior AI Engineer at NVIDIA. I build the systems that
+                make AI practical across the company: fast, economical, and
+                dependable at scale.
+              </p>
+              <p className="mt-5 text-secondary">
+                Before NVIDIA, I spent four years at AWS Outposts building
+                hybrid cloud infrastructure for low-latency, mission-critical
+                workloads. I designed globally deployed distributed systems
+                where reliability, privacy, and operational discipline were
+                essential. I now apply that foundation to model routers,
+                evaluation platforms, ambient agents, and software factories.
+              </p>
             </div>
           </div>
         </div>
-
-        {/* Astronaut animation - fills remaining space, scales responsively */}
-        <div className="flex-1 flex items-center justify-center pointer-events-none min-h-0">
-          <Lottie
-            animationData={animationData}
-            className="w-full h-full max-w-[200px] xs:max-w-[240px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px] max-h-[250px] xs:max-h-[280px] sm:max-h-[350px] md:max-h-[400px]"
-            loop={true}
-          />
-        </div>
-      </div>
-
-      {/* Scroll indicator - positioned at bottom */}
-      <div className="absolute bottom-4 sm:bottom-8 w-full flex justify-center items-center z-10">
-        <a href="#about">
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
-            <motion.div
-              animate={{ y: [1, 20, 1] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-            >
-              <div className="w-[30px]">
-                <img
-                  src={rocket}
-                  alt="Get Started"
-                  width={30}
-                  height={30}
-                  className="cursor-pointer"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </a>
       </div>
     </section>
   );

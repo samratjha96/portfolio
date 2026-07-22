@@ -1,89 +1,81 @@
 ---
-title: GitHub Pages with a Cloudflare Custom Subdomain
-date: 2025-01-05
-description: Set up a custom subdomain for GitHub Pages using Cloudflare DNS in about 10 minutes. Covers CNAME setup, SSL certificates, and common gotchas.
+title: Configure a GitHub Pages Subdomain with Cloudflare DNS
+date: 2026-07-22
+description: Configure a GitHub Pages subdomain with Cloudflare DNS. Covers the required GitHub setting, CNAME record, validation, HTTPS, and deployment-mode differences.
 tags: ["github-pages", "cloudflare", "dns", "deployment"]
 ---
 
-Just set up [candesign.techbrohomelab.xyz](https://candesign.techbrohomelab.xyz), a static site gallery hosted on GitHub Pages with a custom subdomain via Cloudflare. The whole process took maybe 10 minutes once I stopped overthinking it.
+Use a subdomain when you need a stable public name for a GitHub Pages project. I use `gallery.example.com` below as the example. Replace it with your domain.
 
-## The Setup
+This guide covers a project that publishes from a branch and uses Cloudflare for DNS. The default GitHub Pages URL remains available during setup.
 
-GitHub Pages is free hosting for static sites from any public repo. Cloudflare manages my DNS. I wanted `candesign.techbrohomelab.xyz` instead of `samratjha96.github.io/candesign`.
+## Verify the domain first
 
-## Enable GitHub Pages
+Verify the domain in the GitHub account or organization settings before you configure the repository. GitHub uses a TXT record for this check. Keep the TXT record after verification.
 
-In your repo, go to **Settings > Pages**. Under "Build and deployment":
+## Set the domain in GitHub first
 
-- Source: **Deploy from a branch**
-- Branch: `main` (or whatever branch has your site)
-- Folder: `/ (root)` unless your site lives in `/docs`
+In the repository, open **Settings > Pages**. Under **Custom domain**, enter `gallery.example.com` and save the setting.
 
-Save it. GitHub will deploy to `https://<username>.github.io/<repo-name>`.
+The order matters. Set the custom domain in GitHub before you create the DNS record. GitHub recommends this order because DNS that points to GitHub before the repository claims the domain can create a takeover risk.
 
-## Add the CNAME File
-
-Create a file called `CNAME` in your repo root with just your custom domain:
+For branch publishing, GitHub adds an uppercase `CNAME` file to the root of the publishing source. The file contains only the domain name:
 
 ```
-candesign.techbrohomelab.xyz
+gallery.example.com
 ```
 
-No trailing slash, no `https://`. Commit and push it.
+Keep the file in the publishing source. A build that replaces the publishing directory can remove it. This is an easy failure to miss.
 
-GitHub needs this to know which custom domain maps to your repo. Without it, custom domain requests 404.
+This rule does not apply to a custom GitHub Actions workflow. In that mode, GitHub ignores `CNAME` and does not require it.
 
-## Cloudflare DNS
+## Add the Cloudflare DNS record
 
-In Cloudflare, add a CNAME record:
+Create this record in the Cloudflare DNS zone:
 
-| Type  | Name      | Target                | Proxy |
-| ----- | --------- | --------------------- | ----- |
-| CNAME | candesign | samratjha96.github.io | Off   |
+| Type | Name | Target | Proxy status |
+| --- | --- | --- | --- |
+| CNAME | gallery | `USERNAME.github.io` | DNS only |
 
-The name is just the subdomain part. Target is your GitHub Pages URL (without the repo name).
+Replace `USERNAME` with the GitHub account or organization name. Do not add the repository name to the target. For example, a project at `USERNAME.github.io/project-name` still uses `USERNAME.github.io` as the CNAME target.
 
-I initially had proxy enabled (orange cloud) and it worked, but GitHub recommends DNS-only (grey cloud) for Pages. Either works, but DNS-only avoids potential SSL certificate conflicts.
+This example keeps the record DNS-only during setup. GitHub documents CNAME validation, while Cloudflare returns its own addresses for proxied records. Cloudflare gives general proxy guidance for web-serving CNAME records, but it does not give GitHub Pages-specific proxy guidance.
 
-## Back to GitHub
+Do not treat a proxy change as a DNS toggle. It changes the request path. Test certificate renewal, redirects, and cache behavior after the change.
 
-Once DNS propagates (usually seconds with Cloudflare), go back to **Settings > Pages** and enter your custom domain: `candesign.techbrohomelab.xyz`.
+## Verify the record
 
-GitHub will verify DNS and provision an SSL cert. The "Enforce HTTPS" checkbox should become available after a few minutes. Enable it.
+Check the CNAME record before you change any other setting:
 
-## Gotchas
-
-**CNAME file gets deleted**
-
-If you're using a static site generator that wipes your output folder, make sure the CNAME file is in your source directory or build process copies it over. I've lost it a few times to careless `rm -rf dist/*`.
-
-**DNS propagation "issues"**
-
-If GitHub says it can't verify your domain, wait 5 minutes. It's almost always just propagation delay, not a config problem. Don't start changing things.
-
-**www vs non-www**
-
-If you want `www.example.com`, your CNAME record name should be `www`. For apex domains (`example.com`), you need A records pointing to GitHub's IPs instead:
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
+```sh
+dig gallery.example.com +noall +answer -t CNAME
 ```
 
-Subdomains are simpler. Just use CNAME.
+The response should show `gallery.example.com` as a CNAME for `USERNAME.github.io`.
 
-**Mixed content warnings**
+DNS changes can take up to 24 hours. Do not wait and change records at random. Check the record again if GitHub cannot validate the domain.
 
-If your site loads but looks broken, check browser console for mixed content errors. Make sure all your asset URLs use `https://` or protocol-relative `//` paths.
+## Enable HTTPS
 
-## Why Not Just Use the Default URL?
+Return to **Settings > Pages** after GitHub validates the domain. Enable **Enforce HTTPS** when the control becomes available.
 
-Vanity, mostly. But also: if you ever move hosting, your URLs don't break. And `techbrohomelab.xyz` is more memorable than `github.io/candesign` for sharing.
+GitHub can take up to 24 hours to make this control available. Do not add an HTTPS redirect rule until the GitHub Pages certificate is active.
 
----
+## Avoid wildcard DNS records
 
-Live site: [candesign.techbrohomelab.xyz](https://candesign.techbrohomelab.xyz)
+Do not use a wildcard DNS record such as `*.example.com` for GitHub Pages. GitHub warns that wildcard records can expose unclaimed subdomains to takeover.
 
-Source: [github.com/samratjha96/candesign](https://github.com/samratjha96/candesign)
+## Deployment checks
+
+Use these checks after each deployment. They catch most configuration drift:
+
+- Confirm that the custom domain remains set in **Settings > Pages**.
+- For branch publishing, confirm that the publishing source still contains `CNAME`.
+- Confirm that the CNAME target is `USERNAME.github.io`.
+- Confirm that HTTPS is enabled before you require HTTPS-only asset URLs.
+
+## References
+
+- [GitHub Pages custom domains](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)
+- [GitHub Pages domain verification](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages)
+- [Cloudflare proxy status](https://developers.cloudflare.com/dns/proxy-status/)

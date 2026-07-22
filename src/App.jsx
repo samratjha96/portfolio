@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import {
-  About,
   Contact,
   Experience,
   Hero,
@@ -32,7 +31,6 @@ const Home = () => {
         <Navbar />
         <Hero />
       </div>
-      <About />
       <Projects />
       <Experience />
       <Tech />
