@@ -146,12 +146,6 @@
         margin-bottom: 40px;
       }
 
-      h1 .strike {
-        text-decoration: line-through;
-        text-decoration-thickness: 4px;
-        color: var(--gray);
-      }
-
       h1 em {
         font-style: italic;
       }
@@ -458,17 +452,32 @@
       }
 
       footer p {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
         font-size: 12px;
         color: var(--gray);
       }
 
-      footer a {
-        color: var(--gray);
+      .footer-portfolio-link {
+        display: inline-block;
+        padding: 9px 13px;
+        border: 2px solid var(--black);
+        background: var(--white);
+        box-shadow: 4px 4px 0 var(--red);
+        color: var(--black);
+        font-weight: 700;
+        letter-spacing: 1px;
         text-decoration: none;
+        text-transform: uppercase;
+        transition: all 0.15s ease;
       }
 
-      footer a:hover {
-        color: var(--black);
+      .footer-portfolio-link:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 var(--red);
       }
 
       /* Responsive */
@@ -520,15 +529,15 @@
 
     <section class="hero">
       <div class="container">
-        <div class="hero-label">AI Consulting for Small & Mid-Size Businesses</div>
-        <h1>
-          Stop <span class="strike">burning cash</span> on AI tools that
-          <em>don't work</em>
-        </h1>
+        <div class="hero-label">
+          AI Consulting for Small & Mid-Size Businesses
+        </div>
+        <h1>You have ChatGPT. <em>The busywork is still there.</em></h1>
         <p class="hero-sub">
-          I cut through the noise and deploy the 2-3 AI tools that actually
-          move the needle for your business. No hype. No affiliate kickbacks.
-          If it doesn't work, you don't pay.
+          I connect the AI tools you already pay for to the spreadsheets,
+          documents, and repetitive work that eat up your week. Your first
+          automation goes live in Week 1, with accuracy checks built in, or you
+          don't pay.
         </p>
         <a href="https://cal.com/samrat-jha-akdwhz/30min" class="cta-primary"
           >Book a Free Call</a
@@ -545,20 +554,24 @@
               "Wasted probably 2k on tools that promised the world and delivered
               basic automation I could've done with Zapier."
             </p>
-            <p class="problem-source">r/smallbusiness</p>
+            <p class="problem-source">Founder at a Boutique Consulting Firm</p>
           </div>
           <div class="problem-card" data-num="02">
             <p class="problem-quote">
               "$15k chatbot that customers hate. Too robotic, can't handle basic
               questions."
             </p>
-            <p class="problem-source">r/AiForSmallBusiness</p>
+            <p class="problem-source">
+              Operations Lead at a Regional Services Firm
+            </p>
           </div>
           <div class="problem-card" data-num="03">
             <p class="problem-quote">
               "How do you figure out what's legit vs just hype?"
             </p>
-            <p class="problem-source">r/smallbusiness</p>
+            <p class="problem-source">
+              Owner at an Independent Accounting Firm
+            </p>
           </div>
         </div>
       </div>
@@ -716,7 +729,9 @@
         <p>
           Built AI systems at AWS and NVIDIA. Now I help smaller companies
           access the same strategies.
-          <a href="https://www.samratjha.com/">Back to Portfolio</a>
+          <a href="https://www.samratjha.com/" class="footer-portfolio-link"
+            >Go See Who You Are Working With</a
+          >
         </p>
       </div>
     </footer>
