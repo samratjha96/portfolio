@@ -64,7 +64,26 @@ const BlogNavbar = () => {
               );
             }
 
-            // For all other links, navigate to home with anchor
+            // Full-page links must not route through the home-page anchors.
+            if (link.isExternal) {
+              return (
+                <li
+                  key={link.id}
+                  className={`${
+                    active === link.title ? "text-white" : "text-secondary"
+                  } hover:text-white text-[18px] font-medium cursor-pointer`}
+                  onClick={() => setActive(link.title)}
+                >
+                  {link.isFullPage ? (
+                    <a href={link.path}>{link.title}</a>
+                  ) : (
+                    <Link to={link.path}>{link.title}</Link>
+                  )}
+                </li>
+              );
+            }
+
+            // Section links return to the matching home-page anchor.
             return (
               <li
                 key={link.id}
@@ -110,7 +129,29 @@ const BlogNavbar = () => {
                   );
                 }
 
-                // For all other links, navigate to home with anchor
+                // Full-page links must not route through the home-page anchors.
+                if (link.isExternal) {
+                  return (
+                    <li
+                      key={link.id}
+                      className={`${
+                        active === link.title ? "text-white" : "text-secondary"
+                      } font-poppins font-medium cursor-pointer text-[16px]`}
+                      onClick={() => {
+                        setToggle(!toggle);
+                        setActive(link.title);
+                      }}
+                    >
+                      {link.isFullPage ? (
+                        <a href={link.path}>{link.title}</a>
+                      ) : (
+                        <Link to={link.path}>{link.title}</Link>
+                      )}
+                    </li>
+                  );
+                }
+
+                // Section links return to the matching home-page anchor.
                 return (
                   <li
                     key={link.id}
