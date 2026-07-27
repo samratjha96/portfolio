@@ -60,7 +60,9 @@ function loadPosts() {
 function generateSitemap(posts) {
   const urls = [
     { loc: `${SITE_URL}/`, changefreq: "monthly", priority: "1.0" },
+    { loc: `${SITE_URL}/ai/`, changefreq: "monthly", priority: "0.8" },
     { loc: `${SITE_URL}/blog/`, changefreq: "weekly", priority: "0.9" },
+    { loc: `${SITE_URL}/learn/`, changefreq: "monthly", priority: "0.6" },
     ...posts.map((post) => ({
       loc: `${SITE_URL}/blog/${post.slug}/`,
       lastmod: post.lastmod,
@@ -120,8 +122,8 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 - [Which Card](https://github.com/samratjha96/which-card): Find the best credit card for every purchase. Search by merchant, compare rewards, maximize cashback. [Demo](https://which-card.pages.dev)
 - [Space Selfie](https://github.com/samratjha96/space-selfie): Discover when the ISS flew over your special moments. Built with TypeScript, Cloudflare Workers, and satellite.js. [Demo](https://space-selfie.zasamrat.workers.dev)
 - [Bird Radio](https://github.com/samratjha96/BirdRadio): Retro-styled nature sound tuner streaming bird songs worldwide with real-time spectrogram visualization. [Demo](https://bird-radio.pages.dev/)
-- [NetWorth Tracker](https://github.com/samratjha96/networth): Personal finance app to track net worth. React, TypeScript, Tailwind, shadcn-ui. [Demo](https://argos.techbrohomelab.xyz/)
-- [Today's Tech](https://github.com/samratjha96/today): Personal dashboard aggregating market data, GitHub trending, Hacker News, and tech news. [Demo](https://today.techbrohomelab.xyz/)
+- [NetWorth Tracker](https://github.com/samratjha96/networth): Personal finance app to track net worth. React, TypeScript, Tailwind, shadcn-ui. [Demo](https://argos.bootloop.cc/)
+- [Today's Tech](https://github.com/samratjha96/today): Personal dashboard aggregating market data, GitHub trending, Hacker News, and tech news. [Demo](https://today.bootloop.cc/)
 - [SAAS Landing Page](https://github.com/samratjha96/sample-saas-landing-page): White-label SAAS landing page with animations. Reskinnable for any client. [Demo](https://sample-saas-landing-page.vercel.app/)
 
 ## Blog
