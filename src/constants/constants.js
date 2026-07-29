@@ -23,12 +23,12 @@ import {
   threejs,
   saasLandingPage,
   parallaxPhotoGallery,
-  floatingPhotoGallery,
   dashboard,
   argos,
   spaceSelfie,
   birdRadio,
   whichCard,
+  situsearch,
 } from "../assets";
 
 export const navLinks = [
@@ -283,7 +283,7 @@ const projects = [
       "Personal dashboard aggregating market data, GitHub trending repos, Hacker News, and tech news in a sleek terminal-inspired interface",
     image: dashboard,
     source_code_link: "https://github.com/samratjha96/today",
-    demo_link: "https://today.techbrohomelab.xyz/",
+    demo_link: "https://today.bootloop.cc/",
   },
   {
     name: "NetWorth Tracker",
@@ -291,7 +291,15 @@ const projects = [
       "Personal finance application to track net worth. Built with React, TypeScript, Tailwind CSS and shadcn-ui",
     image: argos,
     source_code_link: "https://github.com/samratjha96/networth",
-    demo_link: "https://argos.techbrohomelab.xyz/",
+    demo_link: "https://argos.bootloop.cc/",
+  },
+  {
+    name: "Situation Search",
+    description:
+      "Natural-language search over football match video. Type what you want to see and jump straight to the moment. Built for analysts.",
+    image: situsearch,
+    source_code_link: "https://github.com/samratjha96/situation-search",
+    demo_link: "https://situsearch.bootloop.cc",
   },
   {
     name: "Bird Radio",
@@ -332,14 +340,6 @@ const projects = [
     image: parallaxPhotoGallery,
     source_code_link: "https://github.com/samratjha96/parallax-image-gallery",
     demo_link: "https://parallax-image-gallery-beta.vercel.app/",
-  },
-  {
-    name: "Floating Images Gallery",
-    description:
-      "Interactive floating images gallery built with React, Tailwind and GSAP for animation. Great way to show a collection of photographs in a museum style",
-    image: floatingPhotoGallery,
-    source_code_link: "https://github.com/samratjha96/floating-images-gallery",
-    demo_link: "https://floating-images-gallery.vercel.app/",
   },
 ];
 

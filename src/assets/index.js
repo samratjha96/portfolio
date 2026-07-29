@@ -36,6 +36,7 @@ import argos from "./optimized/argos.webp";
 import spaceSelfie from "./optimized/space-selfie.webp";
 import birdRadio from "./optimized/bird-radio.webp";
 import whichCard from "./optimized/which-card.webp";
+import situsearch from "./optimized/situsearch.webp";
 
 export {
   logo,
@@ -73,4 +74,5 @@ export {
   spaceSelfie,
   birdRadio,
   whichCard,
+  situsearch,
 };
