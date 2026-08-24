@@ -20,7 +20,7 @@ const Hero = () => {
               </p>
               <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4 text-[15px] font-semibold">
                 <a
-                  href="https://cal.com/samrat-jha-akdwhz/30min"
+                  href="https://cal.com/samrat-jha-akdwhz"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white underline decoration-[#915eff] decoration-2 underline-offset-8 hover:text-[#dfd9ff]"
