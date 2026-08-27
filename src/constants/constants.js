@@ -29,6 +29,7 @@ import {
   birdRadio,
   whichCard,
   situsearch,
+  patentagility,
 } from "../assets";
 
 export const navLinks = [
@@ -300,6 +301,15 @@ const projects = [
     image: situsearch,
     source_code_link: "https://github.com/samratjha96/situation-search",
     demo_link: "https://situsearch.bootloop.cc",
+  },
+  {
+    name: "PatentAgility",
+    description:
+      "Patent review workspace covering spec support, claim comparison, antecedent basis, and examiner analytics for a single U.S. patent record. Built with Python, spaCy, and sentence-transformers on a Cloudflare Container.",
+    image: patentagility,
+    source_code_link:
+      "https://github.com/samratjha96/NLP-Based-Patent-Specification-And-Claim-Analysis",
+    demo_link: "https://patentagility-demo.zasamrat.workers.dev",
   },
   {
     name: "Bird Radio",
