@@ -305,7 +305,7 @@ const projects = [
   {
     name: "PatentAgility",
     description:
-      "Patent review workspace covering spec support, claim comparison, antecedent basis, and examiner analytics for a single U.S. patent record. Built with Python, spaCy, and sentence-transformers on a Cloudflare Container.",
+      "A tool that helps patent attorneys find supporting evidence for legal claims. Combines dense sentence embeddings, BM25, and cross-encoder reranking for search, transformer-based NLP to catch claim drafting defects, and auto-generates visual diagrams of how a claim's legal language breaks down.",
     image: patentagility,
     source_code_link:
       "https://github.com/samratjha96/NLP-Based-Patent-Specification-And-Claim-Analysis",
