@@ -147,7 +147,7 @@ const experiences = [
     title: "Senior AI Engineer",
     company_name: "NVIDIA",
     icon: nvidia,
-    iconBg: "#76B900",
+    iconBg: "#FFFFFF",
     date: "December 2025 - Current",
     points: ["Building at the frontier of artificial intelligence"],
   },

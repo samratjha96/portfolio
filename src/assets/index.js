@@ -26,7 +26,7 @@ import rust from "./tech/rust.png";
 import boeing from "./company/boeing.png";
 import aws from "./company/aws.png";
 import appian from "./company/appian.png";
-import nvidia from "./company/nvidia.png";
+import nvidia from "./optimized/nvidia-eye.webp";
 
 import floatingPhotoGallery from "./optimized/FloatingPhotoGallery.webp";
 import parallaxPhotoGallery from "./optimized/ParallaxImageGallery.webp";
