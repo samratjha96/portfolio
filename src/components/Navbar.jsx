@@ -47,9 +47,8 @@ const Navbar = () => {
             alt="logo"
             className="w-9 h-9 object-contain"
           />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex">
-            Samrat &nbsp;
-            <span className="hidden sm:block">| Portfolio</span>
+          <p className="text-white text-[18px] font-semibold cursor-pointer">
+            Samrat Jha
           </p>
         </Link>
         <ul className="list-none hidden sm:flex flex-row gap-10">
@@ -58,7 +57,7 @@ const Navbar = () => {
               key={link.id}
               className={`${
                 active === link.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
+              } hover:text-white text-[18px] font-normal cursor-pointer`}
               onClick={() => setActive(link.title)}
             >
               {link.isExternal ? (
@@ -91,7 +90,7 @@ const Navbar = () => {
                   key={link.id}
                   className={`${
                     active === link.title ? "text-white" : "text-secondary"
-                  } font-poppins font-medium cursor-pointer text-[16px]`}
+                  } font-poppins font-normal cursor-pointer text-[16px]`}
                   onClick={() => {
                     setActive(link.title);
                     setToggle(!toggle);

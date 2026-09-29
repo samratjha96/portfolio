@@ -18,9 +18,6 @@ module.exports = {
       screens: {
         xs: "450px",
       },
-      backgroundImage: {
-        "hero-pattern": "url('/src/assets/optimized/herobg.webp')",
-      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

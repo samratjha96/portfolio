@@ -150,7 +150,7 @@ const BlogPost = () => {
     return (
       <BlogPostLayout>
         <div className="text-center py-20">
-          <h1 className="text-4xl text-white font-bold mb-4">Loading...</h1>
+          <h1 className="text-4xl text-white font-semibold mb-4">Loading...</h1>
         </div>
       </BlogPostLayout>
     );
@@ -165,7 +165,7 @@ const BlogPost = () => {
         </Helmet>
         <BlogPostLayout>
           <div className="text-center py-20">
-            <h1 className="text-4xl text-white font-bold mb-4">
+            <h1 className="text-4xl text-white font-semibold mb-4">
               Post Not Found
             </h1>
             <p className="text-secondary">

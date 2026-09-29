@@ -54,7 +54,7 @@ const BlogSearch = ({ posts = [] }) => {
 
       {inputValue.trim() !== "" && (
         <div className="mt-4 p-4 bg-tertiary bg-opacity-70 backdrop-blur-lg rounded-lg">
-          <h3 className="text-white font-medium mb-3">
+          <h3 className="text-white font-normal mb-3">
             {searchResults.length > 0
               ? `Found ${searchResults.length} result${searchResults.length > 1 ? "s" : ""}`
               : "No results found"}
@@ -66,7 +66,7 @@ const BlogSearch = ({ posts = [] }) => {
                 <li key={post.slug} className="py-3 first:pt-0 last:pb-0">
                   <Link
                     to={`/blog/${post.slug}/`}
-                    className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
+                    className="block text-secondary hover:text-white transition-colors duration-300 font-normal"
                   >
                     {post.title}
                   </Link>

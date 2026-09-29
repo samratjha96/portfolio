@@ -3,13 +3,7 @@
 
 import puppeteer from "puppeteer";
 import { createServer } from "http";
-import {
-  readFileSync,
-  writeFileSync,
-  mkdirSync,
-  existsSync,
-  readdirSync,
-} from "fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -54,10 +48,7 @@ function startServer() {
           webp: "image/webp",
           json: "application/json",
         };
-        res.setHeader(
-          "Content-Type",
-          contentTypes[ext] || "application/octet-stream",
-        );
+        res.setHeader("Content-Type", contentTypes[ext] || "application/octet-stream");
         res.end(content);
       } catch {
         res.statusCode = 404;
@@ -137,6 +128,11 @@ async function prerender() {
         });
 
         toRemove.forEach((el) => el.remove());
+      });
+
+      // Client-only widgets build their own DOM after mount; a snapshot of it is inert without script.
+      await page.evaluate(() => {
+        document.querySelectorAll("[data-client-only]").forEach((el) => el.replaceChildren());
       });
 
       // Get the rendered HTML

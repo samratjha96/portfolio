@@ -8,7 +8,7 @@ const BlogPostCard = ({ post }) => {
       className="block bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full transition-all duration-300 hover:shadow-lg hover:shadow-purple-900/20 group"
     >
       <div className="mt-5">
-        <h3 className="text-white font-bold text-[24px] group-hover:text-[#915eff] transition-colors duration-300">
+        <h3 className="text-white font-semibold text-[24px] group-hover:text-[#915eff] transition-colors duration-300">
           {post.title}
         </h3>
         <p className="mt-2 text-secondary text-[14px]">{post.date}</p>

@@ -1,16 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import {
-  Contact,
-  Experience,
-  Hero,
-  Navbar,
-  Media,
-  Projects,
-  Tech,
-} from "./components";
+import { Contact, Experience, Hero, Navbar, Media, Projects, Tech } from "./components";
 import { BlogList, BlogPost } from "./components/blog";
-import StarsCanvas from "./components/canvas/Stars";
 
 const Home = () => {
   const { hash } = useLocation();
@@ -27,10 +18,8 @@ const Home = () => {
 
   return (
     <div className="relative z-0 bg-primary">
-      <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-        <Navbar />
-        <Hero />
-      </div>
+      <Navbar />
+      <Hero />
       <Projects />
       <Experience />
       <Tech />
@@ -38,7 +27,6 @@ const Home = () => {
       <div className="relative z-0">
         <Contact />
       </div>
-      <StarsCanvas />
     </div>
   );
 };

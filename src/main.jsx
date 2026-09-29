@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot, hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
@@ -17,9 +17,6 @@ const app = (
   </React.StrictMode>
 );
 
-// Use hydration if the page was pre-rendered, otherwise use createRoot
-if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, app);
-} else {
-  createRoot(rootElement).render(app);
-}
+// The prerendered HTML is a Puppeteer DOM snapshot, not renderToString output. It lacks React's Suspense
+// markers, so hydrating it always fails; render fresh and let React replace it.
+createRoot(rootElement).render(app);

@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import DitherText from "./DitherText";
+import Rack from "./rack/Rack";
 
 const Hero = () => {
   return (
     <section id="about" className="relative w-full mx-auto">
-      <div className={`${styles.paddingX} max-w-7xl mx-auto pt-28 pb-16 sm:pt-36 sm:pb-20`}>
+      <div
+        className={`${styles.paddingX} max-w-7xl mx-auto pt-28 pb-16 sm:pt-36 sm:pb-20 grid grid-cols-[minmax(0,1fr)] gap-12 min-[1360px]:grid-cols-[820px_minmax(0,1fr)] min-[1360px]:gap-x-10 min-[1360px]:items-center`}
+      >
         <div className="max-w-5xl border-l border-[#915eff]/50 pl-6 sm:pl-8">
-          <div className="grid gap-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
+          <div className="grid gap-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20 min-[1360px]:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] min-[1360px]:gap-14">
             <div>
-              <h1 className="font-black text-white text-[46px] leading-[56px] sm:text-[54px] sm:leading-[64px] lg:text-[64px] lg:leading-[72px]">
+              <h1 className="font-semibold text-white text-[46px] leading-[56px] sm:text-[54px] sm:leading-[64px] lg:text-[64px] lg:leading-[72px]">
                 <DitherText text="Samrat" dotScale={2} />
                 <br />
                 <DitherText text="Jha" dotScale={2} />
@@ -34,20 +37,21 @@ const Hero = () => {
             </div>
             <div className="max-w-2xl text-[16px] leading-8 sm:text-[18px]">
               <p className="text-[#dfd9ff]">
-                I am a Senior AI Engineer at NVIDIA. I build the systems that
-                make AI practical across the company: fast, economical, and
-                dependable at scale.
+                I am a Senior AI Engineer at NVIDIA. I build the systems that make AI practical
+                across the company: fast, economical, and dependable at scale.
               </p>
               <p className="mt-5 text-secondary">
-                Before NVIDIA, I spent four years at AWS Outposts building
-                hybrid cloud infrastructure for low-latency, mission-critical
-                workloads. I designed globally deployed distributed systems
-                where reliability, privacy, and operational discipline were
-                essential. I now apply that foundation to model routers,
-                evaluation platforms, ambient agents, and software factories.
+                Before NVIDIA, I spent four years at AWS Outposts building hybrid cloud
+                infrastructure for low-latency, mission-critical workloads. I designed globally
+                deployed distributed systems where reliability, privacy, and operational discipline
+                were essential. I now apply that foundation to model routers, evaluation platforms,
+                ambient agents, and software factories.
               </p>
             </div>
           </div>
+        </div>
+        <div className="w-full max-w-[520px] justify-self-center min-[1360px]:max-w-none">
+          <Rack />
         </div>
       </div>
     </section>

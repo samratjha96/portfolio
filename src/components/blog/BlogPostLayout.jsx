@@ -64,7 +64,7 @@ const BlogPostLayout = ({ children, title }) => {
         {/* Main Content - Full Width */}
         <div className="mb-16">
           {title && <h1 className={`${styles.sectionHeadText} mb-6`}>{title}</h1>}
-          <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&_code::before]:content-none [&_code::after]:content-none">
+          <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-semibold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&_code::before]:content-none [&_code::after]:content-none">
             {children}
           </div>
         </div>
@@ -73,10 +73,10 @@ const BlogPostLayout = ({ children, title }) => {
         <div className="mt-12 pt-8 border-t border-gray-800">
           <button
             onClick={() => setIsRecentPostsOpen(!isRecentPostsOpen)}
-            className="flex items-center text-white font-medium mb-4 hover:text-[#915eff] transition-colors duration-300"
+            className="flex items-center text-white font-normal mb-4 hover:text-[#915eff] transition-colors duration-300"
           >
             <span className="mr-2">{isRecentPostsOpen ? "▼" : "►"}</span>
-            <h3 className="font-bold text-xl">Recent Posts</h3>
+            <h3 className="font-semibold text-xl">Recent Posts</h3>
           </button>
 
           {isRecentPostsOpen && (
@@ -86,7 +86,7 @@ const BlogPostLayout = ({ children, title }) => {
                   <div key={post.slug} className="border-b border-gray-700/30 pb-4 last:border-b-0">
                     <Link
                       to={`/blog/${post.slug}/`}
-                      className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
+                      className="block text-secondary hover:text-white transition-colors duration-300 font-normal"
                     >
                       {post.title}
                     </Link>

@@ -56,7 +56,7 @@ const VideoCard = ({ name, description, embedId }) => {
           />
         </div>
       </div>
-      <h3 className="text-white font-bold text-[24px]">{name}</h3>
+      <h3 className="text-white font-semibold text-[24px]">{name}</h3>
       <p className="mt-2 text-secondary text-[14px]">{parseMarkdown(description)}</p>
     </div>
   );
@@ -73,7 +73,7 @@ const OnlinePresence = () => {
       <div className="w-full flex">
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          className="mt-3 text-secondary text-[17px] max-w-2xl leading-[30px]"
         >
           Below are my apperances on{" "}
           <a

@@ -8,23 +8,21 @@ import { SectionWrapper } from "../hoc";
 import { projects } from "../constants/constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  image,
-  source_code_link,
-  demo_link,
-}) => {
+const ProjectCard = ({ index, name, description, image, source_code_link, demo_link }) => {
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+    <motion.div
+      variants={fadeIn("up", "spring", index * 0.5, 0.75)}
+      id={`project-${index + 1}`}
+      data-rack-index={index}
+      className="scroll-mt-32"
+    >
       <Tilt
         options={{
           max: 45,
           scale: 1,
           speed: 450,
         }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+        className="project-card bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
       >
         <div className="relative w-full h-[230px]">
           <a
@@ -61,7 +59,7 @@ const ProjectCard = ({
         </div>
 
         <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
+          <h3 className="text-white font-semibold text-[24px]">{name}</h3>
           <p className="mt-2 text-secondary text-[14px]">{description}</p>
         </div>
       </Tilt>
@@ -80,10 +78,10 @@ const Projects = () => {
       <div className="w-full flex">
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+          className="mt-3 text-secondary text-[17px] max-w-2xl leading-[30px]"
         >
-          A selection of projects I've built—from AI-powered tools to creative
-          web experiences. Each includes live demos and source code.
+          A selection of projects I've built—from AI-powered tools to creative web experiences. Each
+          includes live demos and source code.
         </motion.p>
       </div>
 

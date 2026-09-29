@@ -64,13 +64,13 @@ const BlogLayout = ({ children, title }) => {
           {/* Sidebar */}
           <div className="md:w-1/4">
             <div className="sticky top-24 p-5 rounded-xl bg-tertiary bg-opacity-70 backdrop-blur-lg">
-              <h3 className="text-white font-bold text-xl mb-4">Recent Posts</h3>
+              <h3 className="text-white font-semibold text-xl mb-4">Recent Posts</h3>
               <ul className="divide-y divide-gray-700/30">
                 {displayPosts.map((post, index) => (
                   <li key={post.slug} className={`py-4 ${index === 0 ? "pt-0" : ""}`}>
                     <Link
                       to={`/blog/${post.slug}/`}
-                      className="block text-secondary hover:text-white transition-colors duration-300 font-medium"
+                      className="block text-secondary hover:text-white transition-colors duration-300 font-normal"
                     >
                       {post.title}
                     </Link>
@@ -119,7 +119,7 @@ const BlogLayout = ({ children, title }) => {
           {/* Main Content */}
           <div className="md:w-3/4 overflow-hidden">
             {title && <h1 className={`${styles.sectionHeadText} mb-6`}>{title}</h1>}
-            <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&_code::before]:content-none [&_code::after]:content-none">
+            <div className="prose prose-invert prose-lg prose-headings:text-white prose-headings:font-semibold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h3:text-2xl prose-p:text-gray-300 prose-a:text-[#915eff] prose-strong:text-white prose-code:bg-tertiary prose-code:text-white prose-code:p-1 prose-code:rounded-md prose-pre:bg-transparent prose-pre:p-0 prose-pre:overflow-x-auto prose-li:text-gray-300 max-w-none [&_code::before]:content-none [&_code::after]:content-none">
               {children}
             </div>
           </div>

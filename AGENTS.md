@@ -93,7 +93,6 @@ All `<img>` tags MUST include:
 ```jsx
 import { lazy, Suspense } from "react";
 
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
 const Tech = lazy(() => import("./components/Tech"));
 
 <Suspense fallback={<div className="h-[300px]" />}>
@@ -138,9 +137,15 @@ cat /tmp/lighthouse.json | jq '{
 
 ## Architecture Decisions
 
-### Why 14 WebGL Contexts in Tech Section
+### Hero Rack
 
-The Tech section creates separate Canvas instances for each technology ball. This is a known performance tradeoff for visual appeal. Replacing with static images would be a major UX change—discuss with Samrat first.
+The hero's 42U rack (`src/components/rack/`) is raw WebGL2, not Three.js, so it stays out of the `three` chunk. `mountRack.js` is loaded by dynamic import after mount and starts WebGL only after `load`, at idle, once the rack is on screen. Until then an SVG poster fills the reserved box. Each project card needs `id="project-N"` and `data-rack-index` so the rack can light it. The rack host carries `data-client-only`, which `scripts/prerender.js` empties so the static HTML holds no dead canvas.
+
+The Tech section is text chips, not a WebGL canvas per technology, which would cost 14 contexts on one page.
+
+### Prerender and Hydration
+
+`scripts/prerender.js` snapshots each route's DOM with Puppeteer for crawlers and first paint. A DOM snapshot lacks React's Suspense markers, so `main.jsx` renders with `createRoot` and replaces it rather than hydrating.
 
 ### Three.js Bundle Size
 
@@ -149,16 +154,6 @@ Three.js adds ~995KB to the bundle (gzipped: ~282KB). Unavoidable for 3D feature
 - Code-split into separate chunk (done)
 - Lazy-load components using Three.js (done)
 - Use `frameloop="demand"` on Canvas (done)
-
-### Background Assets
-
-Hero background defined in `tailwind.config.cjs`:
-
-```javascript
-backgroundImage: {
-  "hero-pattern": "url('/src/assets/optimized/herobg.webp')",
-}
-```
 
 ## Adding New Projects
 

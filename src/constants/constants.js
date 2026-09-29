@@ -197,7 +197,7 @@ const experiences = [
     points: [
       "Developed and delivered a full stack integration with Twilio in Appian's Intelligent Contact Center platform allowing cloud native telephony capabilities",
       "Designed, implemented and presented a templatized end to end delivery pipeline of Appian applications to customers. Used to this day to ship thousands of applications on Appian",
-      "Empowered a 100+ engineer organization to be self-sufficient with AWS by solely managing a fleet of AWS accounts for the orgnanization",
+      "Empowered a 100+ engineer organization to be self-sufficient with AWS by solely managing a fleet of AWS accounts for the organization",
       "Developed and shipped an open source project, Terraform provider for Twilio, to be used by Appian and external companies",
     ],
   },
