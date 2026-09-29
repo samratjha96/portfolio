@@ -111,7 +111,7 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 
 ## Experience
 
-- **Senior AI Engineer @ NVIDIA** (Dec 2025 - Present): Building at the frontier of artificial intelligence.
+- **Senior AI Engineer @ NVIDIA** (Dec 2025 - Present): Building long-horizon agents and shipping them across the NVIDIA ecosystem. Evaluating models and the harnesses that run them. Researching personal superintelligence in enterprise environments.
 - **Software Engineer @ AWS Region Expansion** (Sep 2024 - Dec 2025): Built enterprise ETL pipelines ingesting millions of multi-modal documents for RAG workloads. Deployed multi-agent systems to production for planning region builds. Launched AI chatbots answering thousands of questions weekly.
 - **Software Engineer @ AWS Outposts** (Mar 2022 - Sep 2024): Built next-gen edge computing infrastructure. Designed event-driven, low-latency distributed systems using ECS, Lambda, DynamoDB, EventBridge, Kotlin, TypeScript, and Rust.
 - **Senior Software Engineer @ Appian** (Mar 2021 - Jan 2022): Led integration with acquired company in Spain. Won company-wide award for technical innovation. Shipped RPA as a native platform capability.

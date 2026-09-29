@@ -149,7 +149,11 @@ const experiences = [
     icon: nvidia,
     iconBg: "#FFFFFF",
     date: "December 2025 - Current",
-    points: ["Building at the frontier of artificial intelligence"],
+    points: [
+      "Building long-horizon agents and shipping them across the NVIDIA ecosystem",
+      "Evaluating models and the harnesses that run them",
+      "Researching personal superintelligence in enterprise environments",
+    ],
   },
   {
     title: "Software Engineer @ AWS Region Expansion",
