@@ -9,7 +9,7 @@ I just deployed [Space Selfie](https://space-selfie.zasamrat.workers.dev) to Clo
 
 ## Why Workers?
 
-Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, no cold starts, and your code runs close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine.
+Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, start in milliseconds, and run close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine.
 
 ## The Stack
 
@@ -138,7 +138,7 @@ No CORS headaches. No environment variables for API URLs.
 
 ## When This Doesn't Work
 
-- Long-running tasks (30 second max, 10ms CPU on free)
+- CPU-heavy tasks (10ms of CPU per request on free, 30 seconds by default on paid)
 - Heavy compute like ML inference
 - Complex relational database queries (D1 is SQLite)
 - Websockets without Durable Objects
