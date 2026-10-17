@@ -1,13 +1,13 @@
-import{b as n,j as s,F as t}from"./three-f4f913dc.js";function l(a){const e={a:"a",code:"code",em:"em",h2:"h2",p:"p",pre:"pre",span:"span",strong:"strong",...a.components};return s(t,{children:[n(e.p,{children:"I got tired of running Lighthouse, squinting at the JSON output, and manually figuring out what actually matters. So I set up a slash command in Claude Code that runs the audit and tells me what to fix. Took about 5 minutes to set up, saves me 20+ minutes every time I check performance."}),`
-`,s(e.h2,{id:"the-manual-way",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-manual-way",children:n(e.span,{className:"icon icon-link"})}),"The Manual Way"]}),`
-`,n(e.p,{children:"If you've never used Lighthouse from the command line:"}),`
+import{b as n,j as s,F as t}from"./three-92ffd73b.js";const h=[{id:"doing-it-by-hand",text:"Doing it by hand",depth:2},{id:"the-slash-command",text:"The slash command",depth:2},{id:"what-comes-back",text:"What comes back",depth:2},{id:"why-bother-with-the-middleman",text:"Why bother with the middleman",depth:2},{id:"gotchas",text:"Gotchas",depth:2},{id:"you-need-chrome",text:"You need Chrome",depth:3},{id:"the-json-is-huge",text:"The JSON is huge",depth:3},{id:"scores-wobble",text:"Scores wobble",depth:3},{id:"mobile-is-the-default",text:"Mobile is the default",depth:3}];function l(a){const e={a:"a",code:"code",em:"em",h2:"h2",h3:"h3",p:"p",pre:"pre",span:"span",...a.components};return s(t,{children:[n(e.p,{children:"Running Lighthouse is easy. Reading what it gives back is the chore. I'd run the audit, squint at the JSON, try to work out which of forty audits actually mattered, and usually lose interest halfway. So I wrote a Claude Code slash command that runs the audit and reads the report for me. It took about 5 minutes to write and saves me 20+ minutes every time I check performance."}),`
+`,s(e.h2,{id:"doing-it-by-hand",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#doing-it-by-hand",children:n(e.span,{className:"icon icon-link"})}),"Doing it by hand"]}),`
+`,n(e.p,{children:"If you've never run Lighthouse from the command line, it looks like this:"}),`
 `,n(e.pre,{children:s(e.code,{className:"hljs language-bash",children:[`npx lighthouse https://yoursite.com \\
   --output=json \\
   --output-path=/tmp/lighthouse-report.json \\
   --chrome-flags=`,n(e.span,{className:"hljs-string",children:'"--headless"'}),` \\
   --only-categories=performance
 `]})}),`
-`,s(e.p,{children:["This dumps a ~500KB JSON blob. You can open it in Chrome DevTools or pipe it through ",n(e.code,{children:"jq"})," to extract what you care about:"]}),`
+`,s(e.p,{children:["That dumps a ~500KB JSON blob. You can open it in Chrome DevTools, or pipe it through ",n(e.code,{children:"jq"})," and pull out the handful of numbers you care about:"]}),`
 `,n(e.pre,{children:s(e.code,{className:"hljs language-bash",children:[n(e.span,{className:"hljs-built_in",children:"cat"})," /tmp/lighthouse-report.json | jq ",n(e.span,{className:"hljs-string",children:`'{
   score: (.categories.performance.score * 100),
   lcp: .audits["largest-contentful-paint"].displayValue,
@@ -23,9 +23,9 @@ import{b as n,j as s,F as t}from"./three-f4f913dc.js";function l(a){const e={a:"
   `,n(e.span,{className:"hljs-attr",children:'"tbt"'}),n(e.span,{className:"hljs-punctuation",children:":"})," ",n(e.span,{className:"hljs-string",children:'"0 ms"'}),`
 `,n(e.span,{className:"hljs-punctuation",children:"}"}),`
 `]})}),`
-`,s(e.p,{children:["That 58 second LCP is... not great. But now I have to dig through the full report to figure out ",n(e.em,{children:"why"}),", and that's where I usually give up and go do something else."]}),`
-`,s(e.h2,{id:"the-slash-command",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-slash-command",children:n(e.span,{className:"icon icon-link"})}),"The Slash Command"]}),`
-`,s(e.p,{children:["Create a file at ",n(e.code,{children:".claude/commands/analyze-website-performance.md"}),":"]}),`
+`,s(e.p,{children:["A 58 second LCP. Lovely. The numbers tell me something is badly wrong and nothing about ",n(e.em,{children:"why"}),". Finding out means digging through the full report, which is exactly the point where I used to give up and go do something else."]}),`
+`,s(e.h2,{id:"the-slash-command",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-slash-command",children:n(e.span,{className:"icon icon-link"})}),"The slash command"]}),`
+`,s(e.p,{children:["Claude Code turns any markdown file in ",n(e.code,{children:".claude/commands/"})," into a slash command, with ",n(e.code,{children:"$ARGUMENTS"})," replaced by whatever you type after it. So the whole tool is one prompt file at ",n(e.code,{children:".claude/commands/analyze-website-performance.md"}),":"]}),`
 `,n(e.pre,{children:s(e.code,{className:"hljs language-markdown",children:[n(e.span,{className:"hljs-section",children:"# Website Performance Analysis"}),`
 
 Analyze the performance of `,n(e.span,{className:"hljs-code",children:"`$ARGUMENTS`"}),` using Google Lighthouse.
@@ -71,12 +71,13 @@ For each issue:
 `,n(e.span,{className:"hljs-bullet",children:"-"}),` Caching and delivery
 `,n(e.span,{className:"hljs-bullet",children:"-"}),` Code efficiency (tree-shaking, code splitting)
 `]})}),`
-`,n(e.p,{children:"Now run it:"}),`
+`,n(e.p,{children:"The constraints section is there because ripping out half the page technically counts as a performance fix, and I didn't want that kind of advice. Assets and loading, nothing else."}),`
+`,n(e.p,{children:"Then run it:"}),`
 `,n(e.pre,{children:n(e.code,{className:"hljs language-bash",children:`claude
-> /analyze-website-performance https://samratjha.com
+> /analyze-website-performance https://www.samratjha.com/
 `})}),`
-`,s(e.h2,{id:"what-comes-back",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#what-comes-back",children:n(e.span,{className:"icon icon-link"})}),"What Comes Back"]}),`
-`,n(e.p,{children:"Instead of a wall of JSON, you get something like:"}),`
+`,s(e.h2,{id:"what-comes-back",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#what-comes-back",children:n(e.span,{className:"icon icon-link"})}),"What comes back"]}),`
+`,n(e.p,{children:"An abridged run against my own site, from before I'd optimized anything:"}),`
 `,n(e.pre,{children:n(e.code,{children:`## Performance Score: 55/100
 
 ### Critical Issues
@@ -100,31 +101,30 @@ For each issue:
 - Code-split Three.js and heavy dependencies
 - Lazy-load the 3D planet component
 `})}),`
-`,n(e.p,{children:"It cross-references the image dimensions in the DOM against the actual file sizes. My 8.87 MB PNG was being displayed at 431×230 pixels. The source image was 2657×1890. I definitely would've missed that scrolling through raw JSON."}),`
-`,s(e.h2,{id:"the-difference",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-difference",children:n(e.span,{className:"icon icon-link"})}),"The Difference"]}),`
-`,s(e.p,{children:["Lighthouse tells you ",n(e.em,{children:"what's wrong"}),". This tells you ",n(e.em,{children:"what to do about it"}),"."]}),`
-`,n(e.p,{children:"Raw Lighthouse output:"}),`
+`,n(e.p,{children:"The useful part is that it lines up the image dimensions in the DOM against the actual file sizes. My 8.87 MB PNG was being displayed at 431×230 pixels from a 2657×1890 source. Embarrassing, and I would have scrolled straight past it in the raw JSON."}),`
+`,s(e.h2,{id:"why-bother-with-the-middleman",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-bother-with-the-middleman",children:n(e.span,{className:"icon icon-link"})}),"Why bother with the middleman"]}),`
+`,n(e.p,{children:"Lighthouse already knows all of this. It just says it in a way that's hard to act on. The raw audit entry for those images:"}),`
 `,n(e.pre,{children:s(e.code,{className:"hljs language-json",children:[n(e.span,{className:"hljs-punctuation",children:"{"}),`
   `,n(e.span,{className:"hljs-attr",children:'"id"'}),n(e.span,{className:"hljs-punctuation",children:":"})," ",n(e.span,{className:"hljs-string",children:'"image-delivery-insight"'}),n(e.span,{className:"hljs-punctuation",children:","}),`
   `,n(e.span,{className:"hljs-attr",children:'"score"'}),n(e.span,{className:"hljs-punctuation",children:":"})," ",n(e.span,{className:"hljs-number",children:"0"}),n(e.span,{className:"hljs-punctuation",children:","}),`
   `,n(e.span,{className:"hljs-attr",children:'"displayValue"'}),n(e.span,{className:"hljs-punctuation",children:":"})," ",n(e.span,{className:"hljs-string",children:'"Est savings of 15,654 KiB"'}),`
 `,n(e.span,{className:"hljs-punctuation",children:"}"}),`
 `]})}),`
-`,n(e.p,{children:"What Claude gives you:"}),`
+`,n(e.p,{children:"The same finding, after Claude has read the rest of the report:"}),`
 `,n(e.pre,{children:n(e.code,{children:`ParallaxImageGallery.png:
 - Current: 2657×1890 PNG (8.87 MB)
 - Displayed: 431×230 px
 - Target: 862×460 WebP (~50-100 KB)
 - Savings: 8.86 MB (99% reduction)
 `})}),`
-`,n(e.p,{children:`One tells me there's a problem. The other tells me exactly which file, what size it should be, and what format to use. That's the difference between "I should optimize images" and actually doing it.`}),`
+`,n(e.p,{children:`"Est savings of 15,654 KiB" is a fact. A file name, a target size, and a format is a to-do item. I'll put off the first one for weeks. The second one I usually just do.`}),`
 `,s(e.h2,{id:"gotchas",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#gotchas",children:n(e.span,{className:"icon icon-link"})}),"Gotchas"]}),`
-`,n(e.p,{children:n(e.strong,{children:"Chrome needs to be installed"})}),`
-`,n(e.p,{children:"Lighthouse spawns a headless Chrome instance. If you're on a server without Chrome, this won't work. Use the PageSpeed Insights API instead (I haven't bothered setting that up)."}),`
-`,n(e.p,{children:n(e.strong,{children:"The JSON is huge"})}),`
-`,n(e.p,{children:"~500KB for a single page. If you're reading the file directly in Claude, you might hit context limits on complex pages. The slash command handles this by having Claude extract only the relevant parts, but I've still had it choke on really bloated reports."}),`
-`,n(e.p,{children:n(e.strong,{children:"Scores vary between runs"})}),`
-`,n(e.p,{children:"Network conditions, server load, whatever. I've seen ±5 points between consecutive runs. Don't obsess over small score differences."}),`
-`,n(e.p,{children:n(e.strong,{children:"Mobile vs Desktop"})}),`
-`,s(e.p,{children:["Default is mobile throttling. Add ",n(e.code,{children:"--preset=desktop"})," if you want desktop scores. Mobile is usually worse, which is why it's the default."]}),`
-`,s(e.p,{children:["You can also add more categories (",n(e.code,{children:"--only-categories=performance,accessibility,best-practices,seo"}),") or run multiple URLs. The slash command is just a prompt template, so modify it for whatever you need."]})]})}function c(a={}){const{wrapper:e}=a.components||{};return e?n(e,{...a,children:n(l,{...a})}):l(a)}export{c as default};
+`,s(e.h3,{id:"you-need-chrome",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#you-need-chrome",children:n(e.span,{className:"icon icon-link"})}),"You need Chrome"]}),`
+`,n(e.p,{children:"Lighthouse drives a headless Chrome. On a server without Chrome installed, none of this works. The PageSpeed Insights API is the alternative, and I haven't bothered setting it up."}),`
+`,s(e.h3,{id:"the-json-is-huge",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-json-is-huge",children:n(e.span,{className:"icon icon-link"})}),"The JSON is huge"]}),`
+`,n(e.p,{children:"~500KB for a single page. If Claude reads the file whole, complex pages can blow through the context window. The prompt asks it to pull out only the relevant parts, which mostly works, but I've still watched it choke on really bloated reports."}),`
+`,s(e.h3,{id:"scores-wobble",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#scores-wobble",children:n(e.span,{className:"icon icon-link"})}),"Scores wobble"]}),`
+`,n(e.p,{children:"Network conditions, server load, the phase of the moon. I've seen ±5 points between consecutive runs, so a 3-point drop tells you nothing."}),`
+`,s(e.h3,{id:"mobile-is-the-default",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#mobile-is-the-default",children:n(e.span,{className:"icon icon-link"})}),"Mobile is the default"]}),`
+`,s(e.p,{children:["Lighthouse throttles like a mobile device unless you add ",n(e.code,{children:"--preset=desktop"}),". Mobile is usually the worse of the two numbers."]}),`
+`,s(e.p,{children:["You can add more categories (",n(e.code,{children:"--only-categories=performance,accessibility,best-practices,seo"}),") or point it at several URLs. It's a prompt template, so bend it however you like."]})]})}function c(a={}){const{wrapper:e}=a.components||{};return e?n(e,{...a,children:n(l,{...a})}):l(a)}export{c as default,h as toc};

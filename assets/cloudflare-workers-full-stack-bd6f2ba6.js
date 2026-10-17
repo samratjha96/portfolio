@@ -1,12 +1,8 @@
-import{b as n,j as s,F as r}from"./three-f4f913dc.js";function l(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(r,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
+import{b as n,j as s,F as l}from"./three-92ffd73b.js";const i=[{id:"why-workers",text:"Why Workers?",depth:2},{id:"the-stack",text:"The Stack",depth:2},{id:"project-structure",text:"Project Structure",depth:2},{id:"wranglertoml",text:"wrangler.toml",depth:2},{id:"the-hono-app",text:"The Hono App",depth:2},{id:"local-dev",text:"Local Dev",depth:2},{id:"deploying",text:"Deploying",depth:2},{id:"gotchas",text:"Gotchas",depth:2},{id:"frontend",text:"Frontend",depth:2},{id:"when-this-doesnt-work",text:"When This Doesn't Work",depth:2}];function r(a){const e={a:"a",code:"code",h2:"h2",hr:"hr",li:"li",p:"p",pre:"pre",span:"span",strong:"strong",ul:"ul",...a.components};return s(l,{children:[s(e.p,{children:["I just deployed ",n(e.a,{href:"https://space-selfie.zasamrat.workers.dev",children:"Space Selfie"})," to Cloudflare Workers. Single deployment serving both the API and frontend, running on the edge globally, for $0/month. Figured I'd document what actually went into it."]}),`
 `,s(e.h2,{id:"why-workers",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#why-workers",children:n(e.span,{className:"icon icon-link"})}),"Why Workers?"]}),`
 `,n(e.p,{children:"Honestly, for side projects that get sporadic traffic, I didn't want to think about servers. Workers give you 100k requests/day free, no cold starts, and your code runs close to users everywhere. The catch is you're stuck with JavaScript/TypeScript and there are runtime constraints. For an app that makes API calls and does some math? Fine."}),`
 `,s(e.h2,{id:"the-stack",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#the-stack",children:n(e.span,{className:"icon icon-link"})}),"The Stack"]}),`
-`,s(e.ul,{children:[`
-`,s(e.li,{children:[n(e.strong,{children:n(e.a,{href:"https://hono.dev/",children:"Hono"})})," - Web framework built for edge runtimes. Like Express but smaller and doesn't fight the Workers environment."]}),`
-`,s(e.li,{children:[n(e.strong,{children:"TypeScript"})," - Types are nice."]}),`
-`,s(e.li,{children:[n(e.strong,{children:"Wrangler"})," - Cloudflare's CLI. Handles local dev and deploys."]}),`
-`]}),`
+`,s(e.p,{children:[n(e.a,{href:"https://hono.dev/",children:"Hono"})," for the web framework. It's built for edge runtimes, so it feels like Express but smaller and doesn't fight the Workers environment. TypeScript, because types are nice. And Wrangler, Cloudflare's CLI, for local dev and deploys."]}),`
 `,s(e.h2,{id:"project-structure",children:[n(e.a,{"aria-hidden":"true",tabIndex:"-1",href:"#project-structure",children:n(e.span,{className:"icon icon-link"})}),"Project Structure"]}),`
 `,n(e.pre,{children:n(e.code,{children:`workers/
 ├── src/
@@ -98,6 +94,6 @@ npx wrangler deploy
 `,n(e.li,{children:"Complex relational database queries (D1 is SQLite)"}),`
 `,n(e.li,{children:"Websockets without Durable Objects"}),`
 `]}),`
-`,n(e.p,{children:"For APIs and static sites with some dynamic bits, it's solid."}),`
+`,n(e.p,{children:"For APIs and static sites with a few dynamic bits, it's hard to argue with $0/month."}),`
 `,n(e.hr,{}),`
-`,s(e.p,{children:[n(e.a,{href:"https://github.com/samratjha96/space-selfie",children:"Source code for Space Selfie"})," if you want to see the full setup."]})]})}function c(a={}){const{wrapper:e}=a.components||{};return e?n(e,{...a,children:n(l,{...a})}):l(a)}export{c as default};
+`,s(e.p,{children:[n(e.a,{href:"https://github.com/samratjha96/space-selfie",children:"Source code for Space Selfie"})," if you want to see the full setup."]})]})}function c(a={}){const{wrapper:e}=a.components||{};return e?n(e,{...a,children:n(r,{...a})}):r(a)}export{c as default,i as toc};
