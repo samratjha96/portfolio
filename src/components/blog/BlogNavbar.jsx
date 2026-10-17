@@ -1,176 +1,52 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { styles } from "../../styles";
 import { navLinks } from "../../constants/constants";
 import personalLogo from "/personalLogo.png";
-import { menu, close } from "../../assets";
+
+const NavLink = ({ link }) => {
+  if (link.id === "blog") {
+    return (
+      <Link to="/blog/" className="active">
+        {link.title}
+      </Link>
+    );
+  }
+  // Full-page links must not route through the home-page anchors.
+  if (link.isFullPage) return <a href={link.path}>{link.title}</a>;
+  if (link.isExternal) return <Link to={link.path}>{link.title}</Link>;
+  return <Link to={`/#${link.id}`}>{link.title}</Link>;
+};
 
 const BlogNavbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav
-      className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
-      }
-    `}
-    >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
-        >
-          <img src={personalLogo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-semibold cursor-pointer">
-            Samrat Jha
-          </p>
+    <header>
+      <nav className="grid-12 blog-nav">
+        <Link to="/" className="blog-nav-home">
+          <img src={personalLogo} alt="" width={32} height={32} />
+          Samrat Jha
         </Link>
-        <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((link) => {
-            // Special handling for blog link when already on blog pages
-            if (link.id === "blog") {
-              return (
-                <li
-                  key={link.id}
-                  className={`${
-                    active === link.title ? "text-white" : "text-secondary"
-                  } hover:text-white text-[18px] font-normal cursor-pointer`}
-                  onClick={() => setActive(link.title)}
-                >
-                  <Link to="/blog/">{link.title}</Link>
-                </li>
-              );
-            }
-
-            // Full-page links must not route through the home-page anchors.
-            if (link.isExternal) {
-              return (
-                <li
-                  key={link.id}
-                  className={`${
-                    active === link.title ? "text-white" : "text-secondary"
-                  } hover:text-white text-[18px] font-normal cursor-pointer`}
-                  onClick={() => setActive(link.title)}
-                >
-                  {link.isFullPage ? (
-                    <a href={link.path}>{link.title}</a>
-                  ) : (
-                    <Link to={link.path}>{link.title}</Link>
-                  )}
-                </li>
-              );
-            }
-
-            // Section links return to the matching home-page anchor.
-            return (
-              <li
-                key={link.id}
-                className={`${
-                  active === link.title ? "text-white" : "text-secondary"
-                } hover:text-white text-[18px] font-normal cursor-pointer`}
-                onClick={() => setActive(link.title)}
-              >
-                <Link to={`/#${link.id}`}>{link.title}</Link>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="sm:hidden flex flex-1 justify-end items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-[28px] h-[28px] object-contain cursor-pointer"
-            onClick={() => setToggle(!toggle)}
-          />
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className="list-none flex justify-end items-start flex-col gap-4">
-              {navLinks.map((link) => {
-                // Special handling for blog link when already on blog pages
-                if (link.id === "blog") {
-                  return (
-                    <li
-                      key={link.id}
-                      className={`${
-                        active === link.title ? "text-white" : "text-secondary"
-                      } font-poppins font-normal cursor-pointer text-[16px]`}
-                      onClick={() => {
-                        setToggle(!toggle);
-                        setActive(link.title);
-                      }}
-                    >
-                      <Link to="/blog/">{link.title}</Link>
-                    </li>
-                  );
-                }
-
-                // Full-page links must not route through the home-page anchors.
-                if (link.isExternal) {
-                  return (
-                    <li
-                      key={link.id}
-                      className={`${
-                        active === link.title ? "text-white" : "text-secondary"
-                      } font-poppins font-normal cursor-pointer text-[16px]`}
-                      onClick={() => {
-                        setToggle(!toggle);
-                        setActive(link.title);
-                      }}
-                    >
-                      {link.isFullPage ? (
-                        <a href={link.path}>{link.title}</a>
-                      ) : (
-                        <Link to={link.path}>{link.title}</Link>
-                      )}
-                    </li>
-                  );
-                }
-
-                // Section links return to the matching home-page anchor.
-                return (
-                  <li
-                    key={link.id}
-                    className={`${
-                      active === link.title ? "text-white" : "text-secondary"
-                    } font-poppins font-normal cursor-pointer text-[16px]`}
-                    onClick={() => {
-                      setToggle(!toggle);
-                      setActive(link.title);
-                    }}
-                  >
-                    <Link to={`/#${link.id}`}>{link.title}</Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+        <div className="blog-nav-links">
+          {navLinks.map((link) => (
+            <NavLink key={link.id} link={link} />
+          ))}
         </div>
+        <button
+          type="button"
+          className="blog-nav-toggle"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
+          {open ? "Close" : "Menu"}
+        </button>
+      </nav>
+      <div className="blog-nav-panel blog-nav" hidden={!open}>
+        {navLinks.map((link) => (
+          <NavLink key={link.id} link={link} />
+        ))}
       </div>
-    </nav>
+    </header>
   );
 };
 

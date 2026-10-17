@@ -53,12 +53,70 @@ const staticPages = (slugs) => {
   };
 };
 
+// Exports `toc` ([{ id, text, depth }]) from each MDX post so the table of
+// contents is known at render time and matches rehype-slug's ids.
+const rehypeExportToc = () => (tree) => {
+  const text = (node) =>
+    node.type === "text" ? node.value : (node.children || []).map(text).join("");
+  const toc = [];
+  const walk = (node) => {
+    if (node.type === "element" && /^h[23]$/.test(node.tagName) && node.properties?.id) {
+      toc.push({ id: node.properties.id, text: text(node).trim(), depth: Number(node.tagName[1]) });
+      return;
+    }
+    (node.children || []).forEach(walk);
+  };
+  walk(tree);
+
+  const literal = (value) => ({ type: "Literal", value });
+  const entry = (item) => ({
+    type: "ObjectExpression",
+    properties: Object.entries(item).map(([key, value]) => ({
+      type: "Property",
+      kind: "init",
+      method: false,
+      shorthand: false,
+      computed: false,
+      key: { type: "Identifier", name: key },
+      value: literal(value),
+    })),
+  });
+  tree.children.unshift({
+    type: "mdxjsEsm",
+    value: "",
+    data: {
+      estree: {
+        type: "Program",
+        sourceType: "module",
+        body: [
+          {
+            type: "ExportNamedDeclaration",
+            specifiers: [],
+            source: null,
+            declaration: {
+              type: "VariableDeclaration",
+              kind: "const",
+              declarations: [
+                {
+                  type: "VariableDeclarator",
+                  id: { type: "Identifier", name: "toc" },
+                  init: { type: "ArrayExpression", elements: toc.map(entry) },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  });
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     mdx({
-      rehypePlugins: [rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings],
+      rehypePlugins: [rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings, rehypeExportToc],
       remarkPlugins: [remarkGfm, remarkFrontmatter],
     }),
     glob(),

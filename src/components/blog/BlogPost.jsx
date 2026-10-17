@@ -1,16 +1,12 @@
 // ABOUTME: Renders individual blog posts with full SEO optimization
 // ABOUTME: Includes Article structured data, meta tags, canonical URLs, and breadcrumbs
 
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import BlogPostLayout from "./BlogPostLayout";
-import "highlight.js/styles/atom-one-dark.css";
-import {
-  extractFrontMatter,
-  getSlugFromFilename,
-  generateExcerpt,
-} from "../../utils/mdxUtils";
+import BlogLayout, { PostRow } from "./BlogLayout";
+import PostRail from "./PostRail";
+import { formatDate, getLoadedContent, getPost, loadPostContent, posts } from "../../blog/posts";
 
 const SITE_URL = "https://www.samratjha.com";
 const AUTHOR = {
@@ -19,168 +15,77 @@ const AUTHOR = {
   jobTitle: "Senior AI Engineer",
   employer: "NVIDIA",
 };
+const MORE_POSTS = 4;
 
-const BlogPost = () => {
-  const { slug } = useParams();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+// Format date for structured data (ISO 8601)
+const formatDateISO = (dateStr) => (dateStr ? new Date(dateStr).toISOString() : null);
+
+// Article structured data following Google's guidelines
+const articleSchema = (post, canonicalUrl) => {
+  const publishDate = formatDateISO(post.date);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: publishDate,
+    dateModified: publishDate, // Use same as published if no separate modified date
+    author: {
+      "@type": "Person",
+      name: AUTHOR.name,
+      url: AUTHOR.url,
+      jobTitle: AUTHOR.jobTitle,
+    },
+    publisher: {
+      "@type": "Person",
+      name: AUTHOR.name,
+      url: AUTHOR.url,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+    keywords: post.tags.join(", "),
+  };
+};
+
+const breadcrumbSchema = (post, canonicalUrl) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog/` },
+    { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
+  ],
+});
+
+const PostMeta = ({ post }) => (
+  <div className="post-meta">
+    {[
+      ["Author", AUTHOR.name],
+      ["Tags", post.tags.join(", ")],
+      ["Published", formatDate(post.date)],
+      ["Reading time", `${post.minutes} min`],
+    ].map(([label, value]) => (
+      <div key={label}>
+        <div className="label mono">{label}</div>
+        <div className="post-meta-value">{value}</div>
+      </div>
+    ))}
+  </div>
+);
+
+const PostPage = ({ post }) => {
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`;
+  // Preloaded by main.jsx on a direct visit; fetched here after client-side navigation.
+  const [content, setContent] = useState(() => getLoadedContent(post));
 
   useEffect(() => {
-    async function loadPost() {
-      try {
-        setLoading(true);
+    if (!content) loadPostContent(post).then(setContent);
+  }, [content, post]);
 
-        const mdxModules = import.meta.glob("../../blog/posts/*.mdx");
-        const mdxPaths = Object.keys(mdxModules);
-        const matchingPath = mdxPaths.find(
-          (path) => getSlugFromFilename(path) === slug,
-        );
-
-        if (!matchingPath) {
-          setNotFound(true);
-          setLoading(false);
-          return;
-        }
-
-        const rawModules = import.meta.glob("../../blog/posts/*.mdx", {
-          as: "raw",
-          eager: true,
-        });
-        const rawContent = rawModules[matchingPath];
-        const frontMatter = extractFrontMatter(rawContent);
-
-        // Generate description from content if not provided in frontmatter
-        const description =
-          frontMatter.description || generateExcerpt(rawContent, 160);
-
-        const mdxModule = await mdxModules[matchingPath]();
-        const Content = mdxModule.default;
-
-        setPost({
-          title: frontMatter.title || "Untitled Post",
-          date: frontMatter.date || "No date",
-          description: description,
-          tags: frontMatter.tags || [],
-          component: Content,
-          slug: slug,
-        });
-
-        setLoading(false);
-      } catch (error) {
-        console.error("Error loading blog post:", error);
-        setNotFound(true);
-        setLoading(false);
-      }
-    }
-
-    loadPost();
-  }, [slug]);
-
-  // Format date for structured data (ISO 8601)
-  const formatDateISO = (dateStr) => {
-    if (!dateStr || dateStr === "No date") return null;
-    const date = new Date(dateStr);
-    return date.toISOString();
-  };
-
-  // Generate Article structured data following Google's guidelines
-  const generateArticleSchema = () => {
-    if (!post) return null;
-
-    const publishDate = formatDateISO(post.date);
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      datePublished: publishDate,
-      dateModified: publishDate, // Use same as published if no separate modified date
-      author: {
-        "@type": "Person",
-        name: AUTHOR.name,
-        url: AUTHOR.url,
-        jobTitle: AUTHOR.jobTitle,
-      },
-      publisher: {
-        "@type": "Person",
-        name: AUTHOR.name,
-        url: AUTHOR.url,
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": `${SITE_URL}/blog/${post.slug}/`,
-      },
-      keywords: post.tags.join(", "),
-    };
-  };
-
-  // Generate Breadcrumb structured data
-  const generateBreadcrumbSchema = () => {
-    if (!post) return null;
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${SITE_URL}/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Blog",
-          item: `${SITE_URL}/blog/`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: post.title,
-          item: `${SITE_URL}/blog/${post.slug}/`,
-        },
-      ],
-    };
-  };
-
-  if (loading) {
-    return (
-      <BlogPostLayout>
-        <div className="text-center py-20">
-          <h1 className="text-4xl text-white font-semibold mb-4">Loading...</h1>
-        </div>
-      </BlogPostLayout>
-    );
-  }
-
-  if (notFound || !post) {
-    return (
-      <>
-        <Helmet>
-          <title>Post Not Found | Samrat Jha</title>
-          <meta name="robots" content="noindex" />
-        </Helmet>
-        <BlogPostLayout>
-          <div className="text-center py-20">
-            <h1 className="text-4xl text-white font-semibold mb-4">
-              Post Not Found
-            </h1>
-            <p className="text-secondary">
-              The blog post you're looking for doesn't exist.
-            </p>
-          </div>
-        </BlogPostLayout>
-      </>
-    );
-  }
-
-  const PostContent = post.component;
-  const canonicalUrl = `${SITE_URL}/blog/${post.slug}/`;
-  const articleSchema = generateArticleSchema();
-  const breadcrumbSchema = generateBreadcrumbSchema();
+  const Content = content?.default;
+  const morePosts = posts.filter((other) => other.slug !== post.slug).slice(0, MORE_POSTS);
 
   return (
     <>
@@ -201,10 +106,7 @@ const BlogPost = () => {
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:site_name" content="Samrat Jha" />
-        <meta
-          property="article:published_time"
-          content={formatDateISO(post.date)}
-        />
+        <meta property="article:published_time" content={formatDateISO(post.date)} />
         <meta property="article:author" content={AUTHOR.url} />
         {post.tags.map((tag) => (
           <meta key={tag} property="article:tag" content={tag} />
@@ -218,38 +120,83 @@ const BlogPost = () => {
 
         {/* Article Structured Data */}
         <script type="application/ld+json">
-          {JSON.stringify(articleSchema)}
+          {JSON.stringify(articleSchema(post, canonicalUrl))}
         </script>
 
         {/* Breadcrumb Structured Data */}
         <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchema)}
+          {JSON.stringify(breadcrumbSchema(post, canonicalUrl))}
         </script>
       </Helmet>
 
-      <BlogPostLayout title={post.title}>
-        <div>
-          <div className="mb-6">
-            <p className="text-secondary">{post.date}</p>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs bg-[#915eff]/20 text-[#dfd9ff] px-2 py-1 rounded-full"
-                >
-                  #{tag}
-                </span>
-              ))}
+      <BlogLayout>
+        <header className="grid-12 post-hero">
+          <Link to="/blog/" className="post-hero-back mono branch" data-reveal="">
+            BLOG
+          </Link>
+          <div className="post-hero-hd">
+            <h1 id="post-title" data-reveal="" style={{ "--reveal-delay": ".06s" }}>
+              {post.title}
+            </h1>
+            <p className="post-hero-standfirst" data-reveal="" style={{ "--reveal-delay": ".12s" }}>
+              {post.description}
+            </p>
+            <div data-reveal="" style={{ "--reveal-delay": ".18s" }}>
+              <PostMeta post={post} />
             </div>
           </div>
+        </header>
 
-          <article className="prose prose-invert prose-lg max-w-none blog-post-content">
-            <PostContent />
-          </article>
-        </div>
-      </BlogPostLayout>
+        {Content && (
+          <div className="grid-12 post-body" data-reveal="" style={{ "--reveal-delay": ".24s" }}>
+            <PostRail
+              toc={content.toc}
+              title={post.title}
+              minutes={post.minutes}
+              url={canonicalUrl}
+              markdown={post.markdown}
+            />
+            <div className="post-main">
+              <article className="post-prose">
+                <Content />
+              </article>
+              <section className="more-posts">
+                <div className="label mono">More posts</div>
+                {morePosts.map((other) => (
+                  <PostRow key={other.slug} post={other} />
+                ))}
+              </section>
+            </div>
+          </div>
+        )}
+      </BlogLayout>
     </>
   );
+};
+
+const BlogPost = () => {
+  const { slug } = useParams();
+  const post = getPost(slug);
+  if (!post) {
+    return (
+      <>
+        <Helmet>
+          <title>Post Not Found | Samrat Jha</title>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+        <BlogLayout>
+          <div className="not-found">
+            <h1 className="mono">Post not found</h1>
+            <p className="label mono">
+              <Link to="/blog/">└ Back to blog</Link>
+            </p>
+          </div>
+        </BlogLayout>
+      </>
+    );
+  }
+
+  return <PostPage key={post.slug} post={post} />;
 };
 
 export default BlogPost;

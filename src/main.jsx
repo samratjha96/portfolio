@@ -1,8 +1,9 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
+import { getPost, loadPostContent } from "./blog/posts";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -17,6 +18,16 @@ const app = (
   </React.StrictMode>
 );
 
-// The prerendered HTML is a Puppeteer DOM snapshot, not renderToString output. It lacks React's Suspense
-// markers, so hydrating it always fails; render fresh and let React replace it.
-createRoot(rootElement).render(app);
+// The prerendered HTML is a Puppeteer DOM snapshot, not renderToString output. Blog pages hydrate once
+// the current post's body is loaded, so the first render matches. The home page's lazy sections lack
+// Suspense markers in the snapshot, so it renders fresh and React replaces the markup.
+const { pathname } = window.location;
+const post = getPost(pathname.match(/^\/blog\/([^/]+)/)?.[1]);
+
+(post ? loadPostContent(post) : Promise.resolve()).finally(() => {
+  if (pathname.startsWith("/blog") && rootElement.hasChildNodes()) {
+    hydrateRoot(rootElement, app);
+  } else {
+    createRoot(rootElement).render(app);
+  }
+});
