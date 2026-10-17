@@ -1,0 +1,158 @@
+---
+title: Recreating the claude.dev Blog, and What It Says About Taste
+date: 2026-10-17
+description: I rebuilt my blog to work like claude.dev's. How its table of contents and reading indicator work, and why copying a design is no longer the hard part.
+tags: ["css", "react", "performance", "web-dev", "animation"]
+---
+
+I opened [a post on claude.dev](https://claude.dev/blog/solving-code-review-at-anthropic/) to read about code review, and halfway down I realized I was paying more attention to the page than to the post.
+
+The details were small. The table of contents on the left opened a section's subheadings as I scrolled into it and folded them away when I left. In the same column, a progress bar built from `▓` and `░` characters filled in as I read. When the title scrolled off the screen, a smaller copy took its place at the top of the column. Clicking an entry eased the page to that heading over most of a second instead of jumping. None of it called attention to itself, but together it made the page feel finished in a way most blogs, mine included, don't.
+
+So I reverse engineered it and rebuilt my blog to work the same way. Everything you see here was measured off their page and reimplemented on this site's existing Vite and React setup, with no new dependencies.
+
+This post is about itself. If you're on a wide screen, watch the rail while you read. This is also the first post on the site with real H3 subsections, which matters for reasons I'll get to.
+
+## How I took it apart
+
+The process really was as simple as telling Claude:
+
+```
+Make the blog section of my portfolio look like
+https://claude.dev/blog/solving-code-review-at-anthropic/
+
+Focus on the design and the animations around the post: the table of
+contents and how its sections expand, the reading progress bar, and the
+overall aesthetic. Don't just read the HTML. Open it in a browser, scroll
+through it, take screenshots, and experience it the way a reader would.
+Then recreate it without changing my tech stack.
+```
+
+The "don't just read the HTML" part did the most work. [claude.dev](https://claude.dev/) is a Next.js build, so the source is hashed bundles and the initial markup. Everything I liked about the page happens while you scroll, and none of that is visible in a file. So Claude drove a headless browser instead:
+
+1. **Screenshots** at several scroll depths, on desktop and phone widths, to see what changes as you read.
+2. **A dump of every CSS rule the page had loaded**, read from the browser rather than the minified files, so the class names, custom properties, and transitions were all readable.
+3. **A scroll probe** that jumped to fixed positions and recorded which table of contents entry was highlighted, which groups were open, what the progress bar said, and where the title was. Comparing those snapshots showed what triggers each change.
+4. **A timing sample** of the scroll after clicking a table of contents entry, to see whether it was the browser's smooth scroll or their own.
+
+Matching the screenshots against the CSS and the probe output broke the page into a few parts: the table of contents and its expanding groups, the title that moves into the rail, the reading indicator, the staggered entrance at the top, and the one easing curve all of it shares. The rest of this post goes through the ones worth stealing.
+
+## The tree
+
+The table of contents is labeled `Tree` and drawn with `└` branches, like the output of the `tree` command. It tells you you're looking at structure, not navigation, before you've read a word of it.
+
+### Animating to auto height
+
+When you scroll into a section that has subsections, its children unfold under it. You just watched this one do it.
+
+This is the oldest annoying problem in CSS animation: you can't transition `height` to `auto`. The usual workarounds are measuring the content in JavaScript or animating `max-height` to some big number and living with the wrong timing. claude.dev uses a grid instead:
+
+```css
+.subs { display: grid; grid-template-rows: 0fr; visibility: hidden; }
+.subs.open { grid-template-rows: 1fr; visibility: visible; }
+.subs > div { min-height: 0; overflow: hidden; }
+.subs { transition: grid-template-rows .3s var(--ease-out), visibility .3s; }
+```
+
+Grid track sizes *are* animatable, and a `1fr` row resolves to the content's natural height. So the browser does the measuring for you. The `min-height: 0` on the child matters, because a grid item won't shrink below its content by default, and without it nothing collapses.
+
+The `visibility` transition is the subtle part. Visibility doesn't fade. It flips, and when you're hiding it waits until the end of the transition to flip. So the links stay visible while the row collapses, then become hidden, which also takes them out of the tab order. Their CSS also opens a group with `:has(:focus-visible)` when a keyboard user tabs into it, which is a nice touch I didn't copy.
+
+Embarrassingly, none of my existing posts had H3s, so the first time I shipped this, the animation never ran on a real page. This post has subsections partly so the feature finally has something to do.
+
+### Which heading is "on"
+
+I settled on a heuristic where the active section is the last heading that has scrolled above a line one third of the way down the screen. A line right at the top feels wrong. Click a link, land with the heading near the top, and the highlight should agree with you about where you are.
+
+```js
+const line = window.innerHeight / 3;
+let current = 0;
+headings.forEach((el, i) => {
+  if (el && el.getBoundingClientRect().top <= line) current = i;
+});
+setActive(current);
+```
+
+The obvious objection is "use IntersectionObserver." I didn't, on purpose. An observer tells you when something crosses a line. The question here is which heading is the last one above the line, which is about state, not events. Jump from the top of the page to the bottom with an anchor link and nothing crosses anything in between. A scroll listener throttled to one `requestAnimationFrame`, checking a handful of headings, is cheap. And since it only ever sets an index, React skips the render whenever the index hasn't changed, which is almost every frame.
+
+### The title hand-off
+
+Scroll past the big heading and it reappears in small type at the top of the rail. It showed up a few seconds after you started reading. It's triggered by the H1 leaving the screen rather than a fixed scroll offset, so it behaves the same for a one-line title and a three-line one.
+
+It animates with `max-height`, which is normally the hack I just complained about. Here it's fine, because a title has a known maximum size. That's the general rule: `max-height` is only a hack when you're guessing.
+
+## The reading indicator
+
+```
+▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░ 23%
+```
+
+It has filled in a bit more since you started this paragraph. It's just monospace characters, so it can't jitter or reflow, and it needs no SVG or canvas. The percentage is zero-padded (`03%`) so the label never changes width as it counts.
+
+On a phone the rail goes away and the bar becomes a thin line across the top of the screen. claude.dev grows that line by animating `width`, which makes the browser redo layout on every scroll frame. Mine is always full width and scaled with `transform: scaleX()`, which the GPU handles without touching layout. It looks the same. On a slow phone it's cheaper.
+
+## Lessons that travel
+
+Most of what went wrong had nothing to do with this design. These apply to any site.
+
+### A saved snapshot is not server rendering
+
+This site prerenders each page by loading it in a headless browser and saving the HTML. React then takes over that HTML. That looks like server rendering, but it isn't, and the difference caused two bugs.
+
+```jsx
+<span>{post.minutes} min</span>      // React expects two text nodes
+<span>{`${post.minutes} min`}</span> // one, which is what the snapshot has
+```
+
+When the browser saves the HTML, those two adjacent text nodes become one string. On load, React finds one node where it expected two, decides the page doesn't match, and throws away the prerendered HTML. The fix is a template string anywhere a number sits next to text.
+
+`React.lazy` breaks for the same reason. Real server rendering leaves markers where each lazy boundary was, and a snapshot doesn't, so React can't match them up. The fix is to load the current post's code before handing the page to React:
+
+```js
+const post = getPost(window.location.pathname.match(/^\/blog\/([^/]+)/)?.[1]);
+(post ? loadPostContent(post) : Promise.resolve()).finally(() => {
+  /* hydrateRoot or createRoot */
+});
+```
+
+The first render matches the snapshot, and each post still loads as its own chunk.
+
+### Put entrance animations in CSS
+
+The title and metadata at the top of this page slide in with a stagger, and there's no JavaScript involved:
+
+```css
+[data-reveal] {
+  animation: reveal-up 0.7s var(--ease-out) var(--reveal-delay, 0s) backwards;
+}
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(14px); }
+}
+```
+
+The keyframes have no `to` block, so each element animates into its normal style, and one rule works on anything. `backwards` holds the starting state during the delay, so staggered elements don't flash before their turn. And because it's CSS, it plays the moment the HTML paints, before React has loaded. A JS-driven reveal would either flash the content or make it wait for the bundle.
+
+### A font on `*` breaks inheritance
+
+The rest of the site sets its font with a `*` selector. That means no element inherits a font from its parent, because every element matches the rule directly. Any section that wants different fonts ends up in a selector fight. The rail title kept rendering in monospace until I made its selector more specific. Set fonts on `body` and let them inherit.
+
+### Layout shift is about things arriving late
+
+[My tmux config post](/blog/tmux-config/) on Lighthouse, production build, mobile throttling:
+
+| | Score | CLS | LCP |
+|---|---|---|---|
+| Before | 63 to 78 | up to 0.22 | 4.2 to 5.0s |
+| After | 76 to 79 | 0 | 4.1 to 4.4s |
+
+Layout shift went to zero without any work aimed at it. The blog uses system fonts, so there's no web font to swap in, and the post is already in the HTML when it paints. Nothing arrives late, so nothing moves.
+
+## Taste
+
+None of this was hard to copy. A few years ago, reverse engineering a page like this meant hours in devtools. Now I can point an AI agent at a live site and get back its CSS, its timings, and a working version on my own stack in a single sitting.
+
+That changes what's scarce. Taking a design apart is cheap now. Coming up with it in the first place isn't, and the hard part was never the CSS. It's what the designers chose to leave out. Nothing on that page moves unless it's telling you something. The tree opens because you entered a section. The bar fills because you read further. The title shows up because the real one just left. There's no parallax, no hover flourish, no hero image. They borrowed the look of a terminal and stopped well short of making the page pretend to be one. Each of those is a judgment about when to stop, and you can't get that from a stylesheet. I could measure every animation to the millisecond and still not know which ones they tried and threw away. As copying gets easier, that kind of taste is what will set people apart.
+
+I'm comfortable borrowing here. My blog is where I dump things I've learned, and I've never put much thought into how it looks. Borrowing from designers who clearly did seemed better than leaving it plain. I plan to use opportunities like this to build up my own taste and apply it to the products and experiences I build.
+
+The source is [on GitHub](https://github.com/samratjha96/portfolio). The interesting parts are `src/components/blog/PostRail.jsx` and `blog.css`.

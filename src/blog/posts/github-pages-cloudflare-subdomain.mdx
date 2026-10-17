@@ -1,78 +1,73 @@
 ---
-title: Configure a GitHub Pages Subdomain with Cloudflare DNS
+title: Pointing a Cloudflare Subdomain at GitHub Pages
 date: 2026-07-22
-description: Configure a GitHub Pages subdomain with Cloudflare DNS. Covers the required GitHub setting, CNAME record, validation, HTTPS, and deployment-mode differences.
+description: A GitHub Pages project on a Cloudflare subdomain. The setup order that matters, the CNAME file that quietly vanishes, and why I leave the proxy off.
 tags: ["github-pages", "cloudflare", "dns", "deployment"]
 ---
 
-Use a subdomain when you need a stable public name for a GitHub Pages project. I use `gallery.example.com` below as the example. Replace it with your domain.
+A GitHub Pages project gets a URL like `USERNAME.github.io/project-name`, which is fine until you want to hand it to someone. A subdomain fixes that. I'll use `gallery.example.com` throughout; swap in your own.
 
-This guide covers a project that publishes from a branch and uses Cloudflare for DNS. The default GitHub Pages URL remains available during setup.
+This assumes the project publishes from a branch and Cloudflare runs your DNS. Nothing here takes the default `github.io` URL down, so you can poke at it while the new name propagates.
 
-## Verify the domain first
+## Step zero: verify the domain
 
-Verify the domain in the GitHub account or organization settings before you configure the repository. GitHub uses a TXT record for this check. Keep the TXT record after verification.
+Before touching the repository, verify the domain in your GitHub account or organization settings. GitHub hands you a TXT record to add. Once verification passes, leave the TXT record where it is. It's tempting to clean it up. Don't.
 
-## Set the domain in GitHub first
+## Then claim it in the repo
 
-In the repository, open **Settings > Pages**. Under **Custom domain**, enter `gallery.example.com` and save the setting.
+In the repository, go to **Settings > Pages**, enter `gallery.example.com` under **Custom domain**, and save.
 
-The order matters. Set the custom domain in GitHub before you create the DNS record. GitHub recommends this order because DNS that points to GitHub before the repository claims the domain can create a takeover risk.
+The order is the part people get wrong. GitHub wants the repository to claim the domain _before_ any DNS points at GitHub, because a record pointing at GitHub with nobody claiming it is an invitation for someone else's repo to take it over. So: repo setting first, DNS second.
 
-For branch publishing, GitHub adds an uppercase `CNAME` file to the root of the publishing source. The file contains only the domain name:
+For branch publishing, saving that setting makes GitHub commit an uppercase `CNAME` file to the root of your publishing source. Its entire contents:
 
 ```
 gallery.example.com
 ```
 
-Keep the file in the publishing source. A build that replaces the publishing directory can remove it. This is an easy failure to miss.
+This tiny file is the thing that bites. If your build wipes and regenerates the publishing directory, it can take `CNAME` with it, and the custom domain silently stops working on the next deploy. Make sure your build preserves it.
 
-This rule does not apply to a custom GitHub Actions workflow. In that mode, GitHub ignores `CNAME` and does not require it.
+If you deploy with a custom GitHub Actions workflow instead, none of this applies. GitHub ignores `CNAME` in that mode and doesn't need it.
 
-## Add the Cloudflare DNS record
+## The Cloudflare record
 
-Create this record in the Cloudflare DNS zone:
+One record in the Cloudflare DNS zone:
 
 | Type | Name | Target | Proxy status |
 | --- | --- | --- | --- |
 | CNAME | gallery | `USERNAME.github.io` | DNS only |
 
-Replace `USERNAME` with the GitHub account or organization name. Do not add the repository name to the target. For example, a project at `USERNAME.github.io/project-name` still uses `USERNAME.github.io` as the CNAME target.
+`USERNAME` is the GitHub account or organization name. The repository name does _not_ go in the target. A project living at `USERNAME.github.io/project-name` still points at plain `USERNAME.github.io`. GitHub works out the rest from the custom domain you set in the repo.
 
-This example keeps the record DNS-only during setup. GitHub documents CNAME validation, while Cloudflare returns its own addresses for proxied records. Cloudflare gives general proxy guidance for web-serving CNAME records, but it does not give GitHub Pages-specific proxy guidance.
+I keep it DNS-only (grey cloud) during setup. GitHub's docs describe validating a CNAME, and a proxied record makes Cloudflare answer with its own addresses instead. Cloudflare has general advice about proxying web-serving CNAMEs, but nothing specific to GitHub Pages, so I'd rather not guess.
 
-Do not treat a proxy change as a DNS toggle. It changes the request path. Test certificate renewal, redirects, and cache behavior after the change.
+If you do flip the proxy on later, every request starts going through Cloudflare first. That orange cloud looks like a toggle and behaves like a new hop in your request path, so re-test certificate renewal, redirects, and caching afterwards.
 
-## Verify the record
+## Check the record
 
-Check the CNAME record before you change any other setting:
+Before changing anything else, ask DNS what it thinks:
 
 ```sh
 dig gallery.example.com +noall +answer -t CNAME
 ```
 
-The response should show `gallery.example.com` as a CNAME for `USERNAME.github.io`.
+You want `gallery.example.com` coming back as a CNAME for `USERNAME.github.io`.
 
-DNS changes can take up to 24 hours. Do not wait and change records at random. Check the record again if GitHub cannot validate the domain.
+Propagation can take up to 24 hours. The wrong move during that window is to start editing records on a hunch. If GitHub can't validate the domain, run `dig` again and look at what's actually there.
 
-## Enable HTTPS
+## HTTPS
 
-Return to **Settings > Pages** after GitHub validates the domain. Enable **Enforce HTTPS** when the control becomes available.
+Once GitHub validates the domain, go back to **Settings > Pages** and tick **Enforce HTTPS**. That checkbox can itself take up to 24 hours to become clickable, because GitHub has to issue the certificate first.
 
-GitHub can take up to 24 hours to make this control available. Do not add an HTTPS redirect rule until the GitHub Pages certificate is active.
+Don't add an HTTPS redirect rule on the Cloudflare side until the GitHub Pages certificate is live. Redirecting to an HTTPS endpoint that has no certificate yet gets you nowhere.
 
-## Avoid wildcard DNS records
+## No wildcards
 
-Do not use a wildcard DNS record such as `*.example.com` for GitHub Pages. GitHub warns that wildcard records can expose unclaimed subdomains to takeover.
+Don't use a wildcard record like `*.example.com` for this. GitHub explicitly warns that wildcards leave unclaimed subdomains open to takeover, which is the same problem the setup order above exists to avoid.
 
-## Deployment checks
+## After every deploy
 
-Use these checks after each deployment. They catch most configuration drift:
-
-- Confirm that the custom domain remains set in **Settings > Pages**.
-- For branch publishing, confirm that the publishing source still contains `CNAME`.
-- Confirm that the CNAME target is `USERNAME.github.io`.
-- Confirm that HTTPS is enabled before you require HTTPS-only asset URLs.
+Configuration drift here is quiet, so I check four things after a deploy. The custom domain should still be set in **Settings > Pages**. For branch publishing, `CNAME` should still be sitting in the publishing source. The DNS target should still be `USERNAME.github.io`. And HTTPS should be enforced before anything starts depending on HTTPS-only asset URLs.
 
 ## References
 

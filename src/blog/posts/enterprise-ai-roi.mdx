@@ -1,66 +1,62 @@
 ---
-title: The AI ROI Gap
+title: The AI ROI Gap Is a Definition-of-Done Problem
 date: 2026-03-02
-description: Companies are pouring money into AI and most have almost nothing to show for it. The projects actually working aren't the exciting ones.
+description: Most enterprise AI spend returns almost nothing. The projects that pay off share one dull trait: everyone agrees on what finished looks like.
 tags: ["ai", "enterprise", "productivity", "analysis"]
 ---
 
-I've been looking at enterprise AI adoption numbers lately and something doesn't add up.
+Enterprise AI adoption numbers read like a restaurant that keeps buying ovens and never serves dinner.
 
-Spending is up everywhere. Every earnings call has an AI section. And yet: research into enterprise AI adoption finds only 4% of companies report _significant_ returns. 95% of pilots fail before scaling. Only 26% of organizations ship a working product at all.
+Spending is up everywhere, and every earnings call has its AI paragraph. Then you read the research. BCG surveyed 1,000 executives and found that only 4% of companies consistently get substantial value from AI, and only 26% have built the capabilities to get past the proof-of-concept stage at all. MIT's NANDA initiative looked at enterprise generative AI pilots and found that 95% of the organizations it studied had no measurable return to show for them.
 
-The gap between the hype and the ROI has a weird explanation. The companies making money aren't doing what everyone else is building.
+My read on why is unglamorous. The models are mostly fine. The projects that fail never answered one question precisely: what does done look like? The projects that make money tend to be the ones where the answer is so obvious nobody thought to write it down.
 
-## Where the money went
+## The budget went to the hardest problems first
 
-Organizations put more than half their AI budgets into sales and marketing tools. Makes sense on paper: AI should generate leads, improve conversion, personalize outreach at scale. Revenue is measurable. Easy to justify to a CFO.
+According to the NANDA report, more than half of corporate AI budgets go to sales and marketing tools. I understand the appeal. Revenue is measurable, and a CFO likes being able to draw a line from "AI" to "pipeline."
 
-The actual ROI data points the other direction. The highest returns came from back-office automation. Invoice processing. Fraud detection. Internal routing and classification. Stuff nobody demos at a conference.
+The returns point the other way. The report found the strongest returns in the back office: process automation, cutting outsourcing, operational plumbing. Nobody gives a keynote about invoice matching.
 
-This isn't surprising if you think about it for a minute. Sales and marketing AI operates in an adversarial environment where your competitors are running the same tools, customers are developing immunity to AI-generated content, and success still requires human judgment about timing and relationships. Back-office automation competes against _a spreadsheet_. If you automate invoice matching at 90% accuracy, you've won, because the human doing it at 85% costs $80k a year and hates the job.
+Through the definition-of-done lens this stops being surprising. "Generate more qualified leads" is a fuzzy target in an adversarial market. Your competitors bought the same tools, buyers have grown an immune response to AI-written email, and the parts that actually close deals are still human. Invoice matching has a correct answer: the invoice matches the purchase order or it doesn't. The incumbent you're replacing is a spreadsheet and a tired person on a Thursday afternoon.
 
-The companies that got good at AI started with the boring stuff. The companies still failing started with the chatbot.
+My guess is that a lot of the struggling companies started with a chatbot, because a chatbot demos well, and invoice matching has never once demoed well.
 
-If your company is in the second group and you're trying to figure out where to actually start, [this is what I do](/ai/).
+(If you're trying to figure out where to start instead, [this is what I do](/ai/).)
 
-## The data problem everyone misdiagnoses
+## "Data quality" is usually the wrong diagnosis
 
-80% of AI projects fail before production. Post-mortems almost always say the same thing: data quality.
+The figure that gets passed around is that more than 80% of AI projects fail. RAND repeated that estimate in a 2024 report, then did something more useful than repeat it. Its researchers interviewed 65 experienced data scientists and engineers about *why* projects fail. Bad data was on the list. But the most common root cause was that people misunderstood or miscommunicated what problem the project was supposed to solve.
 
-So companies hire data engineers, buy data governance platforms, start a data quality initiative. And still fail.
+That matches what I see. "Data quality" is often a polite name for "we never pinned down the task." You can't tell whether your data is good enough until you know what it's for, so the data initiative launches, runs its course, and leaves the real question exactly where it was.
 
-The actual issue is bidirectional. AI tools don't adapt to how your organization works. But organizations also don't have frameworks for integrating AI into how they actually work. You can't fix one without the other.
+ChatGPT works well for individuals because the individual quietly supplies the definition of done. They steer it, notice when it's wrong, and throw away the bad output without filing a ticket. An organization needs consistent, auditable output wired into processes that predate the transformer paper. There's no one in the loop doing that judgment for free anymore, so it has to be written down in advance, and writing it down is the step most "AI transformations" skip.
 
-Generic tools fail at enterprise scale not because they're bad tools. It's that enterprise workflows are _specific_. ChatGPT works great for an individual who can steer it, correct it, and use it opportunistically. It falls apart for an organization that needs consistent, auditable outputs woven into processes designed in 2012.
+## The agent did exactly what it was told
 
-Most "AI transformations" are trying to adapt the organization to the tool. The ones that work figured out the specific task first, then found the tool for that task.
+One failure mode rarely makes the case studies: agents that work correctly and still cause a mess.
 
-## When the AI works exactly as intended
+Customer service agents have committed companies to deals they never meant to offer, like 50% discounts on products that weren't discountable and full refunds on non-refundable tickets. The agents weren't hallucinating. They'd been told to resolve complaints, and a 50% discount resolves a complaint quickly. Nobody had written down what a resolution was *not* allowed to look like.
 
-There's a failure mode that doesn't make it into case studies: agents that function correctly and still cause disasters.
+Loan decision agents have passed every technical benchmark and then failed to produce fair-lending justifications when regulators asked. The objective was "approve good loans." "Be able to explain yourself to a regulator" never made it into the spec.
 
-Customer service agents have committed companies to binding contracts. 50% discounts on non-discountable products. Full refunds on non-refundable tickets. The agents weren't hallucinating. They were resolving complaints, which is what they were told to do. They just didn't have the judgment to understand "resolve" has limits.
+Both are specification bugs. The missing half of each objective was exactly the part a human employee would have known without being told, which is why nobody thought to tell the machine.
 
-Loan decision agents have passed every technical benchmark but couldn't produce fair-lending citations when regulators asked. The system worked. The deployment failed.
+## Humans in the loop wear out
 
-This is different from a hallucination problem. The model output was correct for the objective it was given. The objective was wrong. Someone defined "resolve customer complaints" without defining what resolution isn't allowed to look like, and nobody thought about the regulator question until after launch.
+The standard response to agents doing surprising things is a human in the loop: every action gets approved before it runs.
 
-## The safety mechanism problem
+Then the approval requests arrive by the hundreds per day. People click through without reading, and some teams end up switching on auto-approve because the interruptions are wrecking everyone's actual work. The safety layer erodes without any attacker involved, purely through the predictable behavior of people who are interrupted all day.
 
-Organizations building agentic systems quickly learned that humans need to be in the loop. Every action gets approved before execution. Reasonable.
+An approval only means something if the reviewer can tell in a few seconds what they're approving. If they can't, you've built a slow rubber stamp and are paying a salary to operate it.
 
-Then users started getting hundreds of approval requests per day. Sometimes thousands. They clicked through without reading. Eventually some organizations enabled auto-approve modes because the constant interruptions were destroying productivity.
+## What working looks like
 
-The human review layer became the vulnerability. Not because attackers exploited it, but because humans adapted to being constantly interrupted by making the interruptions stop. Normal behavior. Completely predictable. Apparently not anticipated.
+Fraud detection keeps coming up as a genuine success, and its shape is worth copying. One agent flags anomalies, another checks compliance, a third writes up the case, and a human makes the call. The machines do the part that means chewing through enormous volumes of transactions. The person does the judgment, on a handful of well-prepared cases rather than a firehose.
 
-## What's actually working
+The task is narrow, the failure modes were known before launch, and you can tell afterward whether it worked, because the fraud was caught or it wasn't. Done was defined before anyone wrote a prompt.
 
-Fraud detection keeps coming up as a real success. The pattern: one agent flags anomalies, a second checks compliance, a third writes the summary. A human makes the final call. AI handles the parts that require processing thousands of data points in milliseconds; the human handles the judgment.
-
-It works because the task is narrow and well-defined. Failure modes are understood in advance. The human role is real, not performative. Success is measurable: fraud got caught or it didn't.
-
-That pattern doesn't map to every use case. But it explains why back-office numbers are better. Narrow, specific, auditable tasks where the cost of doing it wrong is known and the definition of done is unambiguous.
+That pattern won't fit every use case. It does explain the back-office numbers better than any argument about which model is smartest.
 
 ---
 
-Sources: MIT Sloan research on enterprise AI adoption · International AI Safety Report 2026 (Yoshua Bengio, 100+ researchers)
+Sources: [BCG, "Where's the Value in AI?"](https://media-publications.bcg.com/BCG-Wheres-the-Value-in-AI.pdf) (October 2024) · MIT NANDA, "The GenAI Divide: State of AI in Business 2025" · RAND, "The Root Causes of Failure for Artificial Intelligence Projects and How They Can Succeed" (2024) · [International AI Safety Report 2026](https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026)

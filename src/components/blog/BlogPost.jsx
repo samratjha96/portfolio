@@ -63,7 +63,6 @@ const PostMeta = ({ post }) => (
   <div className="post-meta">
     {[
       ["Author", AUTHOR.name],
-      ["Tags", post.tags.join(", ")],
       ["Published", formatDate(post.date)],
       ["Reading time", `${post.minutes} min`],
     ].map(([label, value]) => (

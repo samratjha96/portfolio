@@ -27,14 +27,7 @@ Pick **Self-hosted**, set the domain to your public hostname:
 Application domain: chat.example.com
 ```
 
-Then create a policy:
-
-- **Policy name:** whatever you want
-- **Action:** Allow
-- **Selector:** Emails
-- **Value:** add each email you want to allow
-
-That's it on the Cloudflare side.
+Then create a policy. Name it whatever you want, set the action to Allow, pick Emails as the selector, and add every address you want to let in. Nothing else to do on the Cloudflare side.
 
 ## How it works
 
@@ -56,7 +49,7 @@ Your app sees nothing. No auth headers to parse, no middleware to add, no OAuth 
 
 ## Disabling app-level auth
 
-Since Cloudflare handles auth, you can strip out whatever login your app ships with — OIDC, OAuth, magic links, whatever. One gotcha: if the app's Docker image has auth defaults baked in, deleting the lines from your env override file won't actually disable them. The image defaults kick back in. You need to explicitly set every auth-related variable to an empty string so the app treats them as "not configured."
+Since Cloudflare handles auth, you can strip out whatever login your app ships with (OIDC, OAuth, magic links, whatever). One gotcha: if the app's Docker image has auth defaults baked in, deleting the lines from your env override file won't actually disable them. The image defaults kick back in. You need to explicitly set every auth-related variable to an empty string so the app treats them as "not configured."
 
 ## Session management
 
@@ -76,7 +69,7 @@ If you had `COOKIE_SECURE=true` set for your app's own auth, keep it. Cloudflare
 
 **This works for any app**
 
-The nice thing about this approach is it's app-agnostic. I could put the same Access policy in front of any service behind my tunnel: Stirling PDF, Pocketbase, whatever. No code changes to any of them.
+My favorite part is that it doesn't care what the app is. I could put the same Access policy in front of any service behind my tunnel: Stirling PDF, Pocketbase, whatever. No code changes to any of them.
 
 ## Cost
 
