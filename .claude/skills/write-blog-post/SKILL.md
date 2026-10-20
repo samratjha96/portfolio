@@ -7,7 +7,9 @@ description: Write, revise, retitle or audit a post for this site's blog (src/bl
 
 ## Who this is for
 
-The author writes this blog to share what they learned while building, configuring or thinking through something. The reader is an engineer who landed here from search or a link. They want two things: the insight, and confidence that the person telling them actually did the work. They will leave the moment the post reads like filler, a changelog, or generated text.
+The author writes this blog to share what they learned while building, configuring or thinking through something. The reader is someone technical who landed here from search or a link and is reading casually, often on a phone. They want two things: the insight, and confidence that the person telling them actually did the work. They are not going to rebuild the thing from the post. They will leave the moment the post reads like filler, a changelog, documentation, or generated text.
+
+Rigor belongs in the research, not on the page. Check everything, then write down the conclusions in a few plain sentences. A post that shows all the checking is exhausting to read.
 
 So every post should do three things:
 
@@ -17,7 +19,7 @@ So every post should do three things:
 
 When this skill conflicts with a general writing skill, this one wins for blog posts. In particular, don't walk through methodology for its own sake, and don't hedge conclusions the evidence supports.
 
-Correctness outranks voice. The voice rules below shape how the author's material is said. They never create material: an opinion, admission, motive, experience or action that the author didn't give you and no record shows is a fabrication, however much it sounds like them. That includes work you did while writing: if you ran a measurement, don't write it up as something the author did. Report it to the author and let them decide whether to adopt it.
+Correctness outranks voice. The voice rules below shape how the author's material is said. They never create material: an opinion, admission, motive, experience or action that the author didn't give you and no record shows is a fabrication, however much it sounds like them. That includes work you did while writing: if you ran a measurement, don't write it up as something the author did. Report it to the author and let them decide whether to adopt it. The writing process stays off the page too: no "I haven't run Lighthouse", no "the project notes say", no mention of the repo's agent instruction files. Those go in your handoff.
 
 ## Before drafting
 
@@ -38,7 +40,14 @@ These apply to both tracks.
 
 **Teach findings, not methodology.** The reader wants what the author learned, not the steps they took to learn it. Tool names, script counts and the order things were tried only belong if the reader needs them to act. The author once cut a whole methods section with: "Why does the user need to know we used Puppeteer or the exact steps. We should teach them what we learned while doing it." A short process section is fine when the process is the surprising part, as long as it stays a paragraph or a short list.
 
-**Apply the senior-engineer test to every detail.** Would an experienced engineer learn something from it, or care? If not, cut it. Exact values, file-by-file changes and config diffs fail this test unless the value itself is the lesson. The author on a paragraph of exact `clamp()` values: "Would a senior web dev engineer really care about stuff like that? ... Call out any clever techniques but don't make it a boring read off of the contents of the change."
+**Explain the idea, not the implementation.** Give each technique the one or two sentences a reader needs to get the idea and reuse it. Function names, exact constants, pixel values, CSS minimums and edge-case qualifications are implementation; they belong in the code, not the post. The author on a paragraph of exact `clamp()` values: "Would a senior web dev engineer really care about stuff like that? ... Call out any clever techniques but don't make it a boring read off of the contents of the change." And on a draft that explained a technique like this: "very very annoying and excruciating detail... insane for a casual reader."
+
+- Bad: "Each project server has a real `<a href="#project-N">` laid over its front panel. On every draw, `place()` projects the four corners of that panel through the current matrix and sets the anchor's size and position to the screen-space bounding box. ... Project servers are placed at least two units apart, the anchor height has a floor of 18px, and the CSS gives the rack box a 380px minimum height so servers never sit closer than a 24px touch target. The bounding box is also looser than the panel when the rack is rotated, though the sway range is narrow."
+- Good: "Each server has an ordinary link laid on top of it, moved every frame to follow the 3D. Keyboards, screen readers and browsers without WebGL all get working links, and there's no 3D hit-testing code at all."
+
+Test each detail: would the reader notice if it were gone? If not, cut it. An exact value stays only when the value itself is the lesson ("94% smaller").
+
+**Fix overstatements by cutting, not by qualifying.** When a claim turns out to be slightly wrong, remove it or make it smaller. Don't bolt on a caveat ("though the sway range is narrow"). Caveats pile up across revisions until every paragraph argues with itself.
 
 **Don't present basics as insight.** If any competent practitioner already does it, it isn't a finding. The author on a line praising smaller headings: "Isn't that basic? Why call it out." Spend words on judgment calls, non-obvious mechanisms and things that went wrong.
 
@@ -74,7 +83,7 @@ For how-tos, tool and config walkthroughs, and technical deep dives. The best en
 2. **The obvious approach and why it falls short.** Name the rejected alternative and the reason: "OTs were unnecessarily complex for our problem space" (Figma).
 3. **The technique**, in the smallest snippet that shows it. Five lines beats fifty.
 4. **Why it works.** Explain the mechanism, not just the result. A weak "why" beats no "why".
-5. **The subtle part.** Cover the edge case, the line that looks optional but isn't, or the condition under which it breaks.
+5. **The subtle part**, only if the reader would hit it when they try this: the line that looks optional but isn't, or the condition under which it breaks. One sentence, not a catalog of edge cases.
 6. **When not to use it**, if there's a real answer. State limits as choices: "This is why simultaneous editing of the same text value doesn't work in Figma."
 
 **Use arithmetic to justify a design.** A back-of-envelope calculation beats an adjective: "over three years to migrate one hundred million objects" (Stripe) is why they built the tooling.
@@ -198,6 +207,7 @@ Fix every instance across the whole post, not only the line someone pointed at. 
 
 ## Formatting
 
+- **Length:** existing posts run 300 to 1,300 words, with one longer deep dive. If a draft is longer than the post it's most like, cut detail before cutting ideas.
 - **Paragraphs:** short, usually two to four sentences.
 - **Headings:** sentence case and short. Prefer a heading that states the finding or claim ("WebP alone took 94% off") over a topic label ("WebP conversion"), so the table-of-contents rail reads as a summary of the post. H2 for each main idea, H3 only for real subsections. Both appear in the rail, so they must make sense out of context.
 - **Lists:** use them for things that really are parallel, such as steps, options or gotchas. Arguments and explanations go in prose.
@@ -222,7 +232,7 @@ Fix every instance across the whole post, not only the line someone pointed at. 
 - **Mark what you didn't test.** Separate what the author observed, what the docs say, and what is an estimate.
 - **Claims must follow from the post's own evidence.** Every comparison, superlative or ratio ("bigger", "most", "only", "half", "the real fix") has to be true of the numbers in the post. Check the thesis against the post's own table before anything else.
 - **Claims about what the software does need the code path, not a skim.** "Hovering X lights Y", "it falls back to Z", "crawlers see W" are easy to get wrong from reading code. Run it when you can (a headless browser, the built HTML), or trace the specific path and confirm the line that does it. If neither is possible, don't state it.
-- **Each number has one value, one unit and a date.** The same quantity reads the same everywhere (not "9MB" in prose and "8.7MB" in the table). Prose that describes a table must be true of that table. A measurement from a different time than the event it describes is labeled as such or left out; today's bundle size is not last year's.
+- **Each number has one value and one unit, and you know when it was measured.** The same quantity reads the same everywhere (not "9MB" in prose and "8.7MB" in the table). Prose that describes a table must be true of that table. A measurement from a different time than the event it describes is labeled as such or left out; today's bundle size is not last year's. The measurement date is for your records; put it on the page only when timing is the point, such as a before and after.
 - **Don't fact-check the author's personal notes, memories or experiences.** Those are theirs. Measurable claims about their own work are different: check them against the artifact (git, the build, the files). If the author's number disagrees with the artifact, use the artifact's and tell them.
 - **Cite sources at the end.** Posts that rely on outside sources end with a `---` rule, then a `Sources:` line with ` · ` between entries, linked where possible. How-tos can instead end with a short list of the docs they used.
 
@@ -257,11 +267,11 @@ Fix every instance across the whole post, not only the line someone pointed at. 
 3. Draft, using the track's techniques.
 4. Verify every outside fact. Fix or replace whatever doesn't hold.
 5. Revise in this order:
-   - **Cut:** methodology, changelog detail and basics.
+   - **Cut:** methodology, changelog detail, implementation detail and basics.
    - **Voice:** read each sentence aloud and run the patterns to cut.
    - **Formatting.**
    - **Title and description.**
-6. Verify with a fresh subagent (next section). Fix every finding, then verify the revised draft with another fresh subagent. Repeat until an audit comes back with no blocking findings, up to three rounds. Fixing findings does not verify a draft, because fixes introduce new errors; the step after any fix is another audit, never the handoff. Only when the third round still has blocking findings do you stop, and then the draft is unverified; say so in the handoff.
+6. Verify with a fresh subagent (next section). Fix every finding, preferring to cut over adding qualifiers, then verify the revised draft with another fresh subagent. Repeat until an audit comes back with no blocking findings, up to three rounds. Fixing findings does not verify a draft, because fixes introduce new errors; the step after any fix is another audit, never the handoff. Only when the third round still has blocking findings do you stop, and then the draft is unverified; say so in the handoff.
 7. Build and look at the result. Run `npm run build` and `npm run preview`, then open the post at desktop and phone widths. Check that the table-of-contents rail reads well, links resolve, code blocks fit and images load.
 8. Show the author the draft with the questions only they can answer, and anything you measured that they might want to claim. Don't hand back checks you could have run yourself. When they or a verifier flag one line, find every line in the post with the same problem and fix them all.
 
@@ -287,9 +297,10 @@ Use this prompt, filling in the brackets:
 > 3. **Claims.** List every comparison, superlative, ratio and causal claim, including the thesis and the title. Check each against the numbers in the post and the source. Flag any the evidence doesn't support or contradicts. Flag any claim about what other people or "most advice" do that has no source.
 > 4. **Outside facts.** Check every external statistic, quote, limit, price and named incident against a primary source. Flag what doesn't hold or isn't cited.
 > 5. **Structure and thought.** Name the post's track. State the takeaway in one sentence from the post alone. For each H2, write the lesson a reader could apply in their own codebase; flag any H2 where you can only describe it in this repo's terms, or that tours what the code does without saying why. Do the H2s mirror the source's item list? Flag sections that teach basics a competent engineer already knows, or that read like a changelog or methods section. List every "wasn't measured", "not checked" or similar disclaimer and say whether a command or doc could have settled it. Flag a post that never recommends or judges anything. Check the post against its track's techniques and list the ones it misses that would make it stronger, such as a missing steelman, an unbounded personal claim, a result with no cost, or an ending that recaps instead of handing the reader something.
-> 6. **Voice and patterns.** Apply each test in the skill's "Patterns to cut" section to every sentence, including the title and description. Report every hit, not a sample.
-> 7. **Mechanics.** Grep for em dashes. Count the description's characters. Check headings are sentence case, internal links have trailing slashes, and frontmatter matches the skill.
+> 6. **Reader.** Read the post as someone technical reading casually on a phone, who will never open the code. Quote every sentence that carries implementation rather than an idea: function or variable names, exact constants and pixel values, CSS details, edge-case qualifications, caveats tacked onto a claim. Name any paragraph you'd skim and any section that reads like documentation. Give the word count and compare it with the existing post most like it.
+> 7. **Voice and patterns.** Apply each test in the skill's "Patterns to cut" section to every sentence, including the title and description. Report every hit, not a sample.
+> 8. **Mechanics.** Grep for em dashes. Count the description's characters. Check headings are sentence case, internal links have trailing slashes, and frontmatter matches the skill.
 >
-> Mark each finding BLOCKING or MINOR. BLOCKING means a reader would be misled or the author embarrassed: a false or unsupported claim, a wrong or inconsistent number, an unsourced first-person statement, a contradiction, a section that is inventory rather than a lesson, or an opinion post resting on the author's project alone. Everything else is MINOR.
+> Mark each finding BLOCKING or MINOR. BLOCKING means a reader would be misled or the author embarrassed: a false or unsupported claim, a wrong or inconsistent number, an unsourced first-person statement, a contradiction, a section that is inventory rather than a lesson, a paragraph a casual reader would skim for its implementation detail, or an opinion post resting on the author's project alone. Everything else is MINOR.
 >
 > End with the three findings that would most embarrass the author if the post went live as is.
