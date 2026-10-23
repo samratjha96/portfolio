@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en" style="--line-color: #FFF;"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/personalLogo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your LLM Gateway Is Breaking Prompt Caching | Samrat Jha</title>
+    
+    
+    
+    <meta name="robots" content="index, follow">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://umami.bootloop.cc" crossorigin="">
+
+    <!-- Canonical URL -->
+    
+
+    <!-- LLMs.txt for AI agents -->
+    <link rel="llms-txt" href="/llms.txt">
+
+    <!-- Open Graph / Facebook -->
+    
+    
+    
+    
+    
+    <meta property="og:image" content="https://www.samratjha.com/personalLogo.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    
+    
+    
+    
+    <meta name="twitter:image" content="https://www.samratjha.com/personalLogo.png">
+
+    <!-- Schema.org structured data -->
+    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/cbcfbf2f/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/cbcfbf2f/www-widgetapi.vflset/www-widgetapi.js" async=""></script><script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Samrat Jha",
+        "url": "https://www.samratjha.com/",
+        "image": "https://www.samratjha.com/personalLogo.png",
+        "jobTitle": "Senior AI Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "NVIDIA"
+        },
+        "description": "AI engineer at NVIDIA with 7+ years of experience architecting large-scale distributed systems at AWS. Expert in cloud infrastructure, Generative AI, and building systems at scale.",
+        "sameAs": ["https://github.com/samratjha96"],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Generative AI",
+          "Machine Learning",
+          "Distributed Systems",
+          "Cloud Architecture",
+          "AWS",
+          "NVIDIA",
+          "Large-Scale Infrastructure",
+          "Python",
+          "CUDA"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Samrat Jha Portfolio",
+        "url": "https://www.samratjha.com/",
+        "description": "Portfolio and technical blog of Samrat Jha, AI engineer at NVIDIA with extensive AWS infrastructure experience",
+        "author": {
+          "@type": "Person",
+          "name": "Samrat Jha"
+        }
+      }
+    </script>
+
+    <script defer="" src="https://umami.bootloop.cc/script.js" data-website-id="bdbad683-6e04-45f6-a3a6-f09ea3b42f01"></script>
+    <script type="module" crossorigin="" src="/assets/index-8dd95c2a.js"></script>
+    <link rel="modulepreload" crossorigin="" href="/assets/three-92ffd73b.js">
+    <link rel="modulepreload" crossorigin="" href="/assets/vendor-b1339a3f.js">
+    <link rel="stylesheet" href="/assets/index-4d1d096e.css">
+  <link rel="modulepreload" as="script" crossorigin="" href="/assets/YouTube-b4569e04.js"><script type="text/javascript" charset="utf8" async="" src="https://www.youtube.com/iframe_api"></script><link rel="modulepreload" as="script" crossorigin="" href="/assets/prompt-caching-rabbit-hole-668771ca.js"><link rel="canonical" href="https://www.samratjha.com/blog/prompt-caching-rabbit-hole/" data-rh="true"><meta name="title" content="Your LLM Gateway Is Breaking Prompt Caching | Samrat Jha" data-rh="true"><meta name="description" content="One missing HTTP header cut my coding agent's cache hit rate to 55%. Why LLM gateways break prompt caching, and why prefix hashing can't save you." data-rh="true"><meta name="author" content="Samrat Jha" data-rh="true"><meta name="keywords" content="ai, llm, agents, performance, infrastructure" data-rh="true"><meta property="og:type" content="article" data-rh="true"><meta property="og:url" content="https://www.samratjha.com/blog/prompt-caching-rabbit-hole/" data-rh="true"><meta property="og:title" content="Your LLM Gateway Is Breaking Prompt Caching" data-rh="true"><meta property="og:description" content="One missing HTTP header cut my coding agent's cache hit rate to 55%. Why LLM gateways break prompt caching, and why prefix hashing can't save you." data-rh="true"><meta property="og:site_name" content="Samrat Jha" data-rh="true"><meta property="article:published_time" content="2026-10-20T00:00:00.000Z" data-rh="true"><meta property="article:author" content="https://www.samratjha.com/" data-rh="true"><meta property="article:tag" content="ai" data-rh="true"><meta property="article:tag" content="llm" data-rh="true"><meta property="article:tag" content="agents" data-rh="true"><meta property="article:tag" content="performance" data-rh="true"><meta property="article:tag" content="infrastructure" data-rh="true"><meta name="twitter:card" content="summary" data-rh="true"><meta name="twitter:url" content="https://www.samratjha.com/blog/prompt-caching-rabbit-hole/" data-rh="true"><meta name="twitter:title" content="Your LLM Gateway Is Breaking Prompt Caching" data-rh="true"><meta name="twitter:description" content="One missing HTTP header cut my coding agent's cache hit rate to 55%. Why LLM gateways break prompt caching, and why prefix hashing can't save you." data-rh="true"><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Your LLM Gateway Is Breaking Prompt Caching","description":"One missing HTTP header cut my coding agent's cache hit rate to 55%. Why LLM gateways break prompt caching, and why prefix hashing can't save you.","datePublished":"2026-10-20T00:00:00.000Z","dateModified":"2026-10-20T00:00:00.000Z","author":{"@type":"Person","name":"Samrat Jha","url":"https://www.samratjha.com/","jobTitle":"Senior AI Engineer"},"publisher":{"@type":"Person","name":"Samrat Jha","url":"https://www.samratjha.com/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.samratjha.com/blog/prompt-caching-rabbit-hole/"},"keywords":"ai, llm, agents, performance, infrastructure"}</script><script type="application/ld+json" data-rh="true">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.samratjha.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.samratjha.com/blog/"},{"@type":"ListItem","position":3,"name":"Your LLM Gateway Is Breaking Prompt Caching","item":"https://www.samratjha.com/blog/prompt-caching-rabbit-hole/"}]}</script></head>
+  <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <div
+        style="
+          padding: 2rem;
+          max-width: 800px;
+          margin: 0 auto;
+          font-family: system-ui, sans-serif;
+        "
+      >
+        <p><strong>Samrat Jha - AI Engineer & Infrastructure Architect</strong></p>
+        <p>
+          Building the future of AI at NVIDIA, backed by 7+ years architecting
+          large-scale distributed systems at AWS.
+        </p>
+
+        <h2>About</h2>
+        <p>
+          I'm an AI engineer at NVIDIA, building at the frontier of artificial
+          intelligence. Before this, I spent 7+ years at AWS architecting
+          large-scale distributed systems—from edge computing infrastructure
+          powering hybrid cloud, to Generative AI applications accelerating
+          region launches, to event pipelines handling millions of requests. I
+          bring deep infrastructure expertise to AI.
+        </p>
+
+        <h2>Experience</h2>
+        <ul>
+          <li>
+            <strong>AI Engineer @ NVIDIA</strong> (2024 - Present) - Building at
+            the frontier of artificial intelligence
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Region Expansion</strong> (2024) -
+            Built Generative AI applications to accelerate AWS region launches
+          </li>
+          <li>
+            <strong>Software Engineer @ AWS Outposts</strong> (2022 - 2024) -
+            Architected edge computing infrastructure powering hybrid cloud at
+            scale
+          </li>
+          <li>
+            <strong>Senior Software Engineer @ Appian</strong> (2021 - 2022) -
+            Led cross-continental integration, implemented Robotic Process
+            Automation
+          </li>
+          <li>
+            <strong>Software Engineer @ Appian</strong> (2018 - 2021) - Built
+            low-latency event pipelines, managed AWS fleet for 100+ engineers
+          </li>
+        </ul>
+
+        <h2>Projects</h2>
+        <ul>
+          <li>
+            <a href="https://space-selfie.zasamrat.workers.dev">Space Selfie</a>
+            - Discover when the ISS flew over your special moments
+          </li>
+          <li>
+            <a href="https://bird-radio.pages.dev/">Bird Radio</a> -
+            Retro-styled nature sound tuner with bird songs from around the
+            world
+          </li>
+          <li>
+            <a href="https://argos.bootloop.cc/">NetWorth Tracker</a> -
+            Personal finance application built with React and TypeScript
+          </li>
+        </ul>
+
+        <h2>Skills</h2>
+        <p>
+          Artificial Intelligence, Generative AI, CUDA, AWS, Distributed
+          Systems, Python, Rust, Golang, TypeScript, Docker
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Visit <a href="https://www.samratjha.com/">samratjha.com</a> with
+          JavaScript enabled for the full interactive experience, or reach out
+          via <a href="https://github.com/samratjha96">GitHub</a>.
+        </p>
+
+        <p>
+          <a href="/blog/">Read my blog</a> for technical deep-dives on AI,
+          infrastructure, and software engineering.
+        </p>
+
+        <img
+          src="/personalLogo.png"
+          alt="Samrat Jha - AI Engineer at NVIDIA"
+          width="200"
+          height="200"
+        />
+      </div>
+    </noscript>
+    <div id="root"><div class="blog"><div class="blog-wrap"><header><nav class="grid-12 blog-nav"><a class="blog-nav-home" href="/"><img src="/personalLogo.png" alt="" width="32" height="32">Samrat Jha</a><div class="blog-nav-links"><a href="/#about">About</a><a href="/#work">Work</a><a href="/#media">Media</a><a href="/#contact">Contact</a><a class="active" href="/blog/">Blog</a><a href="/ai/">AI Consulting</a></div><button type="button" class="blog-nav-toggle" aria-expanded="false">Menu</button></nav><div class="blog-nav-panel blog-nav" hidden=""><a href="/#about">About</a><a href="/#work">Work</a><a href="/#media">Media</a><a href="/#contact">Contact</a><a class="active" href="/blog/">Blog</a><a href="/ai/">AI Consulting</a></div></header><header class="grid-12 post-hero"><a class="post-hero-back mono branch" data-reveal="" href="/blog/">BLOG</a><div class="post-hero-hd"><h1 id="post-title" data-reveal="" style="--reveal-delay: .06s;">Your LLM Gateway Is Breaking Prompt Caching</h1><p class="post-hero-standfirst" data-reveal="" style="--reveal-delay: .12s;">One missing HTTP header cut my coding agent's cache hit rate to 55%. Why LLM gateways break prompt caching, and why prefix hashing can't save you.</p><div data-reveal="" style="--reveal-delay: .18s;"><div class="post-meta"><div><div class="label mono">Author</div><div class="post-meta-value">Samrat Jha</div></div><div><div class="label mono">Published</div><div class="post-meta-value">Oct 20, 2026</div></div><div><div class="label mono">Reading time</div><div class="post-meta-value">12 min</div></div></div></div></div></header><div class="grid-12 post-body" data-reveal="" style="--reveal-delay: .24s;"><div class="top-progress" aria-hidden="true" style="transform: scaleX(0);"></div><aside class="rail"><div class="rail-title" aria-hidden="true">Your LLM Gateway Is Breaking Prompt Caching</div><nav class="rail-tree" aria-label="Table of contents"><div class="label">Tree</div><div><a href="#a-custom-gateway-url-breaks-the-handshake" class="branch on">A custom gateway URL breaks the handshake</a></div><div><a href="#why-did-turn-8-remember-turn-2-but-forget-turns-3-through-7" class="branch">Why did Turn 8 remember Turn 2, but forget Turns 3 through 7?</a></div><div><a href="#wait-doesnt-baseten-already-run-a-kv-aware-router" class="branch">Wait. Doesn't Baseten already run a KV-aware router?</a><div class="rail-subs"><div><a href="#attempt-1-hash-the-first-256-tokens-the-openai-way" class="branch sub" tabindex="-1">Attempt 1: Hash the first 256 tokens (the OpenAI way)</a><a href="#attempt-2-hash-the-system-prompt-plus-the-first-user-message-messages2" class="branch sub" tabindex="-1">Attempt 2: Hash the system prompt plus the first user message (messages[:2])</a><a href="#why-baseten-fireworks-and-cloudflare-split-routing-into-two-tiers" class="branch sub" tabindex="-1">Why Baseten, Fireworks, and Cloudflare split routing into two tiers</a></div></div></div><div><a href="#can-the-litellm-gateway-just-inject-the-header-for-us" class="branch">Can the LiteLLM gateway just inject the header for us?</a></div><div><a href="#one-last-trap-langgraphs-thread_id-never-leaves-your-database" class="branch">One last trap: LangGraph's thread_id never leaves your database</a></div><div><a href="#you-cant-fix-what-you-dont-measure" class="branch">You can't fix what you don't measure</a></div><div><a href="#references" class="branch">References</a></div></nav><div class="rail-progress" role="progressbar" aria-label="Reading progress" aria-valuenow="0"><b></b>░░░░░░░░░░░░░░░░░░░░░░░░░░░░<span>00%</span></div><div class="label rail-time">12 min read</div><div class="rail-share"><div class="label">Share</div><a class="branch" href="https://twitter.com/intent/tweet?text=Your%20LLM%20Gateway%20Is%20Breaking%20Prompt%20Caching&amp;url=https%3A%2F%2Fwww.samratjha.com%2Fblog%2Fprompt-caching-rabbit-hole%2F" target="_blank" rel="noopener noreferrer">X</a><a class="branch" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.samratjha.com%2Fblog%2Fprompt-caching-rabbit-hole%2F" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="branch" href="mailto:?subject=Your%20LLM%20Gateway%20Is%20Breaking%20Prompt%20Caching&amp;body=https%3A%2F%2Fwww.samratjha.com%2Fblog%2Fprompt-caching-rabbit-hole%2F">Email</a><button type="button" class="branch">Copy URL</button><button type="button" class="branch">Copy markdown</button></div></aside><div class="post-main"><article class="post-prose"><p>If you live in <a href="https://docs.anthropic.com/en/docs/claude-code/overview">Claude Code</a> or <a href="https://github.com/openai/codex">Codex CLI</a>, prompt caching is a solved problem you never have to think about.</p>
+<p>And you really don't want to think about it, because coding agents are abusive without it. A 25-step bug hunt that grows from 20,000 to 100,000 tokens sends 1.5 million input tokens over the run. 1.4 million of those tokens are the exact same conversation history resent on every step. When prompt caching works, the GPU keeps the key-value (KV) attention state from earlier turns in VRAM and only runs prefill on the new tool output at the tail. At a 90% cache discount on <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">Anthropic</a> and <a href="https://platform.openai.com/docs/guides/prompt-caching">OpenAI</a>, you pay for 240,000 tokens instead of 1.5 million.</p>
+<p>When you talk straight to Anthropic or OpenAI from their own CLI, the harness and the API handle all of that behind your back.</p>
+<p>Then you try a different harness like <a href="https://pi.dev">Pi</a> or <a href="https://opencode.ai">OpenCode</a>, or you wire up your own <a href="https://github.com/langchain-ai/langgraph">LangGraph</a> agent, and you run it at work behind an internal LLM gateway. And suddenly you are reading raw HTTP headers at 11 PM trying to figure out why a GPU cluster forgot a conversation it had nine seconds ago.</p>
+<h2 id="a-custom-gateway-url-breaks-the-handshake"><a aria-hidden="true" tabindex="-1" href="#a-custom-gateway-url-breaks-the-handshake"><span class="icon icon-link"></span></a>A custom gateway URL breaks the handshake</h2>
+<p>Inside most companies, you don't point your agent straight at <code>api.anthropic.com</code> or <code>inference.baseten.co</code>. You point it at an internal gateway (something like <a href="https://github.com/BerriAI/litellm">LiteLLM</a>, Portkey, Envoy, or an in-house proxy) that gives everyone a single <code>/v1</code> URL and routes across OpenAI, Anthropic, Google, and open-weight models on providers like <a href="https://www.baseten.co/">Baseten</a>.</p>
+<p>I'll use a LiteLLM-backed gateway as the example here. When I pulled a month of my Pi (v1.0.4+) session logs (~4,800 Turn-2+ requests, 584M prompt tokens) through that setup, OpenAI and Google models were hitting cache on more than 93% of warm tokens. Open models hosted on Baseten (<code>zai-org/GLM-5.3</code> and <code>zai-org/GLM-5.3-Flash</code>) were sitting between 31% and 55%.</p>
+<p>50% is a terrible number to debug. If your cache hit rate is 0%, you know it's broken. At 50%, you see cache hits in every session and figure the misses are just context growth or 5-minute TTLs expiring while you read code.</p>
+<p>So I dumped a single 12-turn <code>GLM-5.3</code> session turn by turn.</p>
+<h2 id="why-did-turn-8-remember-turn-2-but-forget-turns-3-through-7"><a aria-hidden="true" tabindex="-1" href="#why-did-turn-8-remember-turn-2-but-forget-turns-3-through-7"><span class="icon icon-link"></span></a>Why did Turn 8 remember Turn 2, but forget Turns 3 through 7?</h2>
+<p>Every turn in this session fired within 9 to 34 seconds of the previous one. Nobody went to get coffee. Nothing expired. And <code>cacheRead</code> did this:</p>
+<pre><code class="hljs language-text">t=0  | gap= 0.0s | tot_prompt=26,989 | cacheRead=     0
+t=1  | gap=31.9s | tot_prompt=38,369 | cacheRead=26,902  &lt;-- Worker A (has t=0)
+t=2  | gap=16.9s | tot_prompt=44,056 | cacheRead=26,902  &lt;-- Worker B (only has t=0, missed t=1)
+t=3  | gap=26.2s | tot_prompt=51,503 | cacheRead=38,370  &lt;-- Worker A (matches t=1's 38,369)
+...
+t=7  | gap=13.3s | tot_prompt=76,213 | cacheRead=67,004  &lt;-- Worker A (matches t=6)
+t=8  | gap= 9.1s | tot_prompt=78,529 | cacheRead=44,057  &lt;-- Worker B (matches t=2's 44,056 from 6 turns ago!)
+t=9  | gap=33.9s | tot_prompt=85,944 | cacheRead=76,214  &lt;-- Worker A (matches t=7's 76,213)
+</code></pre>
+<p>Look at <code>t=8</code>. Nine seconds earlier, <code>t=7</code> read 67,004 tokens from cache. Then <code>t=8</code> comes along with a 78,529-token prompt and reads... 44,057.</p>
+<p>Where did 44,057 come from? Look six lines up at <code>t=2</code>: <code>tot_prompt=44,056</code>.</p>
+<p><code>t=8</code> had landed on a GPU worker that hadn't seen my session since <code>t=2</code>. Its VRAM still held my conversation prefix up to Turn 2, and it had to re-prefill the 34,472 tokens from Turns 3 through 8 from scratch. Nine seconds later, <code>t=9</code> bounced back to the first worker and picked right up at <code>76,214</code> (matching <code>t=7</code>).</p>
+<p>Dumping the HTTP response headers from the gateway caught the workers red-handed:</p>
+<pre><code class="hljs language-http">x-litellm-model-api-base: https://inference.baseten.co/v1
+llm_provider-x-baseten-dyn-prefill-worker-id: 5073481647418772908
+llm_provider-x-baseten-dyn-prefill-dp-rank: 0
+</code></pre>
+<p>Baseten returns the upstream prefill worker ID (<code>llm_provider-x-baseten-dyn-prefill-worker-id</code>) and data-parallel rank (<code>dp-rank</code>) on every response. In a 6-turn test with default settings, my requests pinballed across four different prefill workers.</p>
+<img src="/assets/prompt-cache-affinity-routing-8a10c0d9.webp" alt="Diagram comparing multi-turn agent requests bouncing across three unpinned prefill workers without x-session-affinity versus staying pinned to Worker 1 when x-session-affinity is sent" width="1200" height="746" loading="lazy">
+<p>The annoying part is that both Pi and Baseten had already fixed this for direct connections:</p>
+<ul>
+<li>If Pi sees <code>baseten.co</code> in your provider's <code>baseUrl</code>, it automatically turns on <code>sendSessionAffinityHeaders: true</code> and stamps <code>x-session-affinity: &lt;sessionId&gt;</code> onto every request.</li>
+<li>If you connect Claude Code, Codex, or OpenCode straight to Baseten, Baseten <a href="https://docs.baseten.co/inference/model-apis/coding-agents">recognizes their native session IDs</a> and pins the replica for you.</li>
+</ul>
+<p>Putting a gateway in the middle blinded both sides. Pi saw <code>https://llm-proxy.internal/v1</code> instead of <code>inference.baseten.co</code>, assumed it was talking to a generic OpenAI endpoint, and left <code>sendSessionAffinityHeaders</code> off. LiteLLM got a request with no session header and forwarded it upstream as a stateless call.</p>
+<p>Flipping <code>"sendSessionAffinityHeaders": true</code> on in <code>~/.pi/agent/models.json</code> fixed it in one line:</p>
+<pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"providers"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"internal-gateway"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"baseUrl"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://llm-proxy.internal/v1"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"api"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"openai-completions"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"compat"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"sendSessionAffinityHeaders"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>In the 6-turn header test, every turn stayed glued to a single prefill worker. On an 8-turn <code>GLM-5.3-Flash</code> benchmark, Turn-2+ cache hits jumped from 55.5% to 92.9% (+37.4 percentage points), and uncached prompt tokens dropped by 6.3x (from 97,958 down to 15,617).</p>
+<img src="/assets/prompt-cache-benchmark-f9468bf3.webp" alt="Chart showing turn-by-turn cache hit rate rising from 45-83% (55.5% overall) to 91-94% (92.9% overall, +37.4 percentage points) across turns 2 through 8 after enabling x-session-affinity" width="1200" height="501" loading="lazy">
+<p>That could have been the end of the post. Add a header, get 93% cache hits, go home.</p>
+<p>Except that response header bothered me.</p>
+<h2 id="wait-doesnt-baseten-already-run-a-kv-aware-router"><a aria-hidden="true" tabindex="-1" href="#wait-doesnt-baseten-already-run-a-kv-aware-router"><span class="icon icon-link"></span></a>Wait. Doesn't Baseten already run a KV-aware router?</h2>
+<p>Look at the header name again:</p>
+<pre><code class="hljs language-http">llm_provider-x-baseten-dyn-prefill-worker-id: 5073481647418772908
+</code></pre>
+<p>That <code>dyn</code> in <code>dyn-prefill-worker-id</code> is <a href="https://www.baseten.co/blog/how-baseten-achieved-2x-faster-inference-with-nvidia-dynamo/">NVIDIA Dynamo</a>. Baseten has written whole blog posts about running Dynamo's KV-aware router. Their <a href="https://docs.baseten.co/engines/bis-llm/advanced-features">BIS-LLM engine docs</a> explain how their stateful router tokenizes each incoming prompt, checks a live index of every worker's KV cache blocks, and sends the request to the worker with the most cached tokens (balanced against queue depth).</p>
+<p>If Baseten already has a router that knows which GPU holds which KV blocks, why do their <a href="https://docs.baseten.co/inference/model-apis/pricing-and-limits#session-affinity">Model API docs</a> still tell you to send <code>x-session-affinity</code>? Why can't the provider just figure out that Turn 2 belongs with Turn 1 by looking at the prompt?</p>
+<p>Let's try to design content-based routing ourselves and watch where it breaks.</p>
+<h3 id="attempt-1-hash-the-first-256-tokens-the-openai-way"><a aria-hidden="true" tabindex="-1" href="#attempt-1-hash-the-first-256-tokens-the-openai-way"><span class="icon icon-link"></span></a>Attempt 1: Hash the first 256 tokens (the OpenAI way)</h3>
+<p>OpenAI doesn't ask you for a session header on basic calls. Their router hashes the opening prefix of the prompt, typically the first 256 tokens, scoped to your organization.</p>
+<p>When it's just you on your personal API key, that works great. Turn 1, Turn 2, and Turn 20 all start with the same system prompt, so they hash to the same machine.</p>
+<p>Now put 500 engineers behind a company gateway that authenticates to the provider with one shared enterprise API key. At 9 AM, 50 engineers fire up Pi or Claude Code. Every single one of those sessions starts with the exact same 256-token system prompt.</p>
+<p>If your router only hashes the first 256 tokens:</p>
+<ol>
+<li>All 50 engineers hash to the exact same machine.</li>
+<li>That machine saturates. On OpenAI, once a prefix crosses roughly 15 requests per minute, the router spills excess traffic onto secondary machines.</li>
+<li>Because the router is only looking at the first 256 tokens (which are identical for all 50 engineers), Engineer A's Turn 2 lands on Machine 2 while Engineer B's Turn 2 lands on Machine 1. Everyone's conversation tail misses.</li>
+</ol>
+<p>That spillover problem is why OpenAI added <code>prompt_cache_key</code> to their API. It mixes a caller-supplied session ID into the prefix hash so 50 sessions sharing a system prompt spread across the fleet while each individual session stays sticky.</p>
+<h3 id="attempt-2-hash-the-system-prompt-plus-the-first-user-message-messages2"><a aria-hidden="true" tabindex="-1" href="#attempt-2-hash-the-system-prompt-plus-the-first-user-message-messages2"><span class="icon icon-link"></span></a>Attempt 2: Hash the system prompt plus the first user message (<code>messages[:2]</code>)</h3>
+<p>Okay, hashing <code>messages[0]</code> collides because everyone shares the same system prompt. What if the gateway hashes <code>messages[0]</code> <em>plus</em> <code>messages[1]</code> (the user's opening question in the thread)?</p>
+<p><a href="https://openrouter.ai/docs/guides/best-practices/prompt-caching">OpenRouter</a> actually uses this as a fallback when you don't send an explicit <code>session_id</code> or <code>prompt_cache_key</code>. Two people rarely type the exact same first question, and in a normal chat thread <code>messages[:2]</code> stays fixed from Turn 1 to Turn 50.</p>
+<p>In agent workloads, <code>messages[:2]</code> still blows up in three places:</p>
+<ul>
+<li><strong>Sliding-window history truncation:</strong> A lot of chat backends and LangGraph agents cap context by slicing the last <code>N</code> messages (<code>messages[-10:]</code> or <code>trim_messages(..., strategy="last")</code>). The moment your session hits Turn 11, Turn 1 gets dropped. Now <code>messages[1]</code> is different on every single request. Not only does that scramble a <code>messages[:2]</code> routing hash, shifting the array left by one turn invalidates the entire KV prefix of the remaining history on every turn (dropping history cache hits to 0% unless you evict in chunks of 5 or 10 turns at a time).</li>
+<li><strong>Mutated system prompts:</strong> Agents love stuffing live state into <code>messages[0]</code>: current workflow step, progress percentage, timestamps, or freshly retrieved RAG chunks. When <code>messages[0]</code> changes per turn, the hash changes per turn. (Fun side effect on OpenAI models: OpenAI serializes <code>tools</code> <em>before</em> <code>messages[0]</code>. When <code>messages[0]</code> mutates, your tool schemas still hit cache at ~20%. If your dashboard only checks <code>cached_tokens &gt; 0</code>, everything looks fine while 100% of your system prompt and history miss.)</li>
+<li><strong>Slash commands and subagents:</strong> Automated PR-review bots and <code>/review</code> slash commands start every run with identical <code>messages[:2]</code> text, putting you right back in the hot-spot bucket. Meanwhile, spawned subagents start with a fresh <code>messages[:2]</code> that doesn't match their parent.</li>
+</ul>
+<h3 id="why-baseten-fireworks-and-cloudflare-split-routing-into-two-tiers"><a aria-hidden="true" tabindex="-1" href="#why-baseten-fireworks-and-cloudflare-split-routing-into-two-tiers"><span class="icon icon-link"></span></a>Why Baseten, Fireworks, and Cloudflare split routing into two tiers</h3>
+<p>Once you see all the ways content hashing goes sideways, the design that Baseten, <a href="https://docs.fireworks.ai/guides/prompt-caching">Fireworks AI</a>, and <a href="https://blog.cloudflare.com/high-performance-llms/">Cloudflare Workers AI</a> converged on makes a lot more sense. Cloudflare summed it up in one line: <em>"While we have KV-aware routing internally, we also rely on clients sending the <code>x-session-affinity</code> in order to be explicit about prompt caching."</em></p>
+<p>Putting Baseten's Model API docs next to their BIS-LLM docs reveals a two-tier setup:</p>
+<img src="/assets/baseten-two-tier-routing-19bdb943.webp" alt="Diagram of two-tier routing showing Tier 1 L7 Edge Router using x-session-affinity to pick a Replica unit, and Tier 2 Dynamo KV Router inside Replica 1 tokenizing the prompt to pick the warm GPU worker" width="1200" height="378" loading="lazy">
+<ol>
+<li><strong>Tier 1 (Outer L7 load balancer across replicas):</strong> Popular models scale across multiple independent replication units. At the outer HTTP edge, you do not want your load balancer parsing and tokenizing a 100k-token JSON body before it can pick a backend cluster. Tier 1 hashes <code>x-session-affinity</code> in constant time and pins your session to Replica 1.</li>
+<li><strong>Tier 2 (Stateful KV-aware router inside the replica):</strong> Once your request is inside Replica 1, that replica's Dynamo KV router tokenizes the prompt, checks its local worker pool's KV block index, and picks the warm GPU worker (spilling over to a sibling worker in the replica if the queue is full).</li>
+</ol>
+<p>That two-tier split also explains why my unpinned sessions were getting 31% to 55% cache hits instead of 0%. Whenever two turns happened to land on the same replica by luck, the inner KV router found the warm worker. Whenever the outer L7 balancer sent a turn to a different replica, that replica had an isolated KV pool and missed.</p>
+<h2 id="can-the-litellm-gateway-just-inject-the-header-for-us"><a aria-hidden="true" tabindex="-1" href="#can-the-litellm-gateway-just-inject-the-header-for-us"><span class="icon icon-link"></span></a>Can the LiteLLM gateway just inject the header for us?</h2>
+<p>If the upstream provider wants <code>x-session-affinity</code>, you might wonder why the company LiteLLM proxy doesn't generate one on the fly.</p>
+<p>I went through the <code>BerriAI/litellm</code> source code to see what stock LiteLLM actually supports via <code>config.yaml</code> today:</p>
+<ul>
+<li><strong>Forwarding an existing session ID (<a href="https://github.com/BerriAI/litellm/pull/41033">PR #41033</a>):</strong> LiteLLM has a <code>provider_affinity_header: x-session-affinity</code> setting for model deployments. If the caller sends <code>x-litellm-session-id</code> or <code>metadata.session_id</code>, LiteLLM copies it into <code>x-session-affinity</code>. If the caller sends neither, LiteLLM sends no header at all (<a href="https://github.com/BerriAI/litellm/issues/34766">Issue #34766</a> is the open feature request to add OpenRouter's <code>messages[:2]</code> fallback).</li>
+<li><strong>Proxy-level deployment pinning:</strong> LiteLLM also has a router flag (<code>optional_pre_call_checks: [session_affinity, deployment_affinity]</code>) to pin a session to one deployment inside a multi-provider model group. Turning that on globally has some nasty sharp edges right now: if a pinned deployment dies, in-request retries keep hammering the dead deployment until cooldown triggers (<a href="https://github.com/BerriAI/litellm/issues/47482">Issue #47482</a>), and if a pinned deployment is saturated at its concurrency limit while a sibling sits idle, the pin refuses to yield and returns <code>429</code> (<a href="https://github.com/BerriAI/litellm/issues/45868">Issue #45868</a>).</li>
+</ul>
+<p>Passing <code>x-session-affinity</code> from the client through to Baseten avoids those LiteLLM router bugs when a model maps to a single Baseten deployment, because Baseten's outer load balancer treats the header as a soft hint and routes around dead replicas automatically. The catch is that header pass-through won't help if your LiteLLM model group load-balances the same model slug across two completely different providers (say, splitting traffic between Baseten and Cognition). And since <code>x-session-affinity</code> only controls routing, pausing for ten minutes on a busy pool still gives the worker plenty of time to evict your KV blocks from VRAM.</p>
+<h2 id="one-last-trap-langgraphs-thread_id-never-leaves-your-database"><a aria-hidden="true" tabindex="-1" href="#one-last-trap-langgraphs-thread_id-never-leaves-your-database"><span class="icon icon-link"></span></a>One last trap: LangGraph's <code>thread_id</code> never leaves your database</h2>
+<p>Even after you know you need <code>x-session-affinity</code>, agent frameworks make it easy to think you're sending a session ID when you aren't.</p>
+<p>In LangGraph, every multi-turn tutorial has you pass a <code>thread_id</code> in <code>RunnableConfig</code>:</p>
+<pre><code class="hljs language-python">agent.stream(
+    {<span class="hljs-string">"messages"</span>: [HumanMessage(content=user_query)]},
+    config={<span class="hljs-string">"configurable"</span>: {<span class="hljs-string">"thread_id"</span>: thread_id}},
+)
+</code></pre>
+<p>You'd think that <code>thread_id</code> makes it onto the LLM request. It goes to LangGraph's local state checkpointer and stops there; <code>ChatOpenAI</code> sends no affinity header on the wire. Worse, if you try to bind the header with <code>llm = ChatOpenAI(...).bind(extra_headers={"x-session-affinity": thread_id})</code> and hand <code>llm</code> to <code>langchain.agents.create_agent(model=llm, tools=tools)</code>, <code>create_agent</code> unwraps the binding when it calls <code>.bind_tools(tools)</code> and drops your <code>extra_headers</code> on the floor.</p>
+<p>In a 3-turn, 6-call <code>create_agent</code> tool loop on <code>GLM-5.3-Flash</code> (<code>langchain</code> v1.0, <code>langchain-openai</code> v0.3), default <code>ChatOpenAI</code> scattered the six calls across four Baseten workers for a <code>29.8%</code> warm-call cache hit rate (<code>25,856 / 86,747</code> tokens). Passing <code>default_headers</code> directly on the <code>ChatOpenAI</code> constructor (or passing <code>extra_headers</code> to <code>llm_with_tools.ainvoke()</code> inside a custom <code>StateGraph</code> node) pinned all six calls to one worker and brought the warm-call hit rate to <code>87.9%</code> (<code>76,288 / 86,772</code> tokens, hitting 99% of the prior turn's prefix on every step):</p>
+<pre><code class="hljs language-python">llm = ChatOpenAI(
+    model=<span class="hljs-string">"zai-org/GLM-5.3-Flash"</span>,
+    base_url=<span class="hljs-string">"https://llm-proxy.internal/v1"</span>,
+    default_headers={<span class="hljs-string">"x-session-affinity"</span>: thread_id},
+)
+agent = create_agent(model=llm, tools=tools, system_prompt=STATIC_PROMPT, checkpointer=checkpointer)
+</code></pre>
+<h2 id="you-cant-fix-what-you-dont-measure"><a aria-hidden="true" tabindex="-1" href="#you-cant-fix-what-you-dont-measure"><span class="icon icon-link"></span></a>You can't fix what you don't measure</h2>
+<p>And breathe.</p>
+<p>What we walked through here is only the tip of the iceberg. There are so many quiet inefficiencies hiding in our stacks right now because the entire space is brand new. The agent frameworks are new, the gateways are new, and every week brings another provider, another wire protocol, and another layer of routing. Nobody can hold all of those interactions in their head at once.</p>
+<p>If you take one thing from this post, go audit your own agentic setup. Don't just check <code>cached_tokens == 0</code> and call it a day. The expensive misses are the sinister ones that sit at 40% or 55% because your tool schemas or system prompt cached while your conversation history or worker affinity silently broke.</p>
+<p>If you run AI infrastructure inside a company, open your token monitoring dashboard (hopefully you have one) and build a dedicated view for Turn-2+ cache hit rates broken down by model, provider, and harness. Find the combinations that are lagging and point your coding agents at the logs and gateway code to figure out why (or just tell your coding agent to read this amazing post). A one-line config change can save millions of dollars in wasted prefill, but you can't fix what you don't measure.</p>
+<hr>
+<h2 id="references"><a aria-hidden="true" tabindex="-1" href="#references"><span class="icon icon-link"></span></a>References</h2>
+<ul>
+<li><a href="https://docs.baseten.co/inference/model-apis/pricing-and-limits#session-affinity">Baseten: Session affinity and cached input tokens</a></li>
+<li><a href="https://docs.baseten.co/inference/model-apis/coding-agents">Baseten: Set up coding agents</a></li>
+<li><a href="https://docs.baseten.co/engines/bis-llm/advanced-features">Baseten: Advanced features for BIS-LLM (KV-aware routing)</a></li>
+<li><a href="https://www.baseten.co/blog/how-baseten-achieved-2x-faster-inference-with-nvidia-dynamo/">Baseten: 2x faster inference with KV cache-aware routing</a></li>
+<li><a href="https://blog.cloudflare.com/high-performance-llms/">Cloudflare: High-performance LLMs on Workers AI</a></li>
+<li><a href="https://docs.fireworks.ai/guides/prompt-caching">Fireworks AI: Prompt caching</a></li>
+<li><a href="https://platform.openai.com/docs/guides/prompt-caching">OpenAI: Prompt caching</a></li>
+<li><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching">Anthropic: Prompt caching</a></li>
+<li><a href="https://openrouter.ai/docs/guides/best-practices/prompt-caching">OpenRouter: Prompt caching</a></li>
+<li><a href="https://github.com/BerriAI/litellm/pull/41033">LiteLLM PR #41033: Configurable provider affinity header mapping</a></li>
+<li><a href="https://github.com/BerriAI/litellm/issues/34766">LiteLLM Issue #34766: Derive a session key from request content</a></li>
+<li><a href="https://github.com/BerriAI/litellm/issues/47482">LiteLLM Issue #47482: Session affinity retries on failed deployments</a></li>
+<li><a href="https://github.com/BerriAI/litellm/issues/45868">LiteLLM Issue #45868: Let a session-affinity pin yield when saturated</a></li>
+</ul></article><section class="more-posts"><div class="label mono">More posts</div><a class="post-row" href="/blog/recreating-the-claude-dev-blog/"><span class="post-row-date">Oct 17, 2026</span><span class="post-row-title">Recreating the claude.dev Blog, and What It Says About Taste</span><span class="post-row-time">9 min</span></a><a class="post-row" href="/blog/github-pages-cloudflare-subdomain/"><span class="post-row-date">Jul 22, 2026</span><span class="post-row-title">Pointing a Cloudflare Subdomain at GitHub Pages</span><span class="post-row-time">3 min</span></a><a class="post-row" href="/blog/tmux-config/"><span class="post-row-date">Apr 13, 2026</span><span class="post-row-title">My tmux Config, Explained</span><span class="post-row-time">4 min</span></a><a class="post-row" href="/blog/enterprise-ai-roi/"><span class="post-row-date">Mar 02, 2026</span><span class="post-row-title">The AI ROI Gap Is a Definition-of-Done Problem</span><span class="post-row-time">5 min</span></a></section></div></div></div></div></div>
+    
+  
+
+</body></html>
