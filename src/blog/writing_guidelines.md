@@ -4,6 +4,9 @@ These guidelines help avoid AI-sounding writing when generating blog posts.
 
 ## Tone & Voice
 
+- **Channel Thomas Ptacek (Fly.io) + Julia Evans:** Combine Julia Evans's relentless, concrete curiosity (pulling the thread until the actual packet, HTTP header, or source line confesses) with Thomas Ptacek's dry, opinionated, conversational punchiness.
+- **Treat debugging like a crime scene, not a textbook:** Never open with textbook contrasts ("A normal chat request does X. A coding agent does Y."). Point straight at the weird number in the log ("Look at `t=8`. Nine seconds earlier, `t=7` read 67,004 tokens from cache. Then `t=8` comes along and reads... 44,057. Where did 44,057 come from?").
+- **Pull the next thread out loud:** Ask the exact skeptical question the reader is thinking ("Wait. Doesn't Baseten already run a KV-aware router?"), and walk through naive designs as live attempts ("Attempt 1: Hash the first 256 tokens...").
 - First-person, conversational
 - Write like you're explaining to a coworker, not presenting to an audience
 - Have opinions. It's okay to say something is annoying or that you prefer X over Y

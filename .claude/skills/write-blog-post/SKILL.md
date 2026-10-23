@@ -142,6 +142,12 @@ Within the first few paragraphs, the reader should know what the post covers and
 
 ## Voice
 
+**Channel Thomas Ptacek (Fly.io) and Julia Evans.** Combine Julia Evans's relentless, concrete curiosity (pulling a thread until the actual packet, HTTP header, or source line confesses) with Thomas Ptacek's dry, opinionated, conversational punchiness:
+
+- **Treat technical mysteries like a crime scene, not a textbook.** Don't lecture the reader with textbook definitions ("A normal chat request sends a prompt once and waits for a person to reply. A coding agent runs a loop."). Walk them up to the anomaly in the log and point at the smoking gun: "Look at `t=8`. Nine seconds earlier, `t=7` read 67,004 tokens from cache. Then `t=8` comes along with a 78,529-token prompt and reads... 44,057. Where did 44,057 come from? Look six lines up at `t=2`: `tot_prompt=44,056`."
+- **Ask the exact skeptical question the reader is thinking, then go check.** When a fix feels too superficial, pull the next thread ("Wait. Doesn't Baseten already run a KV-aware router?"). Instead of listing design rules in the abstract, invite the reader to try the naive design with you and watch it break ("Let's try to design content-based routing ourselves and watch where it breaks. Attempt 1: Hash the first 256 tokens...").
+- **Call out traps with dry, plain-spoken candor.** "You'd think that `thread_id` makes it onto the LLM request. It goes to LangGraph's local state checkpointer and stops there." "50% is a terrible number to debug. If your cache hit rate is 0%, you know it's broken."
+
 **Write how the author talks.** Read each sentence and ask whether a person would say it out loud to a colleague. If not, rewrite it. Writerly lines that perform insight fail this test. The author rejected these with "Nobody talks like that":
 
 - "So I stopped reading the page and started measuring it, with three throwaway headless Puppeteer scripts."

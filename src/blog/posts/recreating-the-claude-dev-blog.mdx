@@ -1,21 +1,21 @@
 ---
 title: Recreating the claude.dev Blog, and What It Says About Taste
 date: 2026-10-17
-description: I rebuilt my blog to work like claude.dev's. How its table of contents and reading indicator work, and why copying a design is no longer the hard part.
+description: I pointed Claude at claude.dev's blog and stole its layout in an afternoon. How the scroll rail actually works, and why copying good UI is the easy part now.
 tags: ["css", "react", "performance", "web-dev", "animation"]
 ---
 
-I opened [a post on claude.dev](https://claude.dev/blog/solving-code-review-at-anthropic/) to read about code review, and halfway down I realized I was paying more attention to the page than to the post.
+I opened [a post on claude.dev](https://claude.dev/blog/solving-code-review-at-anthropic/) to read about code review, and ten seconds in I had stopped reading the post and was just scrolling the page up and down like an idiot.
 
-The details were small. The table of contents on the left opened a section's subheadings as I scrolled into it and folded them away when I left. In the same column, a progress bar built from `▓` and `░` characters filled in as I read. When the title scrolled off the screen, a smaller copy took its place at the top of the column. Clicking an entry eased the page to that heading over most of a second instead of jumping. None of it called attention to itself, but together it made the page feel finished in a way most blogs, mine included, don't.
+None of the tricks were loud. As I scrolled into a section, its subheadings unfolded in the left rail and folded back up when I left. A little ASCII progress bar built out of `▓` and `░` blocks ticked up as I read. Once the main title scrolled off the top of the viewport, a smaller copy slid into the top of the rail to take its place. Clicking a section eased the page there over most of a second instead of teleporting. Together it made my own blog look like a Google Doc from 2014.
 
-So I reverse engineered it and rebuilt my blog to work the same way. Everything you see here was measured off their page and reimplemented on this site's existing Vite and React setup, with no new dependencies.
+So I stole it. Everything on the page you're reading right now was measured off their live DOM and rebuilt on this site's existing Vite and React setup, with zero new dependencies.
 
-This post is about itself. If you're on a wide screen, watch the rail while you read. This is also the first post on the site with real H3 subsections, which matters for reasons I'll get to.
+If you're on a wide screen, watch the left rail while you read. This post is the demo. It's also the first post on my site that actually has H3 subsections, for reasons that will become embarrassing in a minute.
 
-## How I took it apart
+## Reading the HTML tells you nothing about a scroll loop
 
-The process really was as simple as telling Claude:
+I didn't spend an afternoon squinting at Chrome DevTools. I gave Claude this prompt:
 
 ```
 Make the blog section of my portfolio look like
@@ -28,24 +28,28 @@ through it, take screenshots, and experience it the way a reader would.
 Then recreate it without changing my tech stack.
 ```
 
-The "don't just read the HTML" part did the most work. [claude.dev](https://claude.dev/) is a Next.js build, so the source is hashed bundles and the initial markup. Everything I liked about the page happens while you scroll, and none of that is visible in a file. So Claude drove a headless browser instead:
+"Don't just read the HTML" is the whole trick. Try curling [claude.dev](https://claude.dev/) and reading the source. It's a Next.js build, so you get hashed bundle names and inert initial markup. Everything worth stealing happens mid-scroll.
 
-1. **Screenshots** at several scroll depths, on desktop and phone widths, to see what changes as you read.
-2. **A dump of every CSS rule the page had loaded**, read from the browser rather than the minified files, so the class names, custom properties, and transitions were all readable.
-3. **A scroll probe** that jumped to fixed positions and recorded which table of contents entry was highlighted, which groups were open, what the progress bar said, and where the title was. Comparing those snapshots showed what triggers each change.
-4. **A timing sample** of the scroll after clicking a table of contents entry, to see whether it was the browser's smooth scroll or their own.
+To see what the page was actually doing, Claude drove a headless browser and pulled four things:
 
-Matching the screenshots against the CSS and the probe output broke the page into a few parts: the table of contents and its expanding groups, the title that moves into the rail, the reading indicator, the staggered entrance at the top, and the one easing curve all of it shares. The rest of this post goes through the ones worth stealing.
+1. Screenshots at fixed scroll depths on desktop and mobile viewports to see what state changes happen as you read.
+2. A dump of every active CSS rule from `document.styleSheets`, read straight out of the live browser so custom properties, grid tracks, and transition timings weren't buried in minified chunks.
+3. A scroll probe that stepped down the page and logged which table-of-contents item was active, which subsection drawers were open, what the ASCII bar read, and when the rail title appeared.
+4. A frame-by-frame timestamp log after clicking a TOC link, to see whether they were using native `scroll-behavior: smooth` or a custom easing loop.
 
-## The tree
+Once you have those four dumps side by side, there's no mystery left.
 
-The table of contents is labeled `Tree` and drawn with `└` branches, like the output of the `tree` command. It tells you you're looking at structure, not navigation, before you've read a word of it.
+## How the left-rail tree actually works
 
-### Animating to auto height
+The table of contents is labeled `Tree` and drawn with `└` box-drawing characters, like the output of `tree(1)`. You know you're looking at a document outline before you read a single heading.
 
-When you scroll into a section that has subsections, its children unfold under it. You just watched this one do it.
+### Animating to auto height with a 1fr grid track
 
-This is the oldest annoying problem in CSS animation: you can't transition `height` to `auto`. The usual workarounds are measuring the content in JavaScript or animating `max-height` to some big number and living with the wrong timing. claude.dev uses a grid instead:
+Scroll into a section that has H3s and its children unfold underneath it in the rail. You just watched this one open.
+
+Try transitioning `height: 0` to `height: auto` in CSS and the browser just snaps between them. People usually work around that by measuring `scrollHeight` in JavaScript or animating `max-height` to some guessed ceiling like `500px` and living with the easing timing being slightly off.
+
+claude.dev uses a one-cell CSS Grid instead:
 
 ```css
 .subs { display: grid; grid-template-rows: 0fr; visibility: hidden; }
@@ -54,15 +58,15 @@ This is the oldest annoying problem in CSS animation: you can't transition `heig
 .subs { transition: grid-template-rows .3s var(--ease-out), visibility .3s; }
 ```
 
-Grid track sizes *are* animatable, and a `1fr` row resolves to the content's natural height. So the browser does the measuring for you. The `min-height: 0` on the child matters, because a grid item won't shrink below its content by default, and without it nothing collapses.
+Grid track sizes _are_ animatable, and `1fr` resolves to the child's natural height. The browser does the measuring for you. The one line you cannot skip is `min-height: 0` on the inner `<div>`. Grid items refuse to shrink below their minimum content size by default, so without `min-height: 0` the drawer opens once and never closes again.
 
-The `visibility` transition is the subtle part. Visibility doesn't fade. It flips, and when you're hiding it waits until the end of the transition to flip. So the links stay visible while the row collapses, then become hidden, which also takes them out of the tab order. Their CSS also opens a group with `:has(:focus-visible)` when a keyboard user tabs into it, which is a nice touch I didn't copy.
+The `visibility` transition is doing quiet work too. `visibility` is discrete, so when you transition from `visible` to `hidden`, the browser waits until the 300ms height collapse finishes before flipping it to `hidden`. That keeps the links visible while the drawer shuts and then drops them out of the keyboard tab order once it's closed. (Their CSS also pops a group open with `:has(:focus-visible)` if a keyboard user tabs into a collapsed drawer, which is a great detail I didn't bother copying.)
 
-Embarrassingly, none of my existing posts had H3s, so the first time I shipped this, the animation never ran on a real page. This post has subsections partly so the feature finally has something to do.
+When I first shipped this, nothing unfolded anywhere on my blog. I spent ten minutes checking my CSS before realizing none of my existing posts had a single `###` heading in them. This post has subsections partly so the code has something to do.
 
-### Which heading is "on"
+### Why I skipped IntersectionObserver
 
-I settled on a heuristic where the active section is the last heading that has scrolled above a line one third of the way down the screen. A line right at the top feels wrong. Click a link, land with the heading near the top, and the highlight should agree with you about where you are.
+To highlight the current section, I check which heading is the last one to cross a horizontal line one-third of the way down the viewport:
 
 ```js
 const line = window.innerHeight / 3;
@@ -73,53 +77,57 @@ headings.forEach((el, i) => {
 setActive(current);
 ```
 
-The obvious objection is "use IntersectionObserver." I didn't, on purpose. An observer tells you when something crosses a line. The question here is which heading is the last one above the line, which is about state, not events. Jump from the top of the page to the bottom with an anchor link and nothing crosses anything in between. A scroll listener throttled to one `requestAnimationFrame`, checking a handful of headings, is cheap. And since it only ever sets an index, React skips the render whenever the index hasn't changed, which is almost every frame.
+Whenever someone sees `getBoundingClientRect()` in a scroll handler, their reflex is to tell you to use `IntersectionObserver`. I didn't, on purpose.
 
-### The title hand-off
+`IntersectionObserver` fires events when elements cross a threshold. What we want here is a total ordering question: which heading is the last one above the line right now? Click an anchor link that jumps from the top of the post straight to the bottom and nothing "crosses" the middle of the screen along the way. Checking a dozen heading offsets inside a `requestAnimationFrame`-throttled scroll listener takes microseconds. And because `setActive` only stores an integer index, React bails out without re-rendering on almost every frame.
 
-Scroll past the big heading and it reappears in small type at the top of the rail. It showed up a few seconds after you started reading. It's triggered by the H1 leaving the screen rather than a fixed scroll offset, so it behaves the same for a one-line title and a three-line one.
+### Watching the H1 instead of scrollY
 
-It animates with `max-height`, which is normally the hack I just complained about. Here it's fine, because a title has a known maximum size. That's the general rule: `max-height` is only a hack when you're guessing.
+Scroll past the main H1 at the top of the article and a small copy of the title unfolds at the top of the left rail. It's been sitting over there since you finished the intro.
 
-## The reading indicator
+Instead of hardcoding a pixel offset like `scrollY > 200`, it watches the real H1 and triggers the moment the H1's bottom edge leaves the viewport. A one-line title and a three-line title hand off at the exact right moment.
+
+Here I did use `max-height`, right after complaining about it. A post title is at most three lines tall, so we know the ceiling, and `max-height` is only a hack when you're guessing.
+
+## A progress bar made of 28 monospace characters
 
 ```
-▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░ 23%
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░ 57%
 ```
 
-It has filled in a bit more since you started this paragraph. It's just monospace characters, so it can't jitter or reflow, and it needs no SVG or canvas. The percentage is zero-padded (`03%`) so the label never changes width as it counts.
+Look over at the rail and yours should be sitting right around 57% too. Because it's just 28 monospace characters in a text node, it can't reflow or jitter, and it doesn't need an SVG or a `<canvas>`. The percentage is zero-padded (`03%`) so the number never nudges the line width as it climbs.
 
-On a phone the rail goes away and the bar becomes a thin line across the top of the screen. claude.dev grows that line by animating `width`, which makes the browser redo layout on every scroll frame. Mine is always full width and scaled with `transform: scaleX()`, which the GPU handles without touching layout. It looks the same. On a slow phone it's cheaper.
+On mobile the left rail disappears and the progress indicator turns into a thin bar pinned to the top of the viewport. claude.dev animates that bar by setting `width` on every scroll tick, which triggers a browser layout pass each frame. I kept mine at `width: 100%` and animated `transform: scaleX()` instead, so the compositor scales it on the GPU without touching layout. Same visual result, less work on a phone.
 
-## Lessons that travel
+## Bugs that had nothing to do with claude.dev
 
-Most of what went wrong had nothing to do with this design. These apply to any site.
+Dropping the new layout into my site shook loose four bugs in my own setup that apply to any React or Vite build.
 
-### A saved snapshot is not server rendering
+### A saved DOM snapshot is not SSR
 
-This site prerenders each page by loading it in a headless browser and saving the HTML. React then takes over that HTML. That looks like server rendering, but it isn't, and the difference caused two bugs.
+My build script prerenders each route by opening the built site in headless Puppeteer and saving the serialized DOM to `index.html`. That looks like server-side rendering, and React treats it very differently.
 
 ```jsx
 <span>{post.minutes} min</span>      // React expects two text nodes
-<span>{`${post.minutes} min`}</span> // one, which is what the snapshot has
+<span>{`${post.minutes} min`}</span> // one text node, matching the snapshot
 ```
 
-When the browser saves the HTML, those two adjacent text nodes become one string. On load, React finds one node where it expected two, decides the page doesn't match, and throws away the prerendered HTML. The fix is a template string anywhere a number sits next to text.
+When React renders `{post.minutes} min` in JSX, it creates two adjacent text nodes (`"7"` and `" min"`). When Puppeteer serializes that DOM to an HTML file and the browser parses it back, the HTML parser merges adjacent text into a single text node (`"7 min"`). When React tries to hydrate, it sees one text node where it expected two, panics about a hydration mismatch, and trashes the entire prerendered tree. Wrapping adjacent interpolations in a template literal, as in the second line above, emits a single text node from the start.
 
-`React.lazy` breaks for the same reason. Real server rendering leaves markers where each lazy boundary was, and a snapshot doesn't, so React can't match them up. The fix is to load the current post's code before handing the page to React:
+`React.lazy` broke hydration for a similar reason. Real `renderToString` SSR writes comment markers around Suspense boundaries; a saved DOM snapshot doesn't. The fix is to preload the current route's MDX chunk before mounting React:
 
 ```js
 const post = getPost(window.location.pathname.match(/^\/blog\/([^/]+)/)?.[1]);
 (post ? loadPostContent(post) : Promise.resolve()).finally(() => {
-  /* hydrateRoot or createRoot */
+  /* mount React */
 });
 ```
 
-The first render matches the snapshot, and each post still loads as its own chunk.
+Each post still code-splits into its own chunk, and the first client render matches the prerendered HTML on the first frame.
 
-### Put entrance animations in CSS
+### Put entrance animations in CSS, not JS
 
-The title and metadata at the top of this page slide in with a stagger, and there's no JavaScript involved:
+The title, standfirst, and metadata at the top of the post slide up with a short stagger when you load the page:
 
 ```css
 [data-reveal] {
@@ -130,29 +138,31 @@ The title and metadata at the top of this page slide in with a stagger, and ther
 }
 ```
 
-The keyframes have no `to` block, so each element animates into its normal style, and one rule works on anything. `backwards` holds the starting state during the delay, so staggered elements don't flash before their turn. And because it's CSS, it plays the moment the HTML paints, before React has loaded. A JS-driven reveal would either flash the content or make it wait for the bundle.
+Two details do the work here. Leaving the `to` block off `@keyframes reveal-up` makes the element animate into whatever resting styles it already has, so one keyframe rule works on everything. And `animation-fill-mode: backwards` holds the `opacity: 0; translateY(14px)` state during the `--reveal-delay` window. Because it's pure CSS on prerendered HTML, the animation starts the millisecond the browser paints the document, before the JS bundle has even finished downloading.
 
-### A font on `*` breaks inheritance
+### Putting font-family on `*` breaks CSS inheritance
 
-The rest of the site sets its font with a `*` selector. That means no element inherits a font from its parent, because every element matches the rule directly. Any section that wants different fonts ends up in a selector fight. The rail title kept rendering in monospace until I made its selector more specific. Set fonts on `body` and let them inherit.
+The older parts of my portfolio had a global `* { font-family: ... }` reset. When you put a property on `*`, no element inherits that property from its parent anymore, because every single DOM node matches `*` directly. Give a container `.mono` and its child `<span>` ignores it and falls back to the `*` rule unless you write a more specific selector. Put `font-family` on `body` and let normal CSS inheritance do its job.
 
-### Layout shift is about things arriving late
+### Layout shift goes to zero when nothing arrives late
 
-[My tmux config post](/blog/tmux-config/) on Lighthouse, production build, mobile throttling:
+Running [my tmux config post](/blog/tmux-config/) through Lighthouse on a production build with mobile throttling before and after the rebuild:
 
 | | Score | CLS | LCP |
 |---|---|---|---|
 | Before | 63 to 78 | up to 0.22 | 4.2 to 5.0s |
 | After | 76 to 79 | 0 | 4.1 to 4.4s |
 
-Layout shift went to zero without any work aimed at it. The blog uses system fonts, so there's no web font to swap in, and the post is already in the HTML when it paints. Nothing arrives late, so nothing moves.
+Cumulative Layout Shift dropped from `0.22` to `0` without me writing a single line of CLS-specific code. The blog uses system fonts (no webfont swap) and preloads the post chunk before mount. Nothing arrives late, so nothing shoves the text around after first paint.
 
-## Taste
+## Why taste is the scarce part now
 
-None of this was hard to copy. A few years ago, reverse engineering a page like this meant hours in devtools. Now I can point an AI agent at a live site and get back its CSS, its timings, and a working version on my own stack in a single sitting.
+Reverse engineering a page like this used to take hours of squinting at the Elements panel. Now I can point an agent at a URL, tell it to instrument the scroll loop in a headless browser, and have a working clone running on my own stack before lunch.
 
-That changes what's scarce. Taking a design apart is cheap now. Coming up with it in the first place isn't, and the hard part was never the CSS. It's what the designers chose to leave out. Nothing on that page moves unless it's telling you something. The tree opens because you entered a section. The bar fills because you read further. The title shows up because the real one just left. There's no parallax, no hover flourish, no hero image. They borrowed the look of a terminal and stopped well short of making the page pretend to be one. Each of those is a judgment about when to stop, and you can't get that from a stylesheet. I could measure every animation to the millisecond and still not know which ones they tried and threw away. As copying gets easier, that kind of taste is what will set people apart.
+That changes what is actually hard in frontend work. Cloning the mechanics is cheap now. Deciding what to build, and when to stop, isn't.
 
-I'm comfortable borrowing here. My blog is where I dump things I've learned, and I've never put much thought into how it looks. Borrowing from designers who clearly did seemed better than leaving it plain. I plan to use opportunities like this to build up my own taste and apply it to the products and experiences I build.
+What makes claude.dev's blog feel so good isn't the `0fr -> 1fr` grid trick. It's everything their designers left out. Nothing on that page moves unless it is answering a question about where you are in the document. The tree unfolds because you entered a section. The bar fills because you read further. The small title appears because the big one just left the screen. There is no parallax, no hover glow, no hero illustration. They borrowed the `tree` command and ASCII blocks from a terminal, and stopped well short of making the page cosplay as a CRT monitor.
 
-The source is [on GitHub](https://github.com/samratjha96/portfolio). The interesting parts are `src/components/blog/PostRail.jsx` and `blog.css`.
+You can dump every stylesheet and animation curve off a live site with a script, and none of that output will tell you which ten ideas the designer tried and threw in the trash because they felt busy. As implementation gets cheaper, that kind of restraint is the whole game.
+
+I'm fine borrowing theirs here. My blog is where I write down things I've figured out, and piggybacking on designers who clearly sweated the details beats leaving it ugly.
