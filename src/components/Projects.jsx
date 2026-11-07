@@ -40,22 +40,24 @@ const ProjectCard = ({ index, name, description, image, source_code_link, demo_l
               className="w-full h-full object-cover rounded-2xl"
             />
           </a>
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover pointer-events-none">
-            <a
-              href={source_code_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer pointer-events-auto"
-            >
-              <img
-                src={github}
-                alt="github"
-                width={20}
-                height={20}
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </a>
-          </div>
+          {source_code_link && (
+            <div className="absolute inset-0 flex justify-end m-3 card-img_hover pointer-events-none">
+              <a
+                href={source_code_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer pointer-events-auto"
+              >
+                <img
+                  src={github}
+                  alt="github"
+                  width={20}
+                  height={20}
+                  className="w-1/2 h-1/2 object-contain"
+                />
+              </a>
+            </div>
+          )}
         </div>
 
         <div className="mt-5">
@@ -81,7 +83,7 @@ const Projects = () => {
           className="mt-3 text-secondary text-[17px] max-w-2xl leading-[30px]"
         >
           A selection of projects I've built—from AI-powered tools to creative web experiences. Each
-          includes live demos and source code.
+          links to a live demo.
         </motion.p>
       </div>
 
