@@ -30,6 +30,7 @@ import {
   whichCard,
   situsearch,
   patentagility,
+  terrabrief,
 } from "../assets";
 
 export const navLinks = [
@@ -282,6 +283,13 @@ const videos = [
 ];
 
 const projects = [
+  {
+    name: "Terrabrief",
+    description:
+      "Agentic intelligence for the physical world. Ask about anything from census data to wildfires to flood risk. Built for agencies, militaries and real estate developers making data-driven decisions in the AI age.",
+    image: terrabrief,
+    demo_link: "https://terrabrief.zasamrat.workers.dev",
+  },
   {
     name: "Today's Tech",
     description:

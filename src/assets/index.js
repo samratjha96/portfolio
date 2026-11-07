@@ -37,6 +37,7 @@ import spaceSelfie from "./optimized/space-selfie.webp";
 import birdRadio from "./optimized/bird-radio.webp";
 import whichCard from "./optimized/which-card.webp";
 import situsearch from "./optimized/situsearch.webp";
+import terrabrief from "./optimized/terrabrief.webp";
 import patentagility from "./optimized/patentagility.webp";
 
 export {
@@ -76,5 +77,6 @@ export {
   birdRadio,
   whichCard,
   situsearch,
+  terrabrief,
   patentagility,
 };
