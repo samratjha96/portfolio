@@ -30,16 +30,17 @@ const CONTENTS = [
   [1, "s1", 6],
   [1, "s1"],
   [1, "s1", 7],
-  [2, "s2"],
+  [1, "s1"],
   [1, "s1", 8],
   [1, "s1"],
+  [1, "s1", 9],
   [1, "s1"],
-  [2, "s2", 9],
+  [2, "s2", 10],
   [1, "s1"],
   [1, "blank"],
   [2, "power"],
 ];
-const SLOTS = 10;
+const SLOTS = 11;
 
 // Rack geometry in meters, centered on the origin, front at +z. A 42U rack: 600 wide, 1000 deep, 2000 tall.
 const U = 0.04445,

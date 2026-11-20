@@ -21,6 +21,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.samratjha.com/blog/prompt-caching-rabbit-hole/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.samratjha.com/blog/recreating-the-claude-dev-blog/</loc>
     <lastmod>2026-10-17</lastmod>
     <changefreq>monthly</changefreq>
