@@ -31,6 +31,7 @@ import {
   situsearch,
   patentagility,
   terrabrief,
+  wordduel,
 } from "../assets";
 
 export const navLinks = [
@@ -322,6 +323,13 @@ const projects = [
     source_code_link:
       "https://github.com/samratjha96/NLP-Based-Patent-Specification-And-Claim-Analysis",
     demo_link: "https://patentagility-demo.zasamrat.workers.dev",
+  },
+  {
+    name: "Wordduel",
+    description:
+      "A two-player word game for phones. Both players swipe words on the same 4x4 boards over three timed rounds, each on their own time, and the scorecard shows who won as soon as both finish. Runs on Cloudflare Workers with a Durable Object.",
+    image: wordduel,
+    demo_link: "https://wordduel.zasamrat.workers.dev",
   },
   {
     name: "Bird Radio",
