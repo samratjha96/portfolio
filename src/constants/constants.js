@@ -329,6 +329,7 @@ const projects = [
     description:
       "A two-player word game for phones. Both players swipe words on the same 4x4 boards over three timed rounds, each on their own time, and the scorecard shows who won as soon as both finish. Runs on Cloudflare Workers with a Durable Object.",
     image: wordduel,
+    source_code_link: "https://github.com/samratjha96/wordduel",
     demo_link: "https://wordduel.zasamrat.workers.dev",
   },
   {

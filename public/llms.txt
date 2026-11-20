@@ -26,7 +26,7 @@ Core skills: Python, Rust, Golang, Kotlin, Java, TypeScript, React, AWS, Docker,
 - [Terrabrief](https://terrabrief.zasamrat.workers.dev): Agentic intelligence for the physical world. Ask about anything from census data to wildfires to flood risk.
 - [Which Card](https://github.com/samratjha96/which-card): Find the best credit card for every purchase. Search by merchant, compare rewards, maximize cashback. [Demo](https://which-card.pages.dev)
 - [Space Selfie](https://github.com/samratjha96/space-selfie): Discover when the ISS flew over your special moments. Built with TypeScript, Cloudflare Workers, and satellite.js. [Demo](https://space-selfie.zasamrat.workers.dev)
-- [Wordduel](https://wordduel.zasamrat.workers.dev): Two-player word game for phones. Same 4x4 boards, three timed rounds, play on your own time, and see who won once both finish. Cloudflare Workers and a Durable Object.
+- [Wordduel](https://github.com/samratjha96/wordduel): Two-player word game for phones. Same 4x4 boards, three timed rounds, play on your own time, and see who won once both finish. Cloudflare Workers and a Durable Object. [Demo](https://wordduel.zasamrat.workers.dev)
 - [Bird Radio](https://github.com/samratjha96/BirdRadio): Retro-styled nature sound tuner streaming bird songs worldwide with real-time spectrogram visualization. [Demo](https://bird-radio.pages.dev/)
 - [NetWorth Tracker](https://github.com/samratjha96/networth): Personal finance app to track net worth. React, TypeScript, Tailwind, shadcn-ui. [Demo](https://argos.bootloop.cc/)
 - [Today's Tech](https://github.com/samratjha96/today): Personal dashboard aggregating market data, GitHub trending, Hacker News, and tech news. [Demo](https://today.bootloop.cc/)
